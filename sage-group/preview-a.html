@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>案A プレビュー – フルスクリーン縦スクロール型</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green: #3d8b6f;
+  --green-light: #5aab90;
+  --green-pale: #a8d5c2;
+  --black: #1a2e28;
+  --white: #ffffff;
+  --cream: #f0f7f4;
+  --body: #4a6b62;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { font-family:'Noto Sans JP',sans-serif; scroll-snap-type:y mandatory; overflow-y:scroll; }
+
+/* ===== SIDEBAR NAV ===== */
+.sidenav {
+  position:fixed; left:0; top:0; bottom:0; width:72px;
+  background:var(--green);
+  display:flex; flex-direction:column; align-items:center;
+  justify-content:space-between;
+  padding:32px 0;
+  z-index:100;
+}
+.sidenav-logo {
+  font-family:'Bebas Neue',sans-serif;
+  writing-mode:vertical-rl;
+  font-size:16px; letter-spacing:0.3em;
+  color:var(--white);
+  text-decoration:none;
+}
+.sidenav-links { display:flex; flex-direction:column; gap:28px; align-items:center; }
+.sidenav-dot {
+  width:8px; height:8px; border-radius:50%;
+  background:rgba(255,255,255,0.35);
+  cursor:pointer; transition:all 0.3s;
+  text-decoration:none; display:block;
+}
+.sidenav-dot.active, .sidenav-dot:hover { background:var(--white); transform:scale(1.5); }
+.sidenav-label {
+  writing-mode:vertical-rl;
+  font-size:9px; letter-spacing:0.2em;
+  color:rgba(255,255,255,0.5);
+}
+
+/* ===== SECTIONS ===== */
+section {
+  scroll-snap-align:start;
+  min-height:100vh; width:100%;
+  padding-left:72px;
+  display:flex; align-items:center;
+  position:relative; overflow:hidden;
+}
+
+/* ===== HERO ===== */
+#s-hero { background:var(--white); }
+.hero-left {
+  flex:0 0 50%; padding:60px 60px 60px 80px;
+  display:flex; flex-direction:column; justify-content:center;
+  gap:32px;
+}
+.hero-tag {
+  font-size:11px; letter-spacing:0.35em; color:var(--green);
+  font-weight:500; text-transform:uppercase;
+}
+.hero-title {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(52px,8vw,96px); line-height:0.95;
+  color:var(--black); letter-spacing:0.02em;
+}
+.hero-title span { color:var(--green); }
+.hero-desc {
+  font-size:14px; line-height:2; color:var(--body);
+  max-width:380px; font-weight:300;
+}
+.hero-btn {
+  display:inline-flex; align-items:center; gap:12px;
+  padding:14px 32px;
+  background:var(--green); color:var(--white);
+  font-size:12px; letter-spacing:0.2em; font-weight:500;
+  border:none; cursor:pointer; align-self:flex-start;
+  transition:all 0.3s; text-decoration:none;
+}
+.hero-btn:hover { background:var(--black); }
+.hero-right {
+  flex:1; height:100vh; position:relative;
+  background:var(--cream);
+  display:flex; align-items:center; justify-content:center;
+  overflow:hidden;
+}
+.geo-ring {
+  position:absolute; border-radius:50%;
+  border:1px solid var(--green-pale);
+  animation:spin 20s linear infinite;
+}
+.geo-ring:nth-child(1) { width:300px; height:300px; animation-duration:25s; }
+.geo-ring:nth-child(2) { width:200px; height:200px; animation-direction:reverse; animation-duration:18s; border-color:var(--green); }
+.geo-ring:nth-child(3) { width:420px; height:420px; animation-duration:35s; opacity:0.4; }
+.geo-center {
+  width:100px; height:100px; border-radius:50%;
+  background:var(--green);
+  display:flex; align-items:center; justify-content:center;
+  z-index:1;
+}
+.geo-center span {
+  font-family:'Bebas Neue',sans-serif;
+  color:var(--white); font-size:18px; letter-spacing:0.2em;
+}
+@keyframes spin { to { transform:rotate(360deg); } }
+
+/* ===== BUSINESS SECTION ===== */
+#s-biz { background:var(--cream); flex-direction:column; padding:80px 80px 80px calc(72px + 80px); gap:60px; }
+.sec-label { font-size:10px; letter-spacing:0.4em; color:var(--green); font-weight:500; text-transform:uppercase; }
+.sec-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(36px,5vw,60px); color:var(--black); letter-spacing:0.05em; }
+.biz-scroll { display:flex; gap:24px; overflow-x:auto; padding-bottom:16px; scroll-snap-type:x mandatory; }
+.biz-scroll::-webkit-scrollbar { height:3px; }
+.biz-scroll::-webkit-scrollbar-thumb { background:var(--green-pale); }
+.biz-card {
+  scroll-snap-align:start;
+  flex:0 0 280px; background:var(--white);
+  padding:40px 32px;
+  border-left:3px solid var(--green);
+  transition:all 0.35s;
+}
+.biz-card:hover { transform:translateY(-6px); box-shadow:0 20px 40px rgba(61,139,111,0.15); }
+.biz-num { font-family:'Bebas Neue',sans-serif; font-size:48px; color:var(--green); line-height:1; margin-bottom:8px; }
+.biz-name { font-size:13px; font-weight:700; color:var(--black); margin-bottom:12px; letter-spacing:0.05em; }
+.biz-desc { font-size:12px; color:var(--body); line-height:1.8; font-weight:300; }
+
+/* ===== STATS SECTION ===== */
+#s-stats {
+  background:var(--green);
+  flex-direction:column; gap:0;
+  padding:80px 80px 80px calc(72px + 80px);
+  justify-content:center;
+}
+.stats-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:60px; width:100%; max-width:900px; }
+.stat-item { text-align:center; }
+.stat-num {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(60px,8vw,100px);
+  color:var(--white); line-height:1;
+}
+.stat-unit { font-size:18px; }
+.stat-label { font-size:11px; letter-spacing:0.25em; color:rgba(255,255,255,0.7); margin-top:8px; }
+
+/* ===== VOICE SECTION ===== */
+#s-voice { background:var(--white); flex-direction:column; padding:80px 80px 80px calc(72px + 80px); gap:48px; }
+.voice-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:32px; width:100%; }
+.voice-card {
+  padding:40px; border:1px solid rgba(61,139,111,0.15);
+  position:relative; transition:all 0.35s;
+}
+.voice-card:hover { border-color:var(--green); box-shadow:0 8px 30px rgba(61,139,111,0.1); }
+.voice-quote {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:80px; color:var(--green); line-height:0.6;
+  opacity:0.2; position:absolute; top:20px; left:24px;
+}
+.voice-text { font-size:13px; color:var(--body); line-height:1.9; margin-bottom:24px; padding-top:20px; }
+.voice-name { font-size:11px; font-weight:700; color:var(--black); letter-spacing:0.1em; }
+
+/* ===== CTA SECTION ===== */
+#s-cta {
+  background:var(--black);
+  justify-content:center; align-items:center;
+  flex-direction:column; gap:32px; text-align:center;
+}
+.cta-sub { font-size:11px; letter-spacing:0.4em; color:var(--green-pale); text-transform:uppercase; }
+.cta-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(40px,6vw,72px); color:var(--white); letter-spacing:0.05em; }
+.cta-btn {
+  padding:18px 56px; border:2px solid var(--white);
+  color:var(--white); font-size:12px; letter-spacing:0.25em;
+  cursor:pointer; background:transparent; transition:all 0.3s;
+  font-family:'Noto Sans JP',sans-serif;
+}
+.cta-btn:hover { background:var(--white); color:var(--black); }
+
+/* ===== SCROLL INDICATOR ===== */
+.scroll-hint {
+  position:fixed; bottom:32px; left:calc(72px / 2);
+  transform:translateX(-50%);
+  display:flex; flex-direction:column; align-items:center; gap:8px;
+  font-size:9px; letter-spacing:0.2em; color:rgba(255,255,255,0.6);
+  writing-mode:vertical-rl;
+}
+.scroll-line {
+  width:1px; height:40px; background:rgba(255,255,255,0.3);
+  position:relative; overflow:hidden;
+}
+.scroll-line::after {
+  content:''; position:absolute; top:-100%;
+  width:100%; height:100%; background:var(--white);
+  animation:scrollLine 1.5s ease-in-out infinite;
+}
+@keyframes scrollLine { to { top:200%; } }
+
+/* ===== ENTRANCE ANIMATIONS ===== */
+.fade-up { opacity:0; transform:translateY(30px); transition:opacity 0.7s ease, transform 0.7s ease; }
+.fade-up.visible { opacity:1; transform:translateY(0); }
+
+/* label at top */
+.preview-badge {
+  position:fixed; top:16px; right:16px; z-index:200;
+  background:var(--green); color:var(--white);
+  font-size:11px; letter-spacing:0.15em; padding:6px 14px;
+  font-family:'Noto Sans JP',sans-serif;
+}
+</style>
+</head>
+<body>
+
+<div class="preview-badge">案A プレビュー</div>
+
+<!-- SIDEBAR NAV -->
+<nav class="sidenav">
+  <a href="#s-hero" class="sidenav-logo">SAGE GROUP</a>
+  <div class="sidenav-links">
+    <a href="#s-hero" class="sidenav-dot active" title="TOP"></a>
+    <a href="#s-biz" class="sidenav-dot" title="事業"></a>
+    <a href="#s-stats" class="sidenav-dot" title="実績"></a>
+    <a href="#s-voice" class="sidenav-dot" title="お客様の声"></a>
+    <a href="#s-cta" class="sidenav-dot" title="お問合せ"></a>
+  </div>
+  <span class="sidenav-label">SCROLL</span>
+</nav>
+
+<!-- SCROLL HINT -->
+<div class="scroll-hint">
+  <div class="scroll-line"></div>
+</div>
+
+<!-- HERO -->
+<section id="s-hero">
+  <div class="hero-left">
+    <p class="hero-tag fade-up">経営コンサルティング / 人材紹介 / 情報技術</p>
+    <h1 class="hero-title fade-up" style="transition-delay:0.1s">
+      GROW<br><span>WISE</span><br>FAST
+    </h1>
+    <p class="hero-desc fade-up" style="transition-delay:0.2s">
+      合同会社SageGroupは、経営支援・人材紹介・ITソリューションを通じて、企業の持続的な成長を支えます。
+    </p>
+    <a href="#s-cta" class="hero-btn fade-up" style="transition-delay:0.3s">お問い合わせ →</a>
+  </div>
+  <div class="hero-right">
+    <div class="geo-ring"></div>
+    <div class="geo-ring"></div>
+    <div class="geo-ring"></div>
+    <div class="geo-center"><span>SAGE</span></div>
+  </div>
+</section>
+
+<!-- BUSINESS -->
+<section id="s-biz">
+  <p class="sec-label fade-up">OUR SERVICES</p>
+  <h2 class="sec-title fade-up" style="transition-delay:0.1s">事業紹介</h2>
+  <div class="biz-scroll fade-up" style="transition-delay:0.2s">
+    <div class="biz-card">
+      <div class="biz-num">01</div>
+      <div class="biz-name">経営コンサルティング</div>
+      <div class="biz-desc">中小企業から大手まで、経営課題の本質を捉え、持続的成長を実現するための戦略立案・実行支援を行います。</div>
+    </div>
+    <div class="biz-card">
+      <div class="biz-num">02</div>
+      <div class="biz-name">人材紹介・採用支援</div>
+      <div class="biz-desc">企業のカルチャーと候補者の志向を丁寧にマッチング。採用から定着まで一気通貫でサポートします。</div>
+    </div>
+    <div class="biz-card">
+      <div class="biz-num">03</div>
+      <div class="biz-name">ITソリューション</div>
+      <div class="biz-desc">業務プロセスのデジタル化、システム導入支援、DX推進コンサルティングを提供します。</div>
+    </div>
+    <div class="biz-card">
+      <div class="biz-num">04</div>
+      <div class="biz-name">研修・教育支援</div>
+      <div class="biz-desc">経営幹部から現場スタッフまで、組織の成長に直結する研修プログラムを設計・実施します。</div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section id="s-stats">
+  <div class="stats-grid">
+    <div class="stat-item">
+      <div class="stat-num"><span class="count" data-target="2021">0</span></div>
+      <div class="stat-label">FOUNDED</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num"><span class="count" data-target="4">0</span><span class="stat-unit">+</span></div>
+      <div class="stat-label">AREAS</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num"><span class="count" data-target="4">0</span></div>
+      <div class="stat-label">SERVICES</div>
+    </div>
+  </div>
+</section>
+
+<!-- VOICE -->
+<section id="s-voice">
+  <p class="sec-label fade-up">TESTIMONIALS</p>
+  <h2 class="sec-title fade-up" style="transition-delay:0.1s">お客様の声</h2>
+  <div class="voice-grid fade-up" style="transition-delay:0.2s">
+    <div class="voice-card">
+      <div class="voice-quote">"</div>
+      <p class="voice-text">コンサルタントの方が親身になって課題に向き合ってくれました。経営方針が明確になり、チーム全体が一つの方向を向けるようになりました。</p>
+      <div class="voice-name">製造業 / 代表取締役</div>
+    </div>
+    <div class="voice-card">
+      <div class="voice-quote">"</div>
+      <p class="voice-text">採用に悩んでいたところを相談したら、わずか2ヶ月でピッタリの人材を紹介していただきました。今では欠かせない存在です。</p>
+      <div class="voice-name">IT企業 / 人事部長</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="s-cta">
+  <p class="cta-sub fade-up">Contact Us</p>
+  <h2 class="cta-title fade-up" style="transition-delay:0.1s">まずはご相談ください</h2>
+  <button class="cta-btn fade-up" style="transition-delay:0.2s">お問い合わせ</button>
+</section>
+
+<script>
+// Intersection Observer
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+  });
+}, { threshold: 0.2 });
+document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+
+// Count-up
+function countUp(el, target, duration = 1800) {
+  const start = performance.now();
+  (function tick(now) {
+    const p = Math.min((now - start) / duration, 1);
+    const ease = 1 - Math.pow(1 - p, 3);
+    el.textContent = Math.round(ease * target);
+    if (p < 1) requestAnimationFrame(tick);
+    else el.textContent = target;
+  })(start);
+}
+
+const statsIo = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      document.querySelectorAll('.count').forEach(el => {
+        countUp(el, +el.dataset.target);
+      });
+      statsIo.disconnect();
+    }
+  });
+}, { threshold: 0.5 });
+statsIo.observe(document.getElementById('s-stats'));
+
+// Sidebar dot active state on scroll
+const sections = document.querySelectorAll('section');
+const dots = document.querySelectorAll('.sidenav-dot');
+const secIo = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const idx = [...sections].indexOf(e.target);
+      dots.forEach((d,i) => d.classList.toggle('active', i === idx));
+    }
+  });
+}, { threshold: 0.5 });
+sections.forEach(s => secIo.observe(s));
+</script>
+</body>
+</html>

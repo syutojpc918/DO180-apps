@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>案D プレビュー – タイムライン縦線型</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green: #3d8b6f;
+  --green-light: #5aab90;
+  --green-pale: #c8e8dc;
+  --black: #1a2e28;
+  --white: #ffffff;
+  --cream: #f0f7f4;
+  --body: #4a6b62;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { font-family:'Noto Sans JP',sans-serif; scroll-behavior:smooth; }
+body { background:var(--white); color:var(--black); overflow-x:hidden; }
+
+/* ===== TOP NAV ===== */
+.top-nav {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  display:flex; justify-content:space-between; align-items:center;
+  padding:24px 60px;
+  transition:background 0.4s, box-shadow 0.4s;
+}
+.top-nav.scrolled {
+  background:rgba(255,255,255,0.96);
+  backdrop-filter:blur(12px);
+  box-shadow:0 1px 0 var(--green-pale);
+}
+.nav-logo { font-family:'Bebas Neue',sans-serif; font-size:22px; letter-spacing:0.28em; color:var(--green); text-decoration:none; }
+.nav-links { display:flex; gap:36px; list-style:none; }
+.nav-links a { font-size:11px; color:var(--body); letter-spacing:0.15em; text-decoration:none; font-weight:500; transition:color 0.2s; }
+.nav-links a:hover { color:var(--green); }
+
+/* ===== HERO – FULL BLEED ===== */
+#s-hero {
+  min-height:100vh;
+  display:flex; align-items:center; justify-content:center;
+  text-align:center; padding:120px 60px 80px;
+  position:relative; overflow:hidden;
+}
+.hero-bg-word {
+  position:absolute; font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(120px,20vw,260px); color:rgba(61,139,111,0.05);
+  user-select:none; letter-spacing:0.1em; top:50%; left:50%;
+  transform:translate(-50%,-50%);
+  animation:bgFloat 8s ease-in-out infinite;
+}
+@keyframes bgFloat { 0%,100%{transform:translate(-50%,-52%)} 50%{transform:translate(-50%,-48%)} }
+.hero-inner { position:relative; z-index:1; max-width:700px; }
+.hero-sup { font-size:11px; letter-spacing:0.4em; color:var(--green); margin-bottom:20px; text-transform:uppercase; font-weight:500; }
+.hero-title {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(60px,10vw,120px); line-height:0.9;
+  color:var(--black); letter-spacing:0.03em; margin-bottom:28px;
+}
+.hero-title span { color:var(--green); }
+.hero-desc { font-size:15px; color:var(--body); line-height:2; font-weight:300; margin-bottom:44px; }
+.hero-cta {
+  display:inline-flex; align-items:center; gap:14px;
+  padding:16px 44px; background:var(--green); color:var(--white);
+  font-size:12px; letter-spacing:0.22em; text-decoration:none; font-weight:500;
+  transition:background 0.3s;
+}
+.hero-cta:hover { background:var(--black); }
+.hero-scroll-hint {
+  position:absolute; bottom:36px; left:50%; transform:translateX(-50%);
+  display:flex; flex-direction:column; align-items:center; gap:8px;
+  font-size:9px; letter-spacing:0.25em; color:var(--green);
+}
+.hero-scroll-line {
+  width:1px; height:48px; background:var(--green-pale); overflow:hidden; position:relative;
+}
+.hero-scroll-line::after {
+  content:''; position:absolute; top:-100%; width:100%; height:100%;
+  background:var(--green); animation:scrollDot 1.5s ease-in-out infinite;
+}
+@keyframes scrollDot { to { top:200%; } }
+
+/* ===== TIMELINE WRAPPER ===== */
+.timeline-wrap {
+  max-width:960px; margin:0 auto; padding:0 40px 120px;
+  position:relative;
+}
+
+/* Center vertical line drawn by SVG */
+.tl-line-wrap {
+  position:absolute; left:50%; top:0; transform:translateX(-50%);
+  width:2px; bottom:0; pointer-events:none;
+}
+.tl-line-svg { position:sticky; top:0; width:2px; height:100vh; }
+
+/* Timeline items */
+.tl-item {
+  display:grid; grid-template-columns:1fr 60px 1fr;
+  align-items:start; gap:0; margin-bottom:80px;
+  position:relative;
+}
+
+/* Left side (odd items) */
+.tl-item:nth-child(odd) .tl-card { grid-column:1; text-align:right; }
+.tl-item:nth-child(odd) .tl-center { grid-column:2; }
+.tl-item:nth-child(odd) .tl-empty { grid-column:3; }
+
+/* Right side (even items) */
+.tl-item:nth-child(even) .tl-empty { grid-column:1; }
+.tl-item:nth-child(even) .tl-center { grid-column:2; }
+.tl-item:nth-child(even) .tl-card { grid-column:3; text-align:left; }
+
+.tl-center {
+  display:flex; justify-content:center; padding-top:24px;
+}
+.tl-dot {
+  width:16px; height:16px; border-radius:50%;
+  background:var(--white); border:2px solid var(--green);
+  z-index:2; flex-shrink:0; transition:background 0.3s, transform 0.3s;
+}
+.tl-item:hover .tl-dot { background:var(--green); transform:scale(1.3); }
+
+.tl-card {
+  padding:36px; background:var(--cream);
+  border:1px solid var(--green-pale);
+  transition:all 0.35s;
+}
+.tl-item:nth-child(odd) .tl-card { border-right:3px solid var(--green); }
+.tl-item:nth-child(even) .tl-card { border-left:3px solid var(--green); }
+.tl-item:hover .tl-card {
+  background:var(--white);
+  box-shadow:0 8px 32px rgba(61,139,111,0.12);
+}
+.tl-num { font-family:'Bebas Neue',sans-serif; font-size:40px; color:var(--green); line-height:1; margin-bottom:6px; }
+.tl-name { font-size:14px; font-weight:700; color:var(--black); margin-bottom:10px; letter-spacing:0.05em; }
+.tl-desc { font-size:13px; color:var(--body); line-height:1.85; font-weight:300; }
+
+/* Stats milestone */
+.tl-milestone {
+  grid-column:1/-1; text-align:center;
+  padding:60px 40px; background:var(--green);
+  margin:0 -40px 80px; position:relative;
+}
+.ms-grid { display:flex; gap:60px; justify-content:center; flex-wrap:wrap; }
+.ms-num { font-family:'Bebas Neue',sans-serif; font-size:clamp(56px,7vw,88px); color:var(--white); line-height:1; }
+.ms-lbl { font-size:10px; letter-spacing:0.3em; color:rgba(255,255,255,0.6); margin-top:6px; }
+
+/* Voice section */
+.tl-voice-full {
+  grid-column:1/-1; padding:0 0 0; margin-bottom:80px;
+}
+.voice-grid-d { display:grid; grid-template-columns:repeat(2,1fr); gap:24px; }
+.voice-card-d {
+  padding:36px; background:var(--white); border:1px solid var(--green-pale);
+  position:relative; transition:all 0.35s;
+}
+.voice-card-d:hover { border-color:var(--green); box-shadow:0 6px 24px rgba(61,139,111,0.1); }
+.vd-label { font-size:10px; letter-spacing:0.2em; color:var(--green); font-weight:700; margin-bottom:16px; text-transform:uppercase; }
+.vd-text { font-size:14px; color:var(--black); line-height:1.9; font-weight:300; margin-bottom:20px; }
+.vd-name { font-size:11px; letter-spacing:0.15em; color:var(--body); }
+
+/* Section label above tl */
+.tl-sec-header { text-align:center; padding:80px 0 60px; }
+.tl-sec-tag { font-size:10px; letter-spacing:0.4em; color:var(--green); text-transform:uppercase; margin-bottom:12px; }
+.tl-sec-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(36px,5vw,56px); color:var(--black); }
+
+/* CTA final */
+.tl-cta-full {
+  grid-column:1/-1; text-align:center; padding:80px 40px;
+  background:var(--black); margin:0 -40px;
+}
+.cta-f-tag { font-size:10px; letter-spacing:0.4em; color:var(--green-light); text-transform:uppercase; margin-bottom:20px; }
+.cta-f-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(40px,6vw,72px); color:var(--white); margin-bottom:32px; }
+.cta-f-btn {
+  padding:18px 56px; border:2px solid var(--white); color:var(--white);
+  font-size:12px; letter-spacing:0.25em; background:transparent;
+  cursor:pointer; font-family:'Noto Sans JP',sans-serif;
+  transition:all 0.3s;
+}
+.cta-f-btn:hover { background:var(--white); color:var(--black); }
+
+/* ===== ANIMATIONS ===== */
+.fade-left { opacity:0; transform:translateX(-32px); transition:opacity 0.65s ease, transform 0.65s ease; }
+.fade-right { opacity:0; transform:translateX(32px); transition:opacity 0.65s ease, transform 0.65s ease; }
+.fade-up { opacity:0; transform:translateY(24px); transition:opacity 0.65s ease, transform 0.65s ease; }
+.fade-left.visible, .fade-right.visible, .fade-up.visible { opacity:1; transform:none; }
+
+.preview-badge {
+  position:fixed; top:16px; right:16px; z-index:200;
+  background:var(--green); color:var(--white);
+  font-size:11px; letter-spacing:0.15em; padding:6px 14px;
+}
+
+/* Animated vertical line via CSS */
+.tl-line-bg {
+  position:absolute; left:50%; top:0; width:2px; height:100%;
+  background:var(--green-pale); transform:translateX(-50%);
+}
+.tl-line-fill {
+  position:absolute; left:50%; top:0; width:2px; height:0%;
+  background:var(--green); transform:translateX(-50%);
+  transition:height 0.1s linear;
+}
+</style>
+</head>
+<body>
+
+<div class="preview-badge">案D プレビュー</div>
+
+<!-- TOP NAV -->
+<nav class="top-nav" id="nav">
+  <a href="#" class="nav-logo">SAGE GROUP</a>
+  <ul class="nav-links">
+    <li><a href="#s-biz">事業紹介</a></li>
+    <li><a href="#s-stats">実績</a></li>
+    <li><a href="#s-voice">お客様の声</a></li>
+    <li><a href="#s-cta">お問い合わせ</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="s-hero">
+  <div class="hero-bg-word">SAGE</div>
+  <div class="hero-inner">
+    <p class="hero-sup fade-up">経営コンサルティング / 人材紹介 / ITソリューション</p>
+    <h1 class="hero-title fade-up" style="transition-delay:0.1s">
+      GROW<br><span>WISE</span><br>FAST
+    </h1>
+    <p class="hero-desc fade-up" style="transition-delay:0.2s">
+      合同会社SageGroupは、企業の経営課題に正面から向き合い、<br>持続的な成長を支えるパートナーです。
+    </p>
+    <a href="#s-biz" class="hero-cta fade-up" style="transition-delay:0.3s">事業を見る →</a>
+  </div>
+  <div class="hero-scroll-hint">
+    <div class="hero-scroll-line"></div>
+    SCROLL
+  </div>
+</section>
+
+<!-- TIMELINE SECTION -->
+<div style="position:relative;">
+  <div class="tl-line-bg"></div>
+  <div class="tl-line-fill" id="tlFill"></div>
+
+  <!-- Business header -->
+  <div id="s-biz" style="padding:80px 60px 20px; text-align:center;">
+    <p class="tl-sec-tag fade-up">Our Services</p>
+    <h2 class="tl-sec-title fade-up" style="transition-delay:0.1s">事業紹介</h2>
+  </div>
+
+  <div class="timeline-wrap">
+
+    <!-- BIZ ITEMS -->
+    <div class="tl-item">
+      <div class="tl-card fade-left">
+        <div class="tl-num">01</div>
+        <div class="tl-name">経営コンサルティング</div>
+        <div class="tl-desc">経営課題の本質を捉え、持続的成長を実現するための戦略立案・実行支援。課題分析から計画策定、推進管理まで一貫してサポートします。</div>
+      </div>
+      <div class="tl-center"><div class="tl-dot"></div></div>
+      <div class="tl-empty"></div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-empty"></div>
+      <div class="tl-center"><div class="tl-dot"></div></div>
+      <div class="tl-card fade-right">
+        <div class="tl-num">02</div>
+        <div class="tl-name">人材紹介・採用支援</div>
+        <div class="tl-desc">企業文化と候補者の志向を丁寧にマッチング。採用から定着まで一気通貫でサポートします。</div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-card fade-left">
+        <div class="tl-num">03</div>
+        <div class="tl-name">ITソリューション</div>
+        <div class="tl-desc">業務プロセスのデジタル化・DX推進。最適なシステム導入支援とクラウド活用コンサルティングを提供します。</div>
+      </div>
+      <div class="tl-center"><div class="tl-dot"></div></div>
+      <div class="tl-empty"></div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-empty"></div>
+      <div class="tl-center"><div class="tl-dot"></div></div>
+      <div class="tl-card fade-right">
+        <div class="tl-num">04</div>
+        <div class="tl-name">研修・教育支援</div>
+        <div class="tl-desc">組織の成長に直結する研修プログラムを設計・実施。幹部から現場スタッフまで幅広く対応します。</div>
+      </div>
+    </div>
+
+    <!-- STATS MILESTONE -->
+    <div id="s-stats">
+      <div class="tl-milestone fade-up">
+        <div class="tl-sec-tag" style="color:rgba(255,255,255,0.6);margin-bottom:32px;">Numbers</div>
+        <div class="ms-grid">
+          <div>
+            <div class="ms-num"><span class="count" data-target="2021">0</span></div>
+            <div class="ms-lbl">FOUNDED</div>
+          </div>
+          <div>
+            <div class="ms-num"><span class="count" data-target="4">0</span><span style="font-size:32px">+</span></div>
+            <div class="ms-lbl">AREAS</div>
+          </div>
+          <div>
+            <div class="ms-num"><span class="count" data-target="4">0</span></div>
+            <div class="ms-lbl">SERVICES</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VOICE -->
+    <div id="s-voice" style="padding-top:80px; margin-bottom:80px;">
+      <div style="text-align:center; margin-bottom:48px;">
+        <p class="tl-sec-tag fade-up">Testimonials</p>
+        <h2 class="tl-sec-title fade-up" style="transition-delay:0.1s">お客様の声</h2>
+      </div>
+      <div class="voice-grid-d">
+        <div class="voice-card-d fade-left">
+          <div class="vd-label">★★★★★ 製造業 / 代表取締役</div>
+          <p class="vd-text">経営の方向性に迷っていた時期に出会いました。SageGroupのコンサルタントは本当の意味でのビジネスパートナーとして伴走してくれました。</p>
+          <div class="vd-name">T.S 様</div>
+        </div>
+        <div class="voice-card-d fade-right" style="transition-delay:0.1s">
+          <div class="vd-label">★★★★★ IT企業 / 人事部長</div>
+          <p class="vd-text">採用に悩んでいたところ、わずか2ヶ月でピッタリの人材を紹介していただきました。今では欠かせない存在です。</p>
+          <div class="vd-name">K.M 様</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div id="s-cta">
+      <div class="tl-cta-full fade-up">
+        <p class="cta-f-tag">Contact Us</p>
+        <h2 class="cta-f-title">まずはご相談ください</h2>
+        <button class="cta-f-btn">お問い合わせ →</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// Nav scroll
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 60);
+  // Grow the timeline line
+  const tl = document.querySelector('[style*="position:relative"]');
+  if (tl) {
+    const rect = tl.getBoundingClientRect();
+    const tlTop = window.scrollY + rect.top;
+    const tlHeight = tl.offsetHeight;
+    const scrolled = window.scrollY - tlTop + window.innerHeight * 0.5;
+    const pct = Math.max(0, Math.min(100, (scrolled / tlHeight) * 100));
+    document.getElementById('tlFill').style.height = pct + '%';
+  }
+});
+
+// Fade animations
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+  });
+}, { threshold: 0.15 });
+document.querySelectorAll('.fade-up, .fade-left, .fade-right').forEach(el => io.observe(el));
+
+// Count-up
+function countUp(el, target, duration = 1800) {
+  const start = performance.now();
+  (function tick(now) {
+    const p = Math.min((now - start) / duration, 1);
+    const ease = 1 - Math.pow(1 - p, 3);
+    el.textContent = Math.round(ease * target);
+    if (p < 1) requestAnimationFrame(tick);
+    else el.textContent = target;
+  })(start);
+}
+const statsIo = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      document.querySelectorAll('.count').forEach(el => countUp(el, +el.dataset.target));
+      statsIo.disconnect();
+    }
+  });
+}, { threshold: 0.4 });
+const statsEl = document.getElementById('s-stats');
+if (statsEl) statsIo.observe(statsEl);
+</script>
+</body>
+</html>
