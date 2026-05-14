@@ -1245,15 +1245,20 @@ const io = new IntersectionObserver(entries => {
       io.unobserve(e.target);
     }
   });
-}, { threshold: 0.12 });
+}, { threshold: 0 });
 document.querySelectorAll('.fade-up, .scale-in, .reveal-curtain').forEach(el => io.observe(el));
+
+/* フォールバック: 1秒後に未発火の要素を強制表示 */
+setTimeout(() => {
+  document.querySelectorAll('.fade-up:not(.visible), .scale-in:not(.visible), .reveal-curtain:not(.visible)').forEach(el => el.classList.add('visible'));
+}, 1000);
 
 const ceoPhotoIo = new IntersectionObserver(entries => {
   if (entries[0].isIntersecting) {
     entries[0].target.classList.add('visible');
     ceoPhotoIo.disconnect();
   }
-}, { threshold: 0.3 });
+}, { threshold: 0 });
 const ceoPhoto = document.querySelector('.ceo-photo-wrap');
 if (ceoPhoto) ceoPhotoIo.observe(ceoPhoto);
 
