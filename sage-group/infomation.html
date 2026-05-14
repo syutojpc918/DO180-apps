@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SageGroup – 会社情報</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #1a1714;
+    --white: #ffffff;
+    --gold: #9a7a3e;
+    --gold-light: #b8965a;
+    --cream: #f7f5f1;
+    --cream-mid: #edeae4;
+    --gray-text: #999;
+    --body-text: #555;
+    --border: rgba(154,122,62,0.2);
+    --pad: 60px;
+    --nav-h: 72px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--white);
+    color: var(--black);
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 300;
+    line-height: 1.9;
+    overflow-x: hidden;
+    word-break: normal;
+    overflow-wrap: break-word;
+    line-break: strict;
+  }
+
+  /* ==============================
+     NAVIGATION
+  ============================== */
+  .site-nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    height: var(--nav-h);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--pad);
+    transition: background 0.4s ease, box-shadow 0.4s ease;
+  }
+
+  .site-nav.scrolled {
+    background: rgba(26,23,20,0.96);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 2px 24px rgba(0,0,0,0.35);
+  }
+
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    color: var(--gold);
+    letter-spacing: 0.25em;
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+    align-items: center;
+  }
+
+  .nav-links a {
+    font-size: 11px;
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    letter-spacing: 0.15em;
+    font-weight: 500;
+    transition: color 0.3s;
+    position: relative;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0;
+    width: 0; height: 1px;
+    background: var(--gold);
+    transition: width 0.3s ease;
+  }
+
+  .nav-links a:hover { color: var(--gold-light); }
+  .nav-links a:hover::after { width: 100%; }
+
+  .nav-cta {
+    border: 1px solid var(--gold) !important;
+    color: var(--gold) !important;
+    padding: 8px 20px;
+    font-size: 10px !important;
+    letter-spacing: 0.2em !important;
+    transition: background 0.3s, color 0.3s !important;
+  }
+  .nav-cta::after { display: none !important; }
+  .nav-cta:hover { background: var(--gold) !important; color: var(--white) !important; }
+
+  /* ==============================
+     HERO
+  ============================== */
+  .info-hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: calc(var(--nav-h) + 60px) var(--pad) 100px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .info-hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1600&q=80');
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.32);
+    z-index: 0;
+    will-change: transform;
+  }
+
+  .info-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(160deg, rgba(10,9,8,0.15) 0%, rgba(10,9,8,0.78) 100%);
+    z-index: 1;
+  }
+
+  /* 幾何学デコレーション */
+  .hero-deco { position: absolute; z-index: 1; pointer-events: none; }
+
+  .hero-deco-circle {
+    right: 8%; top: 50%;
+    transform: translateY(-50%);
+    width: 440px; height: 440px;
+    border: 1px solid rgba(154,122,62,0.1);
+    border-radius: 50%;
+    animation: rotateSlow 40s linear infinite;
+  }
+  .hero-deco-circle::before {
+    content: '';
+    position: absolute;
+    inset: 36px;
+    border: 1px solid rgba(154,122,62,0.07);
+    border-radius: 50%;
+    animation: rotateSlow 28s linear infinite reverse;
+  }
+  .hero-deco-circle::after {
+    content: '';
+    position: absolute;
+    inset: 72px;
+    border: 1px solid rgba(154,122,62,0.04);
+    border-radius: 50%;
+  }
+
+  .hero-deco-line {
+    top: 0; left: var(--pad);
+    width: 1px; height: 100%;
+    background: linear-gradient(to bottom, transparent, rgba(154,122,62,0.25) 30%, rgba(154,122,62,0.25) 70%, transparent);
+  }
+
+  .hero-content { position: relative; z-index: 2; max-width: 740px; }
+
+  .hero-eyebrow {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.5em;
+    color: var(--gold);
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.8s ease 0.3s forwards;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    width: 48px; height: 1px;
+    background: var(--gold);
+  }
+
+  .info-hero h1 {
+    font-size: clamp(44px, 6.5vw, 90px);
+    line-height: 1.15;
+    font-weight: 900;
+    letter-spacing: -0.01em;
+    color: #f5f4f0;
+    margin-bottom: 36px;
+  }
+
+  .info-hero h1 .word {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: bottom;
+  }
+  .info-hero h1 .word-inner {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(110%);
+    animation: slideUp 0.75s cubic-bezier(0.16,1,0.3,1) forwards;
+  }
+  .info-hero h1 em { font-style: normal; color: var(--gold-light); }
+
+  .hero-sub {
+    font-size: 14px;
+    color: rgba(245,244,240,0.65);
+    max-width: 480px;
+    line-height: 2.1;
+    letter-spacing: 0.06em;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.8s ease 1.3s forwards;
+  }
+
+  /* スクロールインジケーター */
+  .scroll-indicator {
+    position: absolute;
+    bottom: 40px; left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 1.8s forwards;
+  }
+
+  .scroll-indicator span {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.35em;
+    color: rgba(154,122,62,0.55);
+  }
+
+  .scroll-mouse {
+    width: 22px; height: 32px;
+    border: 1px solid rgba(154,122,62,0.35);
+    border-radius: 11px;
+    position: relative;
+  }
+  .scroll-mouse::after {
+    content: '';
+    position: absolute;
+    top: 6px; left: 50%;
+    transform: translateX(-50%);
+    width: 3px; height: 7px;
+    background: var(--gold);
+    border-radius: 2px;
+    animation: scrollDot 1.6s ease infinite;
+  }
+
+  /* ==============================
+     STATS BAR
+  ============================== */
+  .stats-bar {
+    background: var(--black);
+    padding: 0 var(--pad);
+    display: flex;
+    justify-content: center;
+    border-top: 1px solid rgba(154,122,62,0.12);
+  }
+
+  .stat-item {
+    padding: 44px 64px;
+    text-align: center;
+    position: relative;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .stat-item.visible { opacity: 1; transform: translateY(0); }
+
+  .stat-item + .stat-item::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 28%; height: 44%;
+    width: 1px;
+    background: rgba(154,122,62,0.18);
+  }
+
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 56px;
+    color: var(--gold);
+    line-height: 1;
+    letter-spacing: 0.05em;
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 4px;
+  }
+  .stat-num .unit {
+    font-size: 22px;
+    color: rgba(154,122,62,0.7);
+  }
+
+  .stat-label {
+    font-size: 10px;
+    color: rgba(245,244,240,0.4);
+    letter-spacing: 0.22em;
+    margin-top: 10px;
+    font-weight: 500;
+  }
+
+  /* ==============================
+     SECTION COMMONS
+  ============================== */
+  .section-eyebrow {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-eyebrow::after {
+    content: '';
+    display: block;
+    height: 1px;
+    background: var(--gold);
+    flex-shrink: 0;
+    width: 0;
+    transition: width 0.9s ease 0.3s;
+  }
+  .section-eyebrow.visible::after { width: 32px; }
+
+  .section-title {
+    font-size: clamp(24px, 2.8vw, 36px);
+    font-weight: 900;
+    letter-spacing: 0.03em;
+    line-height: 1.3;
+  }
+
+  /* fade-up 汎用 */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  /* ==============================
+     OVERVIEW
+  ============================== */
+  .overview-section {
+    background: var(--white);
+    padding: 120px var(--pad);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .overview-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 48px;
+  }
+
+  .overview-table tr {
+    border-bottom: 1px solid var(--border);
+    opacity: 0;
+    transform: translateX(-24px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .overview-table tr:first-child { border-top: 1px solid var(--border); }
+  .overview-table tr.visible { opacity: 1; transform: translateX(0); }
+
+  .overview-table th {
+    padding: 22px 24px 22px 0;
+    width: 140px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    vertical-align: top;
+    white-space: nowrap;
+  }
+
+  .overview-table td {
+    padding: 22px 0;
+    font-size: 14px;
+    color: var(--body-text);
+    line-height: 1.9;
+    letter-spacing: 0.04em;
+    vertical-align: top;
+  }
+
+  .overview-table td a {
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border);
+    transition: border-color 0.3s;
+  }
+  .overview-table td a:hover { border-color: var(--gold); }
+
+  /* ビジョン */
+  .vision-block {
+    margin-top: 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .vision-card {
+    background: var(--cream);
+    padding: 40px 36px;
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateX(32px);
+    transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.35s ease, translate 0.35s ease;
+  }
+  .vision-card.visible { opacity: 1; transform: translateX(0); }
+
+  .vision-card:hover {
+    translate: 0 -4px;
+    box-shadow: 0 14px 48px rgba(154,122,62,0.14);
+  }
+
+  .vision-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0;
+    width: 3px; height: 100%;
+    background: var(--gold);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.55s ease 0.3s;
+  }
+  .vision-card.visible::before { transform: scaleY(1); }
+
+  .vision-card-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  .vision-card-title {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    line-height: 1.6;
+    margin-bottom: 12px;
+    color: var(--black);
+  }
+
+  .vision-card-desc {
+    font-size: 13px;
+    color: var(--body-text);
+    line-height: 2.1;
+    letter-spacing: 0.04em;
+  }
+
+  /* ==============================
+     NAME SECTION
+  ============================== */
+  .name-section {
+    background: var(--black);
+    padding: 120px var(--pad);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .name-section::before {
+    content: 'SAGE';
+    position: absolute;
+    top: 50%; right: -30px;
+    transform: translateY(-50%);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 300px;
+    color: rgba(154,122,62,0.03);
+    line-height: 1;
+    pointer-events: none;
+    letter-spacing: -0.02em;
+    user-select: none;
+  }
+
+  .name-section .section-eyebrow { color: var(--gold-light); }
+  .name-section .section-eyebrow::after { background: var(--gold-light); }
+  .name-section .section-title { color: #f5f4f0; }
+
+  .name-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    margin-top: 56px;
+    align-items: center;
+  }
+
+  .name-lead {
+    font-size: 15px;
+    line-height: 2.3;
+    color: rgba(245,244,240,0.7);
+    letter-spacing: 0.05em;
+    margin-bottom: 32px;
+  }
+
+  .name-keywords {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .name-keyword {
+    border: 1px solid rgba(154,122,62,0.4);
+    padding: 8px 18px;
+    font-size: 12px;
+    color: var(--gold-light);
+    letter-spacing: 0.15em;
+    font-weight: 500;
+    cursor: default;
+    opacity: 0;
+    transform: scale(0.85);
+    transition: opacity 0.4s ease, transform 0.4s ease, background 0.3s, color 0.3s, border-color 0.3s;
+  }
+  .name-keyword.visible { opacity: 1; transform: scale(1); }
+  .name-keyword:hover {
+    background: var(--gold);
+    color: var(--white);
+    border-color: var(--gold);
+  }
+
+  .name-visual {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .name-card {
+    background: #1e1e1e;
+    padding: 28px 36px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateX(32px);
+    transition: opacity 0.5s ease, transform 0.5s ease, background 0.3s;
+  }
+  .name-card.visible { opacity: 1; transform: translateX(0); }
+  .name-card:hover { background: #252525; }
+
+  .name-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0;
+    width: 2px; height: 100%;
+    background: var(--gold);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.4s ease 0.2s;
+  }
+  .name-card.visible::before { transform: scaleY(1); }
+
+  .name-card-icon { width: 40px; height: 40px; flex-shrink: 0; }
+  .name-card-icon svg {
+    width: 40px; height: 40px;
+    stroke: var(--gold-light);
+    fill: none;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .name-card-label {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    margin-bottom: 4px;
+    font-weight: 700;
+  }
+
+  .name-card-text {
+    font-size: 15px;
+    font-weight: 700;
+    color: #f5f4f0;
+    letter-spacing: 0.05em;
+  }
+
+  /* ==============================
+     ACCESS
+  ============================== */
+  .access-section {
+    background: var(--cream);
+    padding: 120px var(--pad);
+  }
+
+  .access-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    margin-top: 56px;
+    align-items: start;
+  }
+
+  .access-item {
+    padding: 24px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .access-item:first-child { border-top: 1px solid var(--border); }
+  .access-item.visible { opacity: 1; transform: translateY(0); }
+
+  .access-icon { width: 28px; height: 28px; flex-shrink: 0; margin-top: 2px; }
+  .access-icon svg {
+    width: 24px; height: 24px;
+    stroke: var(--gold);
+    fill: none;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .access-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .access-value {
+    font-size: 14px;
+    color: var(--body-text);
+    line-height: 1.9;
+    letter-spacing: 0.04em;
+  }
+
+  .access-value a {
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border);
+    transition: border-color 0.3s;
+  }
+  .access-value a:hover { border-color: var(--gold); }
+
+  .access-map { position: relative; }
+
+  .map-frame {
+    width: 100%;
+    aspect-ratio: 4/3;
+    border: none;
+    display: block;
+    opacity: 0;
+    transform: scale(0.97);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .map-frame.visible { opacity: 1; transform: scale(1); }
+
+  .map-label {
+    position: absolute;
+    top: 16px; left: 16px;
+    background: var(--gold);
+    color: var(--white);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    padding: 6px 14px;
+    z-index: 1;
+  }
+
+  /* ==============================
+     CTA
+  ============================== */
+  .info-cta {
+    background: var(--gold);
+    padding: 88px var(--pad);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .info-cta::before {
+    content: 'CONTACT';
+    position: absolute;
+    left: -20px; top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 200px;
+    color: rgba(255,255,255,0.06);
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .info-cta-text { position: relative; }
+
+  .info-cta h2 {
+    font-size: clamp(22px, 2.5vw, 32px);
+    color: var(--white);
+    font-weight: 900;
+    margin-bottom: 8px;
+  }
+
+  .info-cta p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.72);
+    letter-spacing: 0.04em;
+  }
+
+  /* リップルボタン */
+  .btn-dark {
+    background: var(--black);
+    color: var(--white);
+    padding: 18px 48px;
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    font-weight: 500;
+    text-decoration: none;
+    font-family: 'Noto Sans JP', sans-serif;
+    white-space: nowrap;
+    flex-shrink: 0;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    transition: opacity 0.3s, translate 0.3s;
+  }
+  .btn-dark:hover { opacity: 0.82; translate: 0 -3px; }
+
+  .btn-dark .ripple {
+    position: absolute;
+    border-radius: 50%;
+    transform: scale(0);
+    animation: rippleAnim 0.65s linear;
+    background: rgba(255,255,255,0.22);
+    pointer-events: none;
+  }
+
+  /* ==============================
+     FOOTER
+  ============================== */
+  footer {
+    background: var(--black);
+    padding: 36px var(--pad);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(154,122,62,0.12);
+  }
+
+  .footer-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    color: var(--gold);
+    letter-spacing: 0.25em;
+  }
+
+  .footer-copy {
+    font-size: 11px;
+    color: rgba(255,255,255,0.28);
+    letter-spacing: 0.1em;
+  }
+
+  /* ==============================
+     KEYFRAMES
+  ============================== */
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes slideUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes scrollDot {
+    0%   { opacity: 1; transform: translateX(-50%) translateY(0); }
+    80%  { opacity: 0; transform: translateX(-50%) translateY(12px); }
+    100% { opacity: 0; transform: translateX(-50%) translateY(12px); }
+  }
+
+  @keyframes rippleAnim {
+    to { transform: scale(4); opacity: 0; }
+  }
+
+  @keyframes rotateSlow {
+    from { transform: translateY(-50%) rotate(0deg); }
+    to   { transform: translateY(-50%) rotate(360deg); }
+  }
+
+  /* ==============================
+     TABLET
+  ============================== */
+  @media (min-width: 768px) and (max-width: 1023px) {
+    :root { --pad: 36px; }
+    .overview-section  { grid-template-columns: 1fr; gap: 56px; }
+    .name-inner        { grid-template-columns: 1fr; gap: 40px; }
+    .access-inner      { grid-template-columns: 1fr; gap: 40px; }
+    .info-cta          { flex-direction: column; align-items: flex-start; gap: 24px; }
+    .nav-links         { display: none; }
+    .hero-deco-circle  { width: 300px; height: 300px; right: 3%; }
+    .stat-item         { padding: 36px 40px; }
+  }
+
+  /* ==============================
+     MOBILE
+  ============================== */
+  @media (max-width: 767px) {
+    :root { --pad: 20px; }
+    .site-nav     { padding: 0 20px; }
+    .nav-links    { display: none; }
+    .info-hero    { min-height: 100svh; padding: 120px var(--pad) 88px; }
+    .info-hero h1 { font-size: clamp(32px, 8.5vw, 50px); }
+    .hero-deco-circle { display: none; }
+    .hero-deco-line   { display: none; }
+    .stats-bar    { flex-wrap: wrap; justify-content: flex-start; }
+    .stat-item    { padding: 28px 36px; flex: 1 0 50%; }
+    .stat-item + .stat-item::before { display: none; }
+    .overview-section { grid-template-columns: 1fr; gap: 48px; padding: 72px var(--pad); }
+    .overview-table th { width: 110px; font-size: 11px; padding-right: 12px; }
+    .overview-table td { font-size: 13px; }
+    .overview-table th,
+    .overview-table td { padding: 18px 0; }
+    .vision-card  { padding: 28px 24px; }
+    .vision-card-title { font-size: 16px; }
+    .name-section { padding: 72px var(--pad); }
+    .name-inner   { grid-template-columns: 1fr; gap: 36px; margin-top: 36px; }
+    .name-card    { padding: 22px 20px; }
+    .access-section { padding: 72px var(--pad); }
+    .access-inner   { grid-template-columns: 1fr; gap: 36px; }
+    .info-cta     { flex-direction: column; align-items: stretch; gap: 24px; padding: 64px var(--pad); }
+    .btn-dark     { width: 100%; text-align: center; padding: 18px; }
+    footer        { flex-direction: column; gap: 10px; text-align: center; padding: 28px var(--pad); }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav class="site-nav" id="siteNav">
+  <a href="#" class="nav-logo">SAGE GROUP</a>
+  <ul class="nav-links">
+    <li><a href="#overview">会社概要</a></li>
+    <li><a href="#vision">ビジョン</a></li>
+    <li><a href="#name">社名の由来</a></li>
+    <li><a href="#access">アクセス</a></li>
+    <li><a href="mailto:info@sage-group.jp" class="nav-cta">お問い合わせ</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="info-hero">
+  <div class="info-hero-bg" id="heroBg"></div>
+  <div class="hero-deco hero-deco-circle"></div>
+  <div class="hero-deco hero-deco-line"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">COMPANY — 会社情報</div>
+    <h1>
+      <span class="word"><span class="word-inner" style="animation-delay:.55s">誠実に、</span></span>
+      <span class="word"><span class="word-inner" style="animation-delay:.75s">共に、</span></span><br>
+      <span class="word"><span class="word-inner" style="animation-delay:.95s"><em>着実に。</em></span></span>
+    </h1>
+    <p class="hero-sub">合同会社SageGroupは「家族愛」「チームワーク」「堅実」を企業理念に、静岡・愛知・東京で事業を展開しています。</p>
+  </div>
+  <div class="scroll-indicator">
+    <div class="scroll-mouse"></div>
+    <span>SCROLL</span>
+  </div>
+</div>
+
+<!-- STATS BAR -->
+<div class="stats-bar" id="statsBar">
+  <div class="stat-item">
+    <div class="stat-num"><span id="statYear">2022</span></div>
+    <div class="stat-label">FOUNDED YEAR</div>
+  </div>
+  <div class="stat-item" style="transition-delay:.12s">
+    <div class="stat-num"><span id="statArea">0</span><span class="unit">都市</span></div>
+    <div class="stat-label">展開エリア</div>
+  </div>
+  <div class="stat-item" style="transition-delay:.24s">
+    <div class="stat-num"><span id="statBiz">0</span><span class="unit">事業</span></div>
+    <div class="stat-label">事業領域</div>
+  </div>
+</div>
+
+<!-- 会社概要 -->
+<div class="overview-section" id="overview">
+  <div>
+    <div class="section-eyebrow fade-up">OVERVIEW</div>
+    <h2 class="section-title fade-up" style="transition-delay:.1s">会社概要</h2>
+    <table class="overview-table" id="overviewTable">
+      <tr><th>会社名</th><td>合同会社SageGroup</td></tr>
+      <tr><th>代表者</th><td>古賀 賢弥</td></tr>
+      <tr><th>設立</th><td>2022年5月</td></tr>
+      <tr><th>所在地</th><td>〒422-0033<br>静岡県静岡市葵区昭和町3-1<br>昭和町ビル303</td></tr>
+      <tr><th>電話番号</th><td><a href="tel:0543976631">054-397-6631</a></td></tr>
+      <tr><th>メール</th><td><a href="mailto:info@sage-group.jp">info@sage-group.jp</a></td></tr>
+      <tr><th>事業内容</th><td>モバイルショップ支援<br>イベントプロモーション<br>アイラッシュサロン運営</td></tr>
+    </table>
+  </div>
+
+  <div id="vision">
+    <div class="section-eyebrow fade-up">VISION</div>
+    <h2 class="section-title fade-up" style="transition-delay:.1s">私たちのビジョン</h2>
+    <div class="vision-block">
+      <div class="vision-card">
+        <div class="vision-card-label">MISSION</div>
+        <div class="vision-card-title">人と企業の可能性を、最大限に引き出す。</div>
+        <div class="vision-card-desc">どんな人にも可能性を感じ、その可能性を最大限に引き出すサポートをしていきたいと考えています。「人間性」を重視した誠実な姿勢で、多くの人と手を取り合い共に成長していくパートナーであり続けます。</div>
+      </div>
+      <div class="vision-card" style="transition-delay:.18s">
+        <div class="vision-card-label">VALUES</div>
+        <div class="vision-card-title">家族のような集団で、着実に歩む。</div>
+        <div class="vision-card-desc">お互いを思い合い、困ったときは助け合う。ギスギスした関係ではなく、チームワークを一番に大切にする会社でありたいと考えています。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 社名の由来 -->
+<div class="name-section" id="name">
+  <div class="section-eyebrow fade-up">ABOUT OUR NAME</div>
+  <h2 class="section-title fade-up" style="transition-delay:.1s">社名「サージ」の由来</h2>
+  <div class="name-inner">
+    <div class="name-text fade-up" style="transition-delay:.2s">
+      <p class="name-lead">「サージ（Sage）」という名前には、花言葉にある「家族愛」や「チームワーク」という意味が込められています。また「堅実」という意味もあり、みんなで仲良く助け合いながらも、一人ひとりが賢く着実に歩んでいける集団でありたいという思いを込めて名付けました。</p>
+      <div class="name-keywords">
+        <div class="name-keyword">家族愛</div>
+        <div class="name-keyword" style="transition-delay:.08s">チームワーク</div>
+        <div class="name-keyword" style="transition-delay:.16s">堅実</div>
+        <div class="name-keyword" style="transition-delay:.24s">誠実</div>
+        <div class="name-keyword" style="transition-delay:.32s">共に成長</div>
+      </div>
+    </div>
+    <div class="name-visual">
+      <div class="name-card">
+        <div class="name-card-icon">
+          <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 34S6 25 6 14a9 9 0 0 1 14-7.4A9 9 0 0 1 34 14c0 11-14 20-14 20z"/>
+          </svg>
+        </div>
+        <div>
+          <div class="name-card-label">FAMILY LOVE</div>
+          <div class="name-card-text">家族愛</div>
+        </div>
+      </div>
+      <div class="name-card" style="transition-delay:.14s">
+        <div class="name-card-icon">
+          <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="13" cy="11" r="4"/>
+            <path d="M4 32c0-6 4-9 9-9s9 3 9 9"/>
+            <circle cx="30" cy="11" r="4"/>
+            <path d="M21 32c0-6 4-9 9-9s9 3 9 9" opacity="0.5"/>
+          </svg>
+        </div>
+        <div>
+          <div class="name-card-label">TEAMWORK</div>
+          <div class="name-card-text">チームワーク</div>
+        </div>
+      </div>
+      <div class="name-card" style="transition-delay:.28s">
+        <div class="name-card-icon">
+          <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 4l14 6v10c0 8-6 14-14 16C12 34 6 28 6 20V10l14-6z"/>
+            <path d="M13 20l5 5 9-9" opacity="0.7"/>
+          </svg>
+        </div>
+        <div>
+          <div class="name-card-label">STEADY</div>
+          <div class="name-card-text">堅実</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- アクセス -->
+<div class="access-section" id="access">
+  <div class="section-eyebrow fade-up">ACCESS</div>
+  <h2 class="section-title fade-up" style="transition-delay:.1s">アクセス</h2>
+  <div class="access-inner">
+    <div class="access-info">
+      <div class="access-item">
+        <div class="access-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2C8.1 2 5 5.1 5 9c0 6 7 13 7 13s7-7 7-13c0-3.9-3.1-7-7-7z"/>
+            <circle cx="12" cy="9" r="2.5"/>
+          </svg>
+        </div>
+        <div>
+          <div class="access-label">ADDRESS</div>
+          <div class="access-value">〒422-0033<br>静岡県静岡市葵区昭和町3-1<br>昭和町ビル303</div>
+        </div>
+      </div>
+      <div class="access-item" style="transition-delay:.1s">
+        <div class="access-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/>
+          </svg>
+        </div>
+        <div>
+          <div class="access-label">PHONE</div>
+          <div class="access-value"><a href="tel:0543976631">054-397-6631</a></div>
+        </div>
+      </div>
+      <div class="access-item" style="transition-delay:.2s">
+        <div class="access-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="4" width="20" height="16" rx="2"/>
+            <path d="M2 4l10 9 10-9"/>
+          </svg>
+        </div>
+        <div>
+          <div class="access-label">EMAIL</div>
+          <div class="access-value"><a href="mailto:info@sage-group.jp">info@sage-group.jp</a></div>
+        </div>
+      </div>
+      <div class="access-item" style="transition-delay:.3s">
+        <div class="access-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="9"/>
+            <path d="M12 7v5l3 3"/>
+          </svg>
+        </div>
+        <div>
+          <div class="access-label">BUSINESS HOURS</div>
+          <div class="access-value">お問い合わせはメール・お電話にて<br>いつでもお気軽にどうぞ</div>
+        </div>
+      </div>
+    </div>
+    <div class="access-map">
+      <div class="map-label">MAP</div>
+      <iframe
+        class="map-frame"
+        src="https://maps.google.com/maps?q=静岡県静岡市葵区昭和町3-1昭和町ビル&output=embed"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="SageGroup 所在地"
+      ></iframe>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="info-cta fade-up">
+  <div class="info-cta-text">
+    <h2>お問い合わせはお気軽に</h2>
+    <p>電話・メール・SNSにていつでもご連絡ください。</p>
+  </div>
+  <a href="mailto:info@sage-group.jp" class="btn-dark" id="ctaBtn">お問い合わせ →</a>
+</div>
+
+<footer>
+  <div class="footer-logo">SAGE GROUP</div>
+  <div class="footer-copy">© SAGEGROUP 2026</div>
+</footer>
+
+<script>
+// NAV: スクロールで背景変化
+const nav = document.getElementById('siteNav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+}, { passive: true });
+
+// PARALLAX: ヒーロー背景
+const heroBg = document.getElementById('heroBg');
+window.addEventListener('scroll', () => {
+  if (window.scrollY < window.innerHeight * 1.2) {
+    heroBg.style.transform = `translateY(${window.scrollY * 0.28}px)`;
+  }
+}, { passive: true });
+
+// INTERSECTION OBSERVER: フェードアニメーション
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.14 });
+
+document.querySelectorAll(
+  '.fade-up, .vision-card, .name-card, .name-keyword, ' +
+  '.access-item, .map-frame, .stat-item, .section-eyebrow'
+).forEach(el => io.observe(el));
+
+// テーブル行: stagger
+document.querySelectorAll('.overview-table tr').forEach((tr, i) => {
+  tr.style.transitionDelay = `${i * 0.07 + 0.1}s`;
+  io.observe(tr);
+});
+
+// COUNTER ANIMATION
+function countUp(el, target, duration) {
+  const start = performance.now();
+  (function tick(now) {
+    const p = Math.min((now - start) / duration, 1);
+    const ease = 1 - Math.pow(1 - p, 3);
+    el.textContent = Math.round(ease * target);
+    if (p < 1) requestAnimationFrame(tick);
+    else el.textContent = target;
+  })(start);
+}
+
+let counted = false;
+new IntersectionObserver((entries) => {
+  if (entries[0].isIntersecting && !counted) {
+    counted = true;
+    countUp(document.getElementById('statArea'), 3, 1100);
+    countUp(document.getElementById('statBiz'),  3, 1100);
+  }
+}, { threshold: 0.4 }).observe(document.getElementById('statsBar'));
+
+// RIPPLE: CTAボタン
+document.getElementById('ctaBtn').addEventListener('click', function (e) {
+  const r = this.getBoundingClientRect();
+  const d = Math.max(this.clientWidth, this.clientHeight);
+  const span = document.createElement('span');
+  span.className = 'ripple';
+  span.style.cssText =
+    `width:${d}px;height:${d}px;` +
+    `left:${e.clientX - r.left - d / 2}px;` +
+    `top:${e.clientY - r.top  - d / 2}px;`;
+  this.appendChild(span);
+  setTimeout(() => span.remove(), 700);
+});
+</script>
+</body>
+</html>
