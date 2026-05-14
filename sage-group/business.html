@@ -1,0 +1,1435 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SageGroup – 事業内容</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+/* ==============================
+   VARIABLES
+============================== */
+:root {
+  --gold: #9a7a3e;
+  --gold-light: #b8965a;
+  --gold-pale: #d4b896;
+  --gold-bg: rgba(154,122,62,0.07);
+  --white: #ffffff;
+  --cream: #fdfbf7;
+  --cream-mid: #f5f0e8;
+  --cream-deep: #ede5d6;
+  --black: #1a1714;
+  --body: #4a4540;
+  --border: rgba(154,122,62,0.18);
+  --pad: 72px;
+  --nav-h: 72px;
+}
+
+/* ==============================
+   RESET & BASE
+============================== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--white);
+  color: var(--black);
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+  line-height: 1.9;
+  overflow-x: hidden;
+  word-break: normal;
+  overflow-wrap: break-word;
+  line-break: strict;
+}
+
+/* ==============================
+   STICKY NAV
+============================== */
+.site-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 200;
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--pad);
+  transition: background 0.45s ease, box-shadow 0.45s ease;
+}
+.site-nav.scrolled {
+  background: rgba(255,255,255,0.96);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 1px 0 var(--cream-deep);
+}
+.nav-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  text-decoration: none;
+}
+.nav-links {
+  display: flex;
+  gap: 36px;
+  list-style: none;
+  align-items: center;
+}
+.nav-links a {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: rgba(26,23,20,0.6);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.site-nav.scrolled .nav-links a { color: var(--body); }
+.nav-links a:hover { color: var(--gold); }
+.nav-links .nav-cta {
+  padding: 9px 22px;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  transition: all 0.3s;
+}
+.nav-links .nav-cta:hover { background: var(--gold); color: var(--white); }
+
+/* ==============================
+   HERO
+============================== */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-end;
+  padding: calc(var(--nav-h) + 60px) var(--pad) 80px;
+  position: relative;
+  overflow: hidden;
+  background: var(--cream);
+}
+
+/* animated background word */
+.hero-bg-word {
+  position: absolute;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(140px, 22vw, 320px);
+  letter-spacing: 0.05em;
+  color: rgba(154,122,62,0.055);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  white-space: nowrap;
+  animation: bgDrift 12s ease-in-out infinite;
+  user-select: none;
+}
+@keyframes bgDrift {
+  0%, 100% { transform: translate(-50%, -52%); }
+  50%       { transform: translate(-50%, -48%); }
+}
+
+/* gold geometric rings top-right */
+.hero-rings {
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 520px; height: 520px;
+  pointer-events: none;
+}
+.hero-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(154,122,62,0.15);
+}
+.hero-ring:nth-child(1) { inset: 0;        animation: spin 30s linear infinite; }
+.hero-ring:nth-child(2) { inset: 80px;     animation: spin 22s linear infinite reverse; border-color: rgba(154,122,62,0.2); }
+.hero-ring:nth-child(3) { inset: 160px;    animation: spin 16s linear infinite; border-color: rgba(154,122,62,0.12); }
+.hero-ring:nth-child(4) { inset: 220px;    background: radial-gradient(circle, rgba(154,122,62,0.08) 0%, transparent 70%); border: none; }
+
+/* second accent bottom-left */
+.hero-rings-bl {
+  position: absolute;
+  bottom: -100px; left: -80px;
+  width: 360px; height: 360px;
+  pointer-events: none;
+}
+.hero-rings-bl .hero-ring:nth-child(1) { inset: 0; animation: spin 40s linear infinite reverse; border-color: rgba(154,122,62,0.08); }
+.hero-rings-bl .hero-ring:nth-child(2) { inset: 60px; animation: spin 28s linear infinite; border-color: rgba(154,122,62,0.1); }
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* scrolling gold line left accent */
+.hero-line-accent {
+  position: absolute;
+  left: calc(var(--pad) - 32px);
+  top: 0; bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--gold-pale) 30%, var(--gold-pale) 70%, transparent);
+  animation: lineIn 1.2s ease 0.4s both;
+}
+@keyframes lineIn {
+  from { transform: scaleY(0); transform-origin: top; }
+  to   { transform: scaleY(1); transform-origin: top; }
+}
+
+.hero-content { position: relative; z-index: 1; max-width: 760px; }
+
+.hero-eyebrow {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.45em;
+  color: var(--gold);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  animation: fadeUp 0.8s ease 0.3s both;
+}
+.hero-eyebrow::before {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 1px;
+  background: var(--gold);
+  flex-shrink: 0;
+}
+.hero-h1 {
+  font-size: clamp(36px, 6vw, 76px);
+  font-weight: 900;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--black);
+  margin-bottom: 28px;
+  animation: fadeUp 0.8s ease 0.5s both;
+}
+.hero-h1 em { font-style: normal; color: var(--gold); }
+.hero-sub {
+  font-size: 14px;
+  color: var(--body);
+  line-height: 2.1;
+  max-width: 460px;
+  letter-spacing: 0.04em;
+  animation: fadeUp 0.8s ease 0.7s both;
+}
+
+/* scroll hint */
+.hero-scroll {
+  position: absolute;
+  bottom: 36px; right: var(--pad);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  color: var(--gold-pale);
+  animation: fadeUp 0.8s ease 1s both;
+}
+.hero-scroll-bar {
+  width: 1px;
+  height: 48px;
+  background: var(--cream-deep);
+  overflow: hidden;
+  position: relative;
+}
+.hero-scroll-bar::after {
+  content: '';
+  position: absolute;
+  top: -100%;
+  width: 100%; height: 100%;
+  background: var(--gold);
+  animation: scrollBar 1.6s ease-in-out infinite;
+}
+@keyframes scrollBar { to { top: 200%; } }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ==============================
+   COMMON SECTION PARTS
+============================== */
+.eyebrow {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.38em;
+  color: var(--gold);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.eyebrow::after {
+  content: '';
+  width: 28px;
+  height: 1px;
+  background: var(--gold);
+  flex-shrink: 0;
+}
+.sec-title {
+  font-size: clamp(22px, 2.8vw, 36px);
+  font-weight: 900;
+  line-height: 1.3;
+  letter-spacing: 0.03em;
+}
+.sec-divider {
+  width: 0;
+  height: 2px;
+  background: var(--gold);
+  margin-top: 20px;
+  transition: width 1s ease;
+}
+.sec-divider.visible { width: 48px; }
+
+/* ==============================
+   SCROLL ANIMATIONS
+============================== */
+.fade-up {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.72s ease, transform 0.72s ease;
+}
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.fade-left {
+  opacity: 0;
+  transform: translateX(-32px);
+  transition: opacity 0.72s ease, transform 0.72s ease;
+}
+.fade-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+.fade-right {
+  opacity: 0;
+  transform: translateX(32px);
+  transition: opacity 0.72s ease, transform 0.72s ease;
+}
+.fade-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ==============================
+   3 PILLAR CARDS
+============================== */
+.pillars {
+  padding: 110px var(--pad);
+  background: var(--white);
+}
+.pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 60px;
+}
+.pillar-card {
+  padding: 52px 40px;
+  background: var(--cream);
+  position: relative;
+  overflow: hidden;
+  cursor: default;
+  transition: background 0.4s, box-shadow 0.4s, transform 0.4s;
+}
+.pillar-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s ease;
+}
+.pillar-card:hover {
+  background: var(--white);
+  box-shadow: 0 20px 60px rgba(154,122,62,0.10);
+  transform: translateY(-6px);
+}
+.pillar-card:hover::before { transform: scaleX(1); }
+
+.pillar-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 72px;
+  color: rgba(154,122,62,0.08);
+  line-height: 1;
+  margin-bottom: 12px;
+  letter-spacing: -0.02em;
+}
+.pillar-tag {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.35em;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+.pillar-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 14px;
+  letter-spacing: 0.04em;
+  line-height: 1.55;
+}
+.pillar-desc {
+  font-size: 13px;
+  color: var(--body);
+  line-height: 2.0;
+  letter-spacing: 0.03em;
+}
+.pillar-area {
+  margin-top: 22px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  font-size: 11px;
+  color: #999;
+  letter-spacing: 0.08em;
+}
+.pillar-area-label {
+  color: var(--gold-light);
+  margin-right: 6px;
+}
+
+/* ==============================
+   BUSINESS DETAIL SECTIONS
+============================== */
+.detail {
+  padding: 110px var(--pad);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.detail.alt { background: var(--cream); }
+.detail.alt .detail-photo { order: 2; }
+.detail.alt .detail-body { order: 1; }
+
+/* Photo side */
+.detail-photo { position: relative; }
+.detail-photo-main {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  display: block;
+}
+.detail-photo-accent {
+  position: absolute;
+  bottom: -22px; right: -22px;
+  width: 44%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  border: 5px solid var(--white);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+}
+.detail-photo-badge {
+  position: absolute;
+  top: 20px; left: 20px;
+  background: var(--gold);
+  color: var(--white);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  padding: 7px 16px;
+  letter-spacing: 0.25em;
+}
+
+/* gold frame line on image */
+.detail-photo::after {
+  content: '';
+  position: absolute;
+  inset: -12px;
+  border: 1px solid var(--gold-pale);
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.5s, inset 0.5s;
+}
+.detail-photo:hover::after {
+  opacity: 1;
+  inset: -8px;
+}
+
+/* Body side */
+.detail-tag {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.38em;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+.detail-title {
+  font-size: clamp(20px, 2.4vw, 32px);
+  font-weight: 900;
+  letter-spacing: 0.03em;
+  line-height: 1.45;
+  margin-bottom: 22px;
+}
+.detail-lead {
+  font-size: 14px;
+  color: var(--body);
+  line-height: 2.1;
+  letter-spacing: 0.04em;
+  margin-bottom: 32px;
+}
+
+/* Steps / Flow */
+.steps { display: flex; flex-direction: column; margin-bottom: 32px; }
+.step {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--border);
+  transition: padding-left 0.3s;
+}
+.step:first-child { padding-top: 0; }
+.step:last-child { border-bottom: none; }
+.step:hover { padding-left: 6px; }
+.step-label {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: var(--gold);
+  flex-shrink: 0;
+  width: 52px;
+  padding-top: 3px;
+}
+.step-title {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  margin-bottom: 3px;
+}
+.step-desc {
+  font-size: 12px;
+  color: var(--body);
+  line-height: 1.85;
+  letter-spacing: 0.03em;
+}
+
+/* Tags */
+.tag-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag-pill {
+  border: 1px solid var(--border);
+  padding: 6px 15px;
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+  font-weight: 500;
+  transition: all 0.25s;
+}
+.tag-pill:hover {
+  background: var(--gold);
+  color: var(--white);
+  border-color: var(--gold);
+}
+
+/* ==============================
+   NUMBERS SECTION
+============================== */
+.numbers {
+  background: var(--cream-mid);
+  padding: 110px var(--pad);
+  position: relative;
+  overflow: hidden;
+}
+.numbers::before {
+  content: '数字';
+  position: absolute;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 900;
+  font-size: 200px;
+  color: rgba(154,122,62,0.04);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+}
+.numbers-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  margin-top: 60px;
+}
+.num-card {
+  background: var(--white);
+  padding: 52px 28px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.35s, transform 0.35s;
+}
+.num-card:hover {
+  box-shadow: 0 12px 40px rgba(154,122,62,0.12);
+  transform: translateY(-4px);
+}
+.num-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 50%;
+  width: 0; height: 2px;
+  background: var(--gold);
+  transform: translateX(-50%);
+  transition: width 0.45s ease;
+}
+.num-card:hover::after { width: 100%; }
+.num-value {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(48px, 5vw, 68px);
+  color: var(--gold);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+}
+.num-unit {
+  font-size: 16px;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 700;
+  vertical-align: super;
+}
+.num-label {
+  font-size: 13px;
+  color: var(--black);
+  letter-spacing: 0.06em;
+  font-weight: 500;
+}
+.num-sub {
+  font-size: 11px;
+  color: #999;
+  letter-spacing: 0.04em;
+  margin-top: 5px;
+}
+
+/* ==============================
+   WHY SECTION
+============================== */
+.why {
+  background: var(--white);
+  padding: 110px var(--pad);
+  position: relative;
+  overflow: hidden;
+}
+/* subtle gold watermark */
+.why::before {
+  content: 'WHY';
+  position: absolute;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 280px;
+  color: rgba(154,122,62,0.035);
+  right: -20px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  user-select: none;
+  line-height: 1;
+}
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 60px;
+}
+.why-card {
+  padding: 44px 36px;
+  background: var(--cream);
+  border: 1px solid transparent;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.35s, border-color 0.35s, box-shadow 0.35s, transform 0.35s;
+}
+.why-card:hover {
+  background: var(--white);
+  border-color: var(--cream-deep);
+  box-shadow: 0 16px 48px rgba(154,122,62,0.10);
+  transform: translateY(-5px);
+}
+/* gold bottom line draw on hover */
+.why-card-line {
+  position: absolute;
+  bottom: 0; left: 0;
+  height: 2px;
+  width: 0;
+  background: linear-gradient(90deg, var(--gold), var(--gold-pale));
+  transition: width 0.45s ease;
+}
+.why-card:hover .why-card-line { width: 100%; }
+
+.why-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 48px;
+  color: rgba(154,122,62,0.12);
+  line-height: 1;
+  margin-bottom: 14px;
+}
+.why-icon {
+  width: 44px; height: 44px;
+  margin-bottom: 18px;
+}
+.why-icon svg {
+  width: 44px; height: 44px;
+  stroke: var(--gold-light);
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.why-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--black);
+  margin-bottom: 12px;
+  letter-spacing: 0.04em;
+  line-height: 1.6;
+}
+.why-desc {
+  font-size: 13px;
+  color: var(--body);
+  line-height: 2.0;
+  letter-spacing: 0.03em;
+}
+
+/* ==============================
+   VOICE SECTION
+============================== */
+.voice {
+  background: var(--cream);
+  padding: 110px var(--pad);
+}
+.voice-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  margin-top: 60px;
+}
+.voice-card {
+  background: var(--white);
+  padding: 38px 30px;
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.35s, transform 0.35s;
+}
+.voice-card:hover {
+  box-shadow: 0 12px 40px rgba(154,122,62,0.10);
+  transform: translateY(-4px);
+}
+/* gold left border draw */
+.voice-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 2px; height: 0;
+  background: var(--gold);
+  transition: height 0.45s ease;
+}
+.voice-card:hover::before { height: 100%; }
+
+.voice-stars {
+  color: var(--gold);
+  font-size: 12px;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+}
+.voice-quote-mark {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 60px;
+  color: rgba(154,122,62,0.12);
+  line-height: 1;
+  margin-bottom: 6px;
+  font-style: italic;
+}
+.voice-text {
+  font-size: 14px;
+  line-height: 2.0;
+  color: var(--black);
+  letter-spacing: 0.04em;
+  margin-bottom: 24px;
+}
+.voice-person {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
+}
+.voice-avatar {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: var(--cream-mid);
+}
+.voice-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.voice-name { font-size: 13px; font-weight: 700; letter-spacing: 0.04em; }
+.voice-role { font-size: 11px; color: #999; letter-spacing: 0.04em; margin-top: 2px; }
+
+/* ==============================
+   AREA SECTION
+============================== */
+.area {
+  background: var(--white);
+  padding: 90px var(--pad);
+  display: flex;
+  align-items: center;
+  gap: 80px;
+}
+.area-body { flex: 1; min-width: 0; }
+.area-body h2 {
+  font-size: clamp(22px, 2.8vw, 36px);
+  font-weight: 700;
+  margin-bottom: 16px;
+  line-height: 1.4;
+}
+.area-body p { color: var(--body); font-size: 14px; line-height: 2.1; letter-spacing: 0.03em; }
+.area-pills {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+}
+.area-pill {
+  padding: 18px 36px;
+  border: 1px solid var(--border);
+  font-size: 15px;
+  letter-spacing: 0.14em;
+  color: var(--gold);
+  font-weight: 500;
+  white-space: nowrap;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.area-pill::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s ease;
+  z-index: 0;
+}
+.area-pill:hover::before { transform: scaleX(1); }
+.area-pill span { position: relative; z-index: 1; transition: color 0.35s; }
+.area-pill:hover span { color: var(--white); }
+
+/* ==============================
+   CTA BANNER
+============================== */
+.cta-banner {
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 60%, #c8a870 100%);
+  padding: 80px var(--pad);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+  position: relative;
+  overflow: hidden;
+}
+.cta-banner::before {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 280px; height: 280px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.15);
+}
+.cta-banner::after {
+  content: '';
+  position: absolute;
+  bottom: -80px; left: 40%;
+  width: 200px; height: 200px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.cta-text h2 {
+  font-size: clamp(20px, 2.5vw, 30px);
+  color: var(--white);
+  font-weight: 900;
+  margin-bottom: 6px;
+  position: relative;
+}
+.cta-text p {
+  font-size: 13px;
+  color: rgba(255,255,255,0.78);
+  letter-spacing: 0.04em;
+  position: relative;
+}
+.cta-btn {
+  background: var(--white);
+  color: var(--gold);
+  padding: 17px 44px;
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  font-weight: 700;
+  text-decoration: none;
+  font-family: 'Noto Sans JP', sans-serif;
+  transition: all 0.3s;
+  white-space: nowrap;
+  flex-shrink: 0;
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+}
+.cta-btn:hover {
+  background: var(--black);
+  color: var(--white);
+}
+/* ripple */
+.cta-btn .ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(154,122,62,0.25);
+  transform: scale(0);
+  animation: rippleAnim 0.6s linear;
+  pointer-events: none;
+}
+@keyframes rippleAnim {
+  to { transform: scale(4); opacity: 0; }
+}
+
+/* ==============================
+   FOOTER
+============================== */
+.site-footer {
+  background: var(--cream-mid);
+  border-top: 1px solid var(--cream-deep);
+  padding: 28px var(--pad);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  color: #999;
+  letter-spacing: 0.08em;
+}
+.footer-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 16px;
+  letter-spacing: 0.28em;
+  color: var(--gold);
+  text-decoration: none;
+}
+
+/* ==============================
+   RESPONSIVE
+============================== */
+@media (max-width: 1023px) {
+  :root { --pad: 36px; }
+  .pillars-grid { grid-template-columns: 1fr; }
+  .detail { grid-template-columns: 1fr; gap: 40px; padding: 72px var(--pad); }
+  .detail.alt .detail-photo { order: 0; }
+  .detail.alt .detail-body { order: 0; }
+  .detail-photo-accent { bottom: -12px; right: -12px; width: 36%; }
+  .numbers-grid { grid-template-columns: repeat(2, 1fr); }
+  .why-grid { grid-template-columns: 1fr; }
+  .voice-grid { grid-template-columns: 1fr; }
+  .area { flex-direction: column; gap: 40px; }
+  .cta-banner { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 767px) {
+  :root { --pad: 20px; }
+  .site-nav .nav-links { display: none; }
+  .hero { min-height: auto; padding: calc(var(--nav-h) + 40px) var(--pad) 60px; }
+  .hero-h1 { font-size: clamp(28px, 8vw, 44px); }
+  .hero-rings { width: 280px; height: 280px; right: -40px; top: -40px; }
+  .pillars { padding: 64px var(--pad); }
+  .pillar-card { padding: 36px 24px; }
+  .detail { padding: 64px var(--pad); gap: 28px; }
+  .detail-photo-accent { display: none; }
+  .numbers { padding: 64px var(--pad); }
+  .numbers-grid { grid-template-columns: repeat(2, 1fr); }
+  .num-card { padding: 36px 16px; }
+  .why { padding: 64px var(--pad); }
+  .why-grid { grid-template-columns: 1fr; }
+  .why-card { padding: 32px 24px; }
+  .voice { padding: 64px var(--pad); }
+  .voice-grid { grid-template-columns: 1fr; }
+  .area { padding: 64px var(--pad); }
+  .cta-banner { padding: 56px var(--pad); }
+  .cta-btn { width: 100%; text-align: center; }
+  .site-footer { flex-direction: column; gap: 8px; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- ==============================
+     NAVIGATION
+============================== -->
+<nav class="site-nav" id="nav">
+  <a href="index.html" class="nav-logo">SAGE GROUP</a>
+  <ul class="nav-links">
+    <li><a href="index.html">TOP</a></li>
+    <li><a href="#pillars">事業紹介</a></li>
+    <li><a href="#numbers">数字</a></li>
+    <li><a href="#why">選ばれる理由</a></li>
+    <li><a href="infomation.html">会社情報</a></li>
+    <li><a href="#cta" class="nav-cta">お問い合わせ</a></li>
+  </ul>
+</nav>
+
+<!-- ==============================
+     HERO
+============================== -->
+<section class="hero" id="top">
+  <div class="hero-bg-word">BUSINESS</div>
+  <div class="hero-rings">
+    <div class="hero-ring"></div>
+    <div class="hero-ring"></div>
+    <div class="hero-ring"></div>
+    <div class="hero-ring"></div>
+  </div>
+  <div class="hero-rings-bl">
+    <div class="hero-ring"></div>
+    <div class="hero-ring"></div>
+  </div>
+  <div class="hero-line-accent"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">BUSINESS — 事業内容</div>
+    <h1 class="hero-h1">
+      モバイル、イベント、<br>
+      そして<em>ビューティー。</em><br>
+      3つの現場で、<br>人と価値をつくる。
+    </h1>
+    <p class="hero-sub">合同会社SageGroupは、静岡・愛知・東京を舞台に、多様な事業フィールドで人と企業をつなぐ会社です。</p>
+  </div>
+  <div class="hero-scroll">
+    <div class="hero-scroll-bar"></div>
+    SCROLL
+  </div>
+</section>
+
+<!-- ==============================
+     3 PILLARS
+============================== -->
+<section class="pillars" id="pillars">
+  <div class="eyebrow fade-up">OUR BUSINESS</div>
+  <h2 class="sec-title fade-up" style="transition-delay:0.1s">私たちのしごと</h2>
+  <div class="sec-divider fade-up"></div>
+  <div class="pillars-grid">
+    <div class="pillar-card fade-up" style="transition-delay:0.1s">
+      <div class="pillar-num">01</div>
+      <div class="pillar-tag">MOBILE</div>
+      <div class="pillar-title">モバイルショップ支援</div>
+      <div class="pillar-desc">SoftBank・楽天モバイルをはじめとするキャリアショップへの人材派遣・販売サポート。店舗の売上向上に直結するスタッフを派遣・育成します。</div>
+      <div class="pillar-area"><span class="pillar-area-label">対応エリア</span>静岡 / 愛知 / 東京</div>
+    </div>
+    <div class="pillar-card fade-up" style="transition-delay:0.2s">
+      <div class="pillar-num">02</div>
+      <div class="pillar-tag">EVENT</div>
+      <div class="pillar-title">イベントプロモーション</div>
+      <div class="pillar-desc">太陽光をはじめとした販促イベントの企画・運営・スタッフ手配まで一貫してサポート。現場の熱量を最大化し成果につながるプロモーションを実現します。</div>
+      <div class="pillar-area"><span class="pillar-area-label">対応エリア</span>静岡 / 愛知 / 東京</div>
+    </div>
+    <div class="pillar-card fade-up" style="transition-delay:0.3s">
+      <div class="pillar-num">03</div>
+      <div class="pillar-tag">BEAUTY</div>
+      <div class="pillar-title">アイラッシュサロン運営</div>
+      <div class="pillar-desc">静岡市駿河区にて「eyelash salon Ria」を自社運営。完全個室・完全予約制で、丁寧なカウンセリングと確かな技術でお客様の理想の目元を叶えます。</div>
+      <div class="pillar-area"><span class="pillar-area-label">所在地</span>静岡市駿河区（静岡駅南口 徒歩5分）</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==============================
+     DETAIL 01: MOBILE
+============================== -->
+<section class="detail" id="mobile">
+  <div class="detail-photo fade-left">
+    <img class="detail-photo-main"
+         src="https://static.wixstatic.com/media/5bf634_9fa1e47620e94fa8b9b6a17c8c99947d~mv2.png"
+         alt="モバイルショップ支援">
+    <img class="detail-photo-accent"
+         src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&q=80"
+         alt="スマートフォン">
+    <div class="detail-photo-badge">01 — MOBILE</div>
+  </div>
+  <div class="detail-body fade-right">
+    <div class="detail-tag">MOBILE SHOP SUPPORT</div>
+    <h2 class="detail-title">キャリアショップの販売力を、<br>底上げする。</h2>
+    <p class="detail-lead">SoftBank・楽天モバイルをはじめとするキャリアショップへ、即戦力となるスタッフを派遣。採用から教育・現場フォローまで一貫して対応し、店舗の売上向上を支援します。</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-label">STEP 1</div>
+        <div>
+          <div class="step-title">ヒアリング・マッチング</div>
+          <div class="step-desc">店舗の課題・必要なスキルセットを丁寧にヒアリングし、最適なスタッフをご提案します。</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-label">STEP 2</div>
+        <div>
+          <div class="step-title">研修・スキルアップ</div>
+          <div class="step-desc">接客マナーから商品知識まで、現場に即した研修を実施。即日稼働できる体制を整えます。</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-label">STEP 3</div>
+        <div>
+          <div class="step-title">派遣・現場フォロー</div>
+          <div class="step-desc">派遣後も担当者が定期的にフォロー。トラブル対応・追加研修も迅速に対応します。</div>
+        </div>
+      </div>
+    </div>
+    <div class="tag-row">
+      <div class="tag-pill">SoftBank</div>
+      <div class="tag-pill">楽天モバイル</div>
+      <div class="tag-pill">キャリアショップ</div>
+      <div class="tag-pill">接客・販売</div>
+      <div class="tag-pill">静岡 / 愛知 / 東京</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==============================
+     DETAIL 02: EVENT
+============================== -->
+<section class="detail alt" id="event">
+  <div class="detail-photo fade-right">
+    <img class="detail-photo-main"
+         src="https://static.wixstatic.com/media/5bf634_e3cd7f8dfc7d4eddb91ae8c2b9aa1375~mv2.jpg"
+         alt="イベントプロモーション">
+    <img class="detail-photo-accent"
+         src="https://static.wixstatic.com/media/5bf634_363cf5ee080a4695955fa7a0be7d5f13~mv2.jpg"
+         alt="イベント現場">
+    <div class="detail-photo-badge">02 — EVENT</div>
+  </div>
+  <div class="detail-body fade-left">
+    <div class="detail-tag">EVENT PROMOTION</div>
+    <h2 class="detail-title">現場の熱量を最大化し、<br>成果に直結させる。</h2>
+    <p class="detail-lead">太陽光発電をはじめとした販促イベントの企画・運営・スタッフ手配を一貫してサポート。豊富な現場経験を持つスタッフが、アポイント獲得から成約までをエスコートします。</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-label">STEP 1</div>
+        <div>
+          <div class="step-title">企画・イベント設計</div>
+          <div class="step-desc">ターゲット・エリア・期間をもとに最適なイベントプランをご提案。集客から成約までの導線を設計します。</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-label">STEP 2</div>
+        <div>
+          <div class="step-title">スタッフ手配・教育</div>
+          <div class="step-desc">トークスクリプト・ロールプレイングで現場力を底上げ。当日に強いスタッフを育てます。</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-label">STEP 3</div>
+        <div>
+          <div class="step-title">運営・効果測定</div>
+          <div class="step-desc">リーダーが現場を統括し、日次でKPIを管理。PDCAを回し成果を最大化します。</div>
+        </div>
+      </div>
+    </div>
+    <div class="tag-row">
+      <div class="tag-pill">太陽光発電</div>
+      <div class="tag-pill">アポイント獲得</div>
+      <div class="tag-pill">イベント運営</div>
+      <div class="tag-pill">スタッフ手配</div>
+      <div class="tag-pill">静岡 / 愛知 / 東京</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==============================
+     DETAIL 03: BEAUTY
+============================== -->
+<section class="detail" id="beauty">
+  <div class="detail-photo fade-left">
+    <img class="detail-photo-main"
+         src="https://lh3.googleusercontent.com/gps-cs-s/APNQkAF_pK9O_QVG0Yne3Vh-dagXrXRGTPxMwVdb0lZ8ccNV34Q6JepudxHl5cpuIQCVIvt2TW0gugdBjkU4ZFfKgiXo6mHDM0_d_U570UIM4tf5-Sy7aHouOpemUgye08a1wpfR0bry=s1360-w1360-h1020-rw"
+         alt="eyelash salon Ria">
+    <img class="detail-photo-accent"
+         src="https://static.wixstatic.com/media/5bf634_c688f7acb8694ad7bb20dd51b315bc61~mv2.jpg"
+         alt="まつ毛エクステ">
+    <div class="detail-photo-badge">03 — BEAUTY</div>
+  </div>
+  <div class="detail-body fade-right">
+    <div class="detail-tag">EYELASH SALON RIA</div>
+    <h2 class="detail-title">完全個室で叶える、<br>理想の目元。</h2>
+    <p class="detail-lead">静岡市駿河区にて「eyelash salon Ria」を自社運営。完全個室・完全予約制で、一人ひとりの目元に合わせた丁寧なカウンセリングを実施。ホットペッパービューティーでの口コミ評価は★4.93（80件以上）を誇ります。</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-label">メニュー</div>
+        <div>
+          <div class="step-title">まつ毛エクステ / まつ毛パーマ</div>
+          <div class="step-desc">お客様の目の形・骨格に合わせたデザイン提案。ナチュラルからボリューム系まで幅広く対応します。</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-label">こだわり</div>
+        <div>
+          <div class="step-title">完全個室・完全予約制</div>
+          <div class="step-desc">プライベート空間でリラックスして施術を受けられる環境。施術者1名体制で丁寧に対応します。</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-label">実績</div>
+        <div>
+          <div class="step-title">口コミ ★4.93（80件以上）</div>
+          <div class="step-desc">ホットペッパービューティーにて高評価を継続獲得。リピーター率の高さが品質の証明です。</div>
+        </div>
+      </div>
+    </div>
+    <div class="tag-row">
+      <div class="tag-pill">まつ毛エクステ</div>
+      <div class="tag-pill">まつ毛パーマ</div>
+      <div class="tag-pill">完全個室</div>
+      <div class="tag-pill">静岡市駿河区</div>
+      <div class="tag-pill">★4.93</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==============================
+     NUMBERS
+============================== -->
+<section class="numbers" id="numbers">
+  <div class="eyebrow fade-up">NUMBERS</div>
+  <h2 class="sec-title fade-up" style="transition-delay:0.1s">数字で見るSageGroup</h2>
+  <div class="sec-divider fade-up"></div>
+  <div class="numbers-grid">
+    <div class="num-card fade-up" style="transition-delay:0.1s">
+      <div class="num-value"><span class="count" data-target="5" data-suffix="">0</span><span class="num-unit">　名</span></div>
+      <div class="num-label">年間採用実績</div>
+      <div class="num-sub">静岡・愛知・東京 合計</div>
+    </div>
+    <div class="num-card fade-up" style="transition-delay:0.2s">
+      <div class="num-value"><span class="count" data-target="3" data-suffix="">0</span><span class="num-unit">　拠点</span></div>
+      <div class="num-label">活動エリア</div>
+      <div class="num-sub">静岡 / 愛知 / 東京</div>
+    </div>
+    <div class="num-card fade-up" style="transition-delay:0.3s">
+      <div class="num-value num-decimal" id="rating-val">0</div>
+      <div class="num-label">サロン口コミ評価</div>
+      <div class="num-sub">ホットペッパービューティー</div>
+    </div>
+    <div class="num-card fade-up" style="transition-delay:0.4s">
+      <div class="num-value"><span class="count" data-target="3" data-suffix="">0</span><span class="num-unit">　事業</span></div>
+      <div class="num-label">展開事業数</div>
+      <div class="num-sub">モバイル / イベント / ビューティー</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==============================
+     WHY SECTION
+============================== -->
+<section class="why" id="why">
+  <div class="eyebrow fade-up">WHY SAGE GROUP</div>
+  <h2 class="sec-title fade-up" style="transition-delay:0.1s">SageGroupが選ばれる理由</h2>
+  <div class="sec-divider fade-up"></div>
+  <div class="why-grid">
+    <div class="why-card fade-up" style="transition-delay:0.05s">
+      <div class="why-num">01</div>
+      <div class="why-icon">
+        <svg viewBox="0 0 44 44"><circle cx="15" cy="12" r="5"/><path d="M4 36c0-7 5-11 11-11s11 4 11 11"/><path d="M29 20l4 4 8-8"/></svg>
+      </div>
+      <div class="why-title">採用から育成まで<br>一貫サポート</div>
+      <div class="why-desc">求人・面接・研修・現場フォローを自社で一貫して担当。スタッフの定着率を高め、クライアントの採用コストを削減します。</div>
+      <div class="why-card-line"></div>
+    </div>
+    <div class="why-card fade-up" style="transition-delay:0.1s">
+      <div class="why-num">02</div>
+      <div class="why-icon">
+        <svg viewBox="0 0 44 44"><path d="M25 4L10 24h14l-5 16 19-22H24L25 4z"/></svg>
+      </div>
+      <div class="why-title">現場経験に裏打ちされた<br>即戦力人材</div>
+      <div class="why-desc">モバイル・イベント・ビューティーと多彩な現場で培ったノウハウを活かし、実践的なスキルを持つスタッフを派遣します。</div>
+      <div class="why-card-line"></div>
+    </div>
+    <div class="why-card fade-up" style="transition-delay:0.15s">
+      <div class="why-num">03</div>
+      <div class="why-icon">
+        <svg viewBox="0 0 44 44"><path d="M22 4C16.5 4 12 8.5 12 14c0 8 10 20 10 20s10-12 10-20c0-5.5-4.5-10-10-10z"/><circle cx="22" cy="14" r="4"/><path d="M8 38h28" opacity="0.4"/></svg>
+      </div>
+      <div class="why-title">静岡・愛知・東京の<br>3拠点対応</div>
+      <div class="why-desc">地域に根ざしたネットワークを持ち、各エリアの市場特性に合った人材・プロモーションを迅速に提供できます。</div>
+      <div class="why-card-line"></div>
+    </div>
+    <div class="why-card fade-up" style="transition-delay:0.2s">
+      <div class="why-num">04</div>
+      <div class="why-icon">
+        <svg viewBox="0 0 44 44"><path d="M38 28c0 2-1.6 3.6-3.6 3.6H14l-8 6V10c0-2 1.6-3.6 3.6-3.6h24.8C36.4 6.4 38 8 38 10v18z"/><path d="M14 18h16M14 24h10" opacity="0.6"/></svg>
+      </div>
+      <div class="why-title">密なコミュニケーションと<br>迅速な対応</div>
+      <div class="why-desc">担当者がクライアントの状況を細かく把握し、急な追加依頼やトラブルにも柔軟かつ迅速に対応します。</div>
+      <div class="why-card-line"></div>
+    </div>
+    <div class="why-card fade-up" style="transition-delay:0.25s">
+      <div class="why-num">05</div>
+      <div class="why-icon">
+        <svg viewBox="0 0 44 44"><path d="M22 38S6 28 6 16a10 10 0 0 1 16-8 10 10 0 0 1 16 8c0 12-16 22-16 22z"/></svg>
+      </div>
+      <div class="why-title">スタッフを大切にする<br>企業文化</div>
+      <div class="why-desc">「推し活手当」など独自の福利厚生を整備。スタッフが安心して長く働ける環境が、サービスの質と安定稼働を支えています。</div>
+      <div class="why-card-line"></div>
+    </div>
+    <div class="why-card fade-up" style="transition-delay:0.3s">
+      <div class="why-num">06</div>
+      <div class="why-icon">
+        <svg viewBox="0 0 44 44"><rect x="12" y="12" width="20" height="20" rx="2"/><path d="M17 6v6M22 6v6M27 6v6M17 32v6M22 32v6M27 32v6M6 17h6M6 22h6M6 27h6M32 17h6M32 22h6M32 27h6"/><path d="M17 17h10v10H17z" opacity="0.4"/></svg>
+      </div>
+      <div class="why-title">AIとテクノロジーで<br>業務を効率化</div>
+      <div class="why-desc">GAS・AIツールを活用した勤怠管理・採用マーケティングの仕組みを内製。データドリブンな運営で高品質なサービスを実現します。</div>
+      <div class="why-card-line"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==============================
+     VOICE
+============================== -->
+<section class="voice" id="voice">
+  <div class="eyebrow fade-up">VOICE</div>
+  <h2 class="sec-title fade-up" style="transition-delay:0.1s">お客様・パートナーの声</h2>
+  <div class="sec-divider fade-up"></div>
+  <div class="voice-grid">
+    <div class="voice-card fade-up" style="transition-delay:0.1s">
+      <div class="voice-stars">★★★★★</div>
+      <div class="voice-quote-mark">"</div>
+      <p class="voice-text">急な増員依頼にも迅速に対応いただき、非常に助かりました。派遣されたスタッフの接客クオリティが高く、お客様からの評判も上々です。</p>
+      <div class="voice-person">
+        <div class="voice-avatar"><img src="https://static.wixstatic.com/media/5bf634_df51664c71c8432e90fa7c36629bc10f~mv2.jpg" alt=""></div>
+        <div>
+          <div class="voice-name">キャリアショップ 店長</div>
+          <div class="voice-role">静岡市内 モバイルショップ</div>
+        </div>
+      </div>
+    </div>
+    <div class="voice-card fade-up" style="transition-delay:0.2s">
+      <div class="voice-stars">★★★★★</div>
+      <div class="voice-quote-mark">"</div>
+      <p class="voice-text">イベントの企画段階から丁寧にヒアリングしてくださり、スタッフの教育も徹底されていました。アポイント獲得数が目標を大きく上回り、非常に満足しています。</p>
+      <div class="voice-person">
+        <div class="voice-avatar"><img src="https://static.wixstatic.com/media/5bf634_3371086ebcb2487ba87143effae2b9eb~mv2.jpg" alt=""></div>
+        <div>
+          <div class="voice-name">太陽光事業 営業マネージャー</div>
+          <div class="voice-role">エネルギー関連企業</div>
+        </div>
+      </div>
+    </div>
+    <div class="voice-card fade-up" style="transition-delay:0.3s">
+      <div class="voice-stars">★★★★★</div>
+      <div class="voice-quote-mark">"</div>
+      <p class="voice-text">他社と比べてコミュニケーションが密で、こちらの要望をしっかり汲み取ってくれます。現場のトラブルにも即日対応してくれるので、安心してお任せできています。</p>
+      <div class="voice-person">
+        <div class="voice-avatar"><img src="https://static.wixstatic.com/media/5bf634_97c2621b7c1b4b369b15e931621ed413~mv2.jpg" alt=""></div>
+        <div>
+          <div class="voice-name">人材担当 マネージャー</div>
+          <div class="voice-role">量販店 人事部</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==============================
+     AREA
+============================== -->
+<section class="area" id="area">
+  <div class="area-body fade-left">
+    <div class="eyebrow">AREA</div>
+    <h2>活動エリア</h2>
+    <p>静岡を拠点に、愛知・東京へとフィールドを広げています。地域に根ざしたネットワークと、広域対応できる柔軟性が私たちの強みです。</p>
+  </div>
+  <div class="area-pills fade-right">
+    <div class="area-pill"><span>静岡</span></div>
+    <div class="area-pill"><span>愛知</span></div>
+    <div class="area-pill"><span>東京</span></div>
+  </div>
+</section>
+
+<!-- ==============================
+     CTA
+============================== -->
+<section class="cta-banner" id="cta">
+  <div class="cta-text fade-left">
+    <h2>まずはお気軽にご相談ください</h2>
+    <p>初回のご相談は無料です。事業のご質問・お見積もりお気軽にどうぞ。</p>
+  </div>
+  <a href="mailto:info@sagegroup.co.jp" class="cta-btn fade-right" id="ctaBtn">お問い合わせ →</a>
+</section>
+
+<!-- ==============================
+     FOOTER
+============================== -->
+<footer class="site-footer">
+  <a href="index.html" class="footer-logo">SAGE GROUP</a>
+  <span>© 2024 合同会社SageGroup. All rights reserved.</span>
+</footer>
+
+<!-- ==============================
+     JAVASCRIPT
+============================== -->
+<script>
+/* --- Nav scroll --- */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+}, { passive: true });
+
+/* --- Intersection Observer: fade animations --- */
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.14 });
+
+document.querySelectorAll('.fade-up, .fade-left, .fade-right, .sec-divider').forEach(el => io.observe(el));
+
+/* --- Count-up animation (integer) --- */
+function countUp(el, target, duration) {
+  const start = performance.now();
+  (function tick(now) {
+    const p = Math.min((now - start) / duration, 1);
+    const ease = 1 - Math.pow(1 - p, 3);
+    el.textContent = Math.round(ease * target);
+    if (p < 1) requestAnimationFrame(tick);
+    else el.textContent = target;
+  })(start);
+}
+
+/* --- Count-up: decimal (rating 4.93) --- */
+function countUpDecimal(el, target, duration) {
+  const start = performance.now();
+  (function tick(now) {
+    const p = Math.min((now - start) / duration, 1);
+    const ease = 1 - Math.pow(1 - p, 3);
+    el.textContent = (ease * target).toFixed(2);
+    if (p < 1) requestAnimationFrame(tick);
+    else el.textContent = target.toFixed(2);
+  })(start);
+}
+
+/* --- Trigger counts when numbers section enters --- */
+const numIo = new IntersectionObserver(entries => {
+  if (entries[0].isIntersecting) {
+    document.querySelectorAll('.count').forEach(el => {
+      countUp(el, +el.dataset.target, 1800);
+    });
+    countUpDecimal(document.getElementById('rating-val'), 4.93, 2000);
+    numIo.disconnect();
+  }
+}, { threshold: 0.35 });
+numIo.observe(document.getElementById('numbers'));
+
+/* --- Ripple on CTA button --- */
+document.getElementById('ctaBtn').addEventListener('click', function(e) {
+  const btn = this;
+  const r = document.createElement('span');
+  r.classList.add('ripple');
+  const rect = btn.getBoundingClientRect();
+  const size = Math.max(rect.width, rect.height);
+  r.style.cssText = `width:${size}px;height:${size}px;left:${e.clientX - rect.left - size/2}px;top:${e.clientY - rect.top - size/2}px`;
+  btn.appendChild(r);
+  setTimeout(() => r.remove(), 700);
+});
+
+/* --- Stagger delay on why/voice cards already set via inline style --- */
+</script>
+</body>
+</html>
