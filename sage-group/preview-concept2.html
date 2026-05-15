@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>案2 プレビュー — スナップスクロール・フルシーン型</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+JP:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gold:#9a7a3e;--gold-l:#b8965a;--gold-p:#d4b896;
+  --black:#0e0c0a;--off:#1a1714;
+  --white:#ffffff;--cream:#fdfbf7;--cream-m:#f5f0e8;
+  --body:#4a4540;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans JP',sans-serif;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+
+/* ── BADGE ── */
+.preview-badge{
+  position:fixed;top:16px;right:16px;z-index:9999;
+  background:var(--gold);color:#fff;
+  font-size:0.7rem;letter-spacing:0.15em;padding:6px 14px;
+}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;height:60px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 56px;z-index:1000;
+  transition:background 0.4s;
+}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:0.12em;color:var(--white);transition:color 0.4s}
+nav.light .nav-logo{color:var(--gold)}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{font-size:0.7rem;letter-spacing:0.14em;color:rgba(255,255,255,0.55);transition:color 0.3s}
+nav.light .nav-links a{color:rgba(26,23,20,0.5)}
+.nav-links a:hover{color:var(--gold) !important}
+
+/* ── SIDE DOT NAV ── */
+.side-nav{
+  position:fixed;right:28px;top:50%;transform:translateY(-50%);
+  display:flex;flex-direction:column;gap:12px;z-index:999;
+}
+.side-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:rgba(255,255,255,0.25);cursor:pointer;
+  transition:background 0.3s,transform 0.3s;
+}
+.side-dot.active{background:var(--gold);transform:scale(1.4)}
+.side-dot-label{
+  position:absolute;right:20px;top:50%;transform:translateY(-50%);
+  font-size:0.62rem;letter-spacing:0.12em;color:var(--gold-p);
+  white-space:nowrap;opacity:0;transition:opacity 0.2s;
+  pointer-events:none;
+}
+
+/* ── LEFT PROGRESS ── */
+#prog{
+  position:fixed;left:0;top:0;width:3px;
+  height:0%;background:var(--gold);z-index:9998;
+  transition:height 0.1s linear;
+}
+
+/* ── SNAP CONTAINER ── */
+.snap-container{
+  height:100vh;overflow-y:scroll;
+  scroll-snap-type:y mandatory;
+  scroll-behavior:smooth;
+}
+.snap-section{
+  height:100vh;scroll-snap-align:start;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+}
+
+/* ── SCENE 1: HERO — BLACK ── */
+.s1{background:var(--black)}
+.s1-inner{text-align:center;padding:0 60px;position:relative;z-index:1}
+.s1-grid-bg{
+  position:absolute;inset:0;
+  background-image:linear-gradient(rgba(154,122,62,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(154,122,62,0.05) 1px,transparent 1px);
+  background-size:64px 64px;
+}
+.s1-label{font-size:0.65rem;letter-spacing:0.4em;color:var(--gold-p);margin-bottom:28px;display:block}
+.s1-h{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(5rem,14vw,13rem);
+  line-height:0.88;color:var(--white);
+  letter-spacing:0.03em;margin-bottom:32px;
+}
+.s1-h em{display:block;color:var(--gold);font-style:normal}
+.s1-sub{font-size:0.95rem;line-height:1.85;color:rgba(255,255,255,0.6);margin-bottom:40px}
+.ctas{display:flex;gap:16px;justify-content:center}
+.btn-g{display:inline-block;padding:14px 36px;background:var(--gold);color:#fff;font-size:0.78rem;letter-spacing:0.16em;transition:background 0.3s}
+.btn-g:hover{background:var(--gold-l)}
+.btn-o{display:inline-block;padding:14px 36px;border:1px solid rgba(154,122,62,0.5);color:var(--gold-p);font-size:0.78rem;letter-spacing:0.16em;transition:border-color 0.3s,color 0.3s}
+.btn-o:hover{border-color:var(--gold);color:var(--gold)}
+.s1-scroll{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px}
+.s1-scroll span{font-size:0.6rem;letter-spacing:0.3em;color:rgba(255,255,255,0.35)}
+.s1-line{width:1px;height:40px;background:linear-gradient(180deg,var(--gold),transparent);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.2}}
+
+/* ── SCENE 2: ABOUT — CREAM ── */
+.s2{background:var(--cream)}
+.s2-inner{display:grid;grid-template-columns:1fr 1fr;width:100%;height:100%;max-width:none}
+.s2-left{
+  background:var(--off);display:flex;flex-direction:column;
+  justify-content:center;padding:80px 60px;
+  position:relative;overflow:hidden;
+}
+.s2-left::after{
+  content:'ABOUT';position:absolute;right:-20px;bottom:20px;
+  font-family:'Bebas Neue',sans-serif;font-size:10rem;
+  color:rgba(154,122,62,0.06);line-height:1;pointer-events:none;
+}
+.s2-left .tag{font-size:0.65rem;letter-spacing:0.35em;color:var(--gold-p);margin-bottom:24px;display:block}
+.s2-left h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,5vw,5.5rem);color:var(--white);line-height:1.05;margin-bottom:32px}
+.s2-left h2 span{color:var(--gold)}
+.s2-left p{font-size:0.88rem;line-height:2;color:rgba(255,255,255,0.6)}
+.s2-right{background:var(--cream);display:grid;grid-template-columns:1fr 1fr;gap:2px;background-image:repeating-linear-gradient(0deg,var(--cream-m),var(--cream-m) 1px,transparent 1px,transparent)}
+.num-cell{
+  background:var(--cream);display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:8px;
+  padding:40px 24px;border:1px solid rgba(154,122,62,0.12);
+  transition:background 0.3s;
+}
+.num-cell:hover{background:var(--cream-m)}
+.n-val{font-family:'Bebas Neue',sans-serif;font-size:5rem;color:var(--gold);line-height:1}
+.n-lbl{font-size:0.75rem;letter-spacing:0.12em;color:var(--body);text-align:center}
+
+/* ── SCENE 3: SERVICES — OFF BLACK ── */
+.s3{background:var(--off)}
+.s3-inner{width:100%;height:100%;display:flex;flex-direction:column;justify-content:center;padding:80px 80px}
+.s3 .tag{font-size:0.65rem;letter-spacing:0.35em;color:var(--gold-p);margin-bottom:20px;display:block}
+.s3 h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,5vw,5rem);color:var(--white);line-height:1.05;margin-bottom:48px}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.svc-card{
+  background:rgba(255,255,255,0.03);padding:48px 36px;
+  border-top:2px solid rgba(154,122,62,0.15);
+  transition:background 0.3s,border-color 0.3s;
+}
+.svc-card:hover{background:rgba(154,122,62,0.08);border-color:var(--gold)}
+.svc-card .num{font-family:'Bebas Neue',sans-serif;font-size:3.5rem;color:rgba(154,122,62,0.3);line-height:1;margin-bottom:16px}
+.svc-card .name{font-size:1rem;font-weight:500;color:var(--white);margin-bottom:12px}
+.svc-card .desc{font-size:0.82rem;line-height:1.9;color:rgba(255,255,255,0.5)}
+
+/* ── SCENE 4: CONCEPT — GOLD BG ── */
+.s4{background:var(--gold)}
+.s4-inner{text-align:center;padding:60px;position:relative;z-index:1}
+.s4-rings{position:absolute;inset:0;pointer-events:none}
+.ring{
+  position:absolute;border-radius:50%;border:1px solid rgba(255,255,255,0.12);
+  top:50%;left:50%;transform:translate(-50%,-50%);
+  animation:expand 5s ease-out infinite;
+}
+.ring:nth-child(1){width:300px;height:300px;animation-delay:0s}
+.ring:nth-child(2){width:500px;height:500px;animation-delay:1.5s}
+.ring:nth-child(3){width:750px;height:750px;animation-delay:3s}
+@keyframes expand{0%{opacity:0.8;transform:translate(-50%,-50%) scale(0.7)}100%{opacity:0;transform:translate(-50%,-50%) scale(1.4)}}
+.s4-label{font-size:0.65rem;letter-spacing:0.4em;color:rgba(255,255,255,0.6);margin-bottom:24px;display:block}
+.s4-h{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.5rem,8vw,9rem);color:var(--white);line-height:0.95;margin-bottom:28px}
+.s4-sub{font-size:1.05rem;line-height:1.9;color:rgba(255,255,255,0.85);max-width:560px;margin:0 auto 32px}
+.s4-sub strong{color:var(--white);font-weight:700}
+.oshi-pill{
+  display:inline-block;padding:10px 28px;
+  background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.4);
+  color:var(--white);font-size:0.82rem;letter-spacing:0.1em;
+}
+
+/* ── SCENE 5: RECRUIT — WHITE ── */
+.s5{background:var(--cream)}
+.s5-inner{width:100%;height:100%;display:grid;grid-template-columns:1fr 1fr}
+.s5-left{
+  background:var(--black);display:flex;flex-direction:column;
+  justify-content:center;align-items:center;padding:60px;text-align:center;
+}
+.s5-left .tag{font-size:0.65rem;letter-spacing:0.35em;color:var(--gold-p);margin-bottom:24px;display:block}
+.s5-left h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.2rem,4vw,4rem);color:var(--white);line-height:1.05;margin-bottom:20px}
+.s5-left h2 span{color:var(--gold)}
+.s5-left .sub{font-size:0.88rem;color:rgba(255,255,255,0.55);margin-bottom:40px}
+.s5-tags{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:36px}
+.s5-tag{font-size:0.7rem;letter-spacing:0.1em;padding:6px 14px;border:1px solid rgba(154,122,62,0.35);color:var(--gold-p)}
+.s5-right{
+  background:var(--cream-m);display:flex;flex-direction:column;
+  justify-content:center;padding:60px;
+}
+.s5-right p{font-size:0.9rem;line-height:2.1;color:var(--body);margin-bottom:28px}
+.s5-right .cta-note{font-size:0.78rem;color:var(--gold);letter-spacing:0.06em;margin-top:8px}
+
+/* ── SCENE 6: NEWS ── */
+.s6{background:var(--white)}
+.s6-inner{width:100%;height:100%;display:flex;flex-direction:column;justify-content:center;padding:80px}
+.s6 .tag{font-size:0.65rem;letter-spacing:0.35em;color:var(--gold);margin-bottom:16px;display:block}
+.s6 h2{font-family:'Bebas Neue',sans-serif;font-size:3.5rem;color:var(--black);margin-bottom:40px}
+.news-list{display:flex;flex-direction:column;gap:2px}
+.news-item{
+  display:grid;grid-template-columns:120px 80px 1fr;gap:24px;align-items:center;
+  padding:24px 32px;background:var(--cream);
+  border-left:3px solid transparent;transition:border-color 0.3s;
+}
+.news-item:hover{border-color:var(--gold)}
+.n-date{font-size:0.78rem;letter-spacing:0.1em;color:var(--body)}
+.n-cat{font-size:0.68rem;letter-spacing:0.1em;padding:3px 10px;background:var(--gold);color:#fff;text-align:center}
+.n-title{font-size:0.9rem;color:var(--black)}
+
+/* ── SCENE 7: CTA — DARK ── */
+.s7{background:var(--off)}
+.s7-inner{text-align:center;padding:60px;position:relative;z-index:1}
+.s7-bg{
+  position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(circle at 50% 60%,rgba(154,122,62,0.1) 0%,transparent 60%);
+}
+.s7-label{font-size:0.65rem;letter-spacing:0.4em;color:var(--gold-p);margin-bottom:24px;display:block}
+.s7-h{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,7vw,7rem);color:var(--white);line-height:1.05;margin-bottom:24px}
+.s7-p{font-size:0.9rem;line-height:2;color:rgba(255,255,255,0.55);max-width:480px;margin:0 auto 16px}
+.s7-note{font-size:0.75rem;color:rgba(154,122,62,0.7);margin-bottom:40px;letter-spacing:0.08em}
+.ctas{display:flex;gap:16px;justify-content:center}
+
+/* FOOTER (inside scene) */
+.s7-foot{
+  position:absolute;bottom:32px;left:50%;transform:translateX(-50%);
+  font-size:0.7rem;letter-spacing:0.1em;color:rgba(255,255,255,0.2);
+  white-space:nowrap;
+}
+
+/* ── MARQUEE (used in scene 1 bottom) ── */
+.marquee-bar{
+  position:absolute;bottom:0;left:0;right:0;
+  background:var(--gold);overflow:hidden;padding:10px 0;
+}
+.marquee-track{
+  display:flex;gap:0;white-space:nowrap;
+  animation:mq 16s linear infinite;
+}
+.marquee-track span{font-size:0.68rem;letter-spacing:0.2em;color:rgba(255,255,255,0.9);padding:0 28px}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* scene transition content */
+.sc-content{opacity:0;transform:translateY(24px);transition:opacity 0.7s ease,transform 0.7s ease}
+.snap-section.in-view .sc-content{opacity:1;transform:none}
+
+@media(max-width:900px){
+  .s2-inner,.s5-inner{grid-template-columns:1fr}
+  .s2-left,.s5-left{min-height:50vh}
+  .s2-right{grid-template-columns:1fr 1fr}
+  .svc-grid{grid-template-columns:1fr}
+  .svc-card{padding:28px 24px}
+  .snap-section{height:auto;min-height:100vh;scroll-snap-align:none}
+  .snap-container{height:auto;overflow:visible;scroll-snap-type:none}
+  nav{padding:0 24px}
+  .s1-inner,.s3-inner,.s4-inner,.s6-inner,.s7-inner,.s2-left,.s5-left,.s5-right{padding:40px 28px}
+  .news-item{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="preview-badge">案2 プレビュー</div>
+<div id="prog"></div>
+
+<nav id="nav">
+  <div class="nav-logo">SAGE GROUP</div>
+  <ul class="nav-links">
+    <li><a href="#" onclick="goScene(0);return false">ホーム</a></li>
+    <li><a href="#" onclick="goScene(1);return false">会社情報</a></li>
+    <li><a href="#" onclick="goScene(2);return false">事業内容</a></li>
+    <li><a href="#" onclick="goScene(4);return false">採用情報</a></li>
+    <li><a href="#" onclick="goScene(6);return false">お問い合わせ</a></li>
+  </ul>
+</nav>
+
+<!-- SIDE DOT NAV -->
+<div class="side-nav" id="sideNav"></div>
+
+<div class="snap-container" id="container">
+
+  <!-- S1: HERO -->
+  <section class="snap-section s1" data-index="0">
+    <div class="s1-grid-bg"></div>
+    <div class="s1-inner sc-content">
+      <span class="s1-label">SAGE GROUP — SHIZUOKA, JAPAN</span>
+      <h1 class="s1-h">
+        仕事も、<em>推しも、</em>どっちも本気で。
+      </h1>
+      <p class="s1-sub">好きなことを諦めなくていい働き方が、静岡にある。<br>SoftBank・au・docomoの現場から、あなたらしいキャリアをはじめよう。</p>
+      <div class="ctas">
+        <a href="#" class="btn-g" onclick="goScene(2);return false">事業内容を見る</a>
+        <a href="#" class="btn-o" onclick="goScene(4);return false">採用情報を見る</a>
+      </div>
+    </div>
+    <div class="s1-scroll">
+      <span>SCROLL</span>
+      <div class="s1-line"></div>
+    </div>
+    <div class="marquee-bar">
+      <div class="marquee-track">
+        <span>SoftBank</span><span>/</span><span>au</span><span>/</span><span>docomo</span><span>/</span>
+        <span>推し活支援制度あり</span><span>/</span><span>学歴・経歴不問</span><span>/</span>
+        <span>未経験OK</span><span>/</span><span>若手活躍中</span><span>/</span><span>静岡県内勤務</span><span>/</span>
+        <span>SoftBank</span><span>/</span><span>au</span><span>/</span><span>docomo</span><span>/</span>
+        <span>推し活支援制度あり</span><span>/</span><span>学歴・経歴不問</span><span>/</span>
+        <span>未経験OK</span><span>/</span><span>若手活躍中</span><span>/</span><span>静岡県内勤務</span><span>/</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- S2: ABOUT -->
+  <section class="snap-section s2" data-index="1">
+    <div class="s2-inner">
+      <div class="s2-left">
+        <span class="tag sc-content">ABOUT US</span>
+        <h2 class="sc-content">あなたらしい<br>キャリアを、<br><span>共に描く。</span></h2>
+        <p class="sc-content" style="transition-delay:0.15s">私たちは通信業界を中心とした、質の高いお仕事を紹介しています。単なる仕事探しではなく、あなたの「どうなりたいか」という想いに寄り添い、最適なステップアップを全力でサポートします。</p>
+      </div>
+      <div class="s2-right">
+        <div class="num-cell sc-content"><div class="n-val">3</div><div class="n-lbl">主要キャリア</div></div>
+        <div class="num-cell sc-content" style="transition-delay:0.1s"><div class="n-val">∞</div><div class="n-lbl">可能性の数</div></div>
+        <div class="num-cell sc-content" style="transition-delay:0.2s"><div class="n-val">0</div><div class="n-lbl">経験不問</div></div>
+        <div class="num-cell sc-content" style="transition-delay:0.3s"><div class="n-val">全</div><div class="n-lbl">力サポート</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- S3: SERVICES -->
+  <section class="snap-section s3" data-index="2">
+    <div class="s3-inner">
+      <span class="tag sc-content">SERVICES / 事業内容</span>
+      <h2 class="sc-content">通信業界のキャリアを、<br>あなたの「強み」に変える仕事。</h2>
+      <div class="svc-grid sc-content" style="transition-delay:0.15s">
+        <div class="svc-card">
+          <div class="num">01</div>
+          <div class="name">通信キャリア販売スタッフ</div>
+          <div class="desc">SoftBank・au・docomoの大手3キャリアショップでのスマートフォン販売。充実した研修でゼロから着実にスキルが身につきます。</div>
+        </div>
+        <div class="svc-card">
+          <div class="num">02</div>
+          <div class="name">イベント・プロモーションスタッフ</div>
+          <div class="desc">モバイルショップのキャンペーンや販促イベントへの参加。短期・単発から長期まで、ライフスタイルに合わせた働き方を選べます。</div>
+        </div>
+        <div class="svc-card">
+          <div class="num">03</div>
+          <div class="name">キャリアアップサポート</div>
+          <div class="desc">就業中もコーディネーターが定期的にフォロー。「次のステップへ」という気持ちを一緒に形にするための伴走を続けます。</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- S4: CONCEPT -->
+  <section class="snap-section s4" data-index="3">
+    <div class="s4-rings">
+      <div class="ring"></div><div class="ring"></div><div class="ring"></div>
+    </div>
+    <div class="s4-inner sc-content">
+      <span class="s4-label">CONCEPT / 企業文化・想い</span>
+      <h2 class="s4-h">仕事を頑張れるのは、<br>人生が楽しいから。</h2>
+      <p class="s4-sub">
+        好きなアーティストのライブに行きたい。推しのグッズを買いたい。<br>
+        そんな気持ち、私たちは<strong>本気で応援</strong>しています。<br>
+        あなたの「好き」が、いい仕事ができる人間にしていると信じているから。
+      </p>
+      <div class="oshi-pill">推し活支援制度あります ✨</div>
+    </div>
+  </section>
+
+  <!-- S5: RECRUIT -->
+  <section class="snap-section s5" data-index="4">
+    <div class="s5-inner">
+      <div class="s5-left">
+        <span class="tag sc-content">RECRUITMENT / 採用情報</span>
+        <h2 class="sc-content">あなたが「いい」と<br>思えたなら、<br><span>それがスタート</span>ラインです。</h2>
+        <div class="s5-tags sc-content" style="transition-delay:0.15s">
+          <span class="s5-tag">学歴・経歴不問</span>
+          <span class="s5-tag">未経験OK</span>
+          <span class="s5-tag">推し活支援あり</span>
+          <span class="s5-tag">若手活躍中</span>
+          <span class="s5-tag">静岡県内勤務</span>
+          <span class="s5-tag">研修制度充実</span>
+        </div>
+        <a href="https://en-gage.net/sagegroupshizuoka_saiyo/?banner=1" target="_blank" class="btn-g sc-content" style="transition-delay:0.25s">採用情報を見る</a>
+      </div>
+      <div class="s5-right">
+        <div class="sc-content">
+          <p>必要なのは、「やってみたい」という気持ちだけ。SageGroupのスタッフがそばで支えるので、<strong>初日から一人にはしません。</strong></p>
+          <p>新しいキャリアをスタートさせたい方や、異業種からの転職をお考えの方にも、きめ細やかなサポートと成長の機会を提供します。</p>
+          <p class="sub" style="margin-top:28px;font-size:0.8rem;color:var(--body)">学歴も、職歴も、関係ありません。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- S6: NEWS -->
+  <section class="snap-section s6" data-index="5">
+    <div class="s6-inner">
+      <span class="tag sc-content">NEWS / お知らせ</span>
+      <h2 class="sc-content">お知らせ</h2>
+      <div class="news-list sc-content" style="transition-delay:0.15s">
+        <div class="news-item">
+          <div class="n-date">2025.05.01</div>
+          <div class="n-cat">お知らせ</div>
+          <div class="n-title">5月のイベントスタッフ募集を開始しました</div>
+        </div>
+        <div class="news-item">
+          <div class="n-date">2025.04.15</div>
+          <div class="n-cat">採用</div>
+          <div class="n-title">新しい研修プログラムを導入しました</div>
+        </div>
+        <div class="news-item">
+          <div class="n-date">2025.04.01</div>
+          <div class="n-cat">会社情報</div>
+          <div class="n-title">コーポレートサイトをリニューアルしました</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- S7: CTA -->
+  <section class="snap-section s7" data-index="6">
+    <div class="s7-bg"></div>
+    <div class="s7-inner sc-content">
+      <span class="s7-label">GET IN TOUCH</span>
+      <h2 class="s7-h">まず、<br>話してみてください。</h2>
+      <p class="s7-p">「転職しようか迷っている」「どんな仕事か知りたいだけ」——そんな段階でも大歓迎です。あなたの話を、じっくり聞かせてください。</p>
+      <p class="s7-note">お電話またはメールにて、いつでもお気軽にどうぞ</p>
+      <div class="ctas">
+        <a href="mailto:info@sagegroup.jp" class="btn-g">お問い合わせフォームへ</a>
+        <a href="https://en-gage.net/sagegroupshizuoka_saiyo/?banner=1" target="_blank" class="btn-o">採用情報を見る</a>
+      </div>
+    </div>
+    <div class="s7-foot">&copy; 2022 合同会社SageGroup. All Rights Reserved.</div>
+  </section>
+
+</div>
+
+<script>
+const scenes = document.querySelectorAll('.snap-section');
+const container = document.getElementById('container');
+const prog = document.getElementById('prog');
+const navEl = document.getElementById('nav');
+const sideNav = document.getElementById('sideNav');
+const labels = ['HERO','ABOUT','SERVICE','CONCEPT','RECRUIT','NEWS','CONTACT'];
+const lightScenes = [1,4,5]; // cream/white backgrounds
+
+// Build side dots
+scenes.forEach((s,i)=>{
+  const dot = document.createElement('div');
+  dot.className='side-dot'+(i===0?' active':'');
+  dot.title=labels[i];
+  dot.addEventListener('click',()=>goScene(i));
+  sideNav.appendChild(dot);
+});
+
+let currentScene=0;
+
+function goScene(n){
+  const target=scenes[n];
+  target.scrollIntoView({behavior:'smooth'});
+}
+
+function updateScene(idx){
+  currentScene=idx;
+  document.querySelectorAll('.side-dot').forEach((d,i)=>d.classList.toggle('active',i===idx));
+  const pct=(idx/(scenes.length-1))*100;
+  prog.style.height=pct+'%';
+  navEl.classList.toggle('light',lightScenes.includes(idx));
+}
+
+// IntersectionObserver for snap sections
+const io=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.intersectionRatio>=0.5){
+      const idx=+e.target.dataset.index;
+      updateScene(idx);
+      e.target.classList.add('in-view');
+    }
+  });
+},{threshold:0.5,root:container});
+scenes.forEach(s=>io.observe(s));
+
+// Content reveal observer
+const revealIo=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting) e.target.classList.add('in-view');
+  });
+},{threshold:0.2,root:container});
+scenes.forEach(s=>revealIo.observe(s));
+</script>
+</body>
+</html>
