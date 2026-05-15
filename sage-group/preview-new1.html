@@ -180,6 +180,11 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
   clip-path:polygon(0 0,100% 0,100% 92%,0 100%);
 }
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.about-hero-photo{
+  width:100%;aspect-ratio:3/2;border-radius:6px;overflow:hidden;margin-bottom:16px;
+}
+.about-hero-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.5s ease}
+.about-hero-photo:hover img{transform:scale(1.03)}
 .about-left p{font-size:0.92rem;line-height:2.1;color:var(--body)}
 .about-left p+p{margin-top:16px}
 .carrier-block{margin-top:36px}
@@ -211,10 +216,18 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
 }
 .photo-block{
   background:var(--gray);aspect-ratio:16/9;border-radius:4px;
-  display:flex;align-items:center;justify-content:center;
-  color:var(--gray-m);font-size:0.7rem;letter-spacing:0.1em;
+  overflow:hidden;
 }
+.photo-block img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.45s ease}
+.photo-block:hover img{transform:scale(1.04)}
 .photo-block.tall{aspect-ratio:9/12}
+
+/* ===== SERVICE CARD IMAGE ===== */
+.svc-img{
+  width:100%;aspect-ratio:16/9;overflow:hidden;border-radius:4px;margin-bottom:18px;
+}
+.svc-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.45s ease}
+.svc-card:hover .svc-img img{transform:scale(1.04)}
 
 /* ===== SERVICES (gray diagonal) ===== */
 .services{
@@ -287,18 +300,36 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
 }
 .life-cell{
   background:var(--gray);border-radius:6px;
-  display:flex;align-items:center;justify-content:center;
-  color:var(--gray-m);font-size:0.7rem;letter-spacing:0.1em;
+  overflow:hidden;position:relative;
   transition:transform 0.35s,box-shadow 0.35s;
 }
-.life-cell:hover{transform:scale(1.02);box-shadow:0 12px 32px rgba(0,0,0,0.08)}
+.life-cell img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  transition:transform 0.45s ease;
+}
+.life-cell:hover{transform:scale(1.02);box-shadow:0 12px 32px rgba(0,0,0,0.12)}
+.life-cell:hover img{transform:scale(1.06)}
 .life-cell.span-2{grid-row:span 2}
+
+/* ===== RECRUIT BG PHOTO ===== */
+.recruit-photo{
+  position:absolute;right:0;bottom:0;top:0;width:38%;
+  overflow:hidden;opacity:0.18;
+}
+.recruit-photo img{width:100%;height:100%;object-fit:cover;object-position:top}
+.concept-photo{
+  background:var(--black);aspect-ratio:4/3;border-radius:6px;
+  overflow:hidden;
+}
+.concept-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.45s ease}
+.concept-photo:hover img{transform:scale(1.04)}
 
 /* ===== RECRUIT (dark diagonal) ===== */
 .recruit{
   background:var(--black);
   padding:120px 64px;
   clip-path:polygon(0 0,100% 0,100% 92%,0 100%);
+  position:relative;overflow:hidden;
 }
 .recruit .sec-en{color:var(--white)}
 .recruit .sec-ja{color:var(--gold-l)}
@@ -432,6 +463,9 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
       </div>
     </div>
     <div class="about-right stagger">
+      <div class="about-hero-photo reveal">
+        <img src="photos/photo_00.jpg" alt="チームBBQパーティ">
+      </div>
       <div class="fact-card reveal">
         <div class="fact-num">2022</div>
         <div class="fact-info">
@@ -463,10 +497,16 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
     </div>
   </div>
   <div class="about-photo reveal">
-    <div class="photo-block" style="aspect-ratio:16/8">PHOTO — SHOP INTERIOR</div>
+    <div class="photo-block" style="aspect-ratio:16/8">
+      <img src="photos/photo_19.jpg" alt="キャリアショップでの接客風景">
+    </div>
     <div style="display:flex;flex-direction:column;gap:12px">
-      <div class="photo-block" style="aspect-ratio:1/1">PHOTO</div>
-      <div class="photo-block" style="aspect-ratio:1/1">PHOTO</div>
+      <div class="photo-block" style="aspect-ratio:1/1">
+        <img src="photos/photo_12.jpg" alt="代表スタッフ" style="object-position:top center">
+      </div>
+      <div class="photo-block" style="aspect-ratio:1/1">
+        <img src="photos/photo_10.jpg" alt="社内ミーティング">
+      </div>
     </div>
   </div>
 </section>
@@ -481,19 +521,28 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
   </div>
   <div class="svc-grid stagger">
     <div class="svc-card reveal">
+      <div class="svc-img">
+        <img src="photos/photo_14.jpg" alt="キャリアショップでの接客">
+      </div>
       <div class="svc-num">01</div>
       <h3 class="svc-name">キャリア販売事業</h3>
       <p class="svc-desc">SoftBank・au・docomoの正規代理店として、スマートフォンや料金プランの提案から端末の設定・アフターサポートまでをワンストップで提供します。</p>
     </div>
     <div class="svc-card reveal">
+      <div class="svc-img">
+        <img src="photos/photo_03.jpg" alt="Riaエステ事業 施術">
+      </div>
       <div class="svc-num">02</div>
-      <h3 class="svc-name">人材紹介・採用支援</h3>
-      <p class="svc-desc">推し活ができる余暇と充実した収入の両立を実現するため、働き方の柔軟性を重視した採用・育成プログラムを展開しています。</p>
+      <h3 class="svc-name">美容・エステ事業 (Ria)</h3>
+      <p class="svc-desc">まつ毛エクステ専門サロン「Ria」を運営。推し活を楽しむスタッフが、お客様の美しさを全力でサポートします。</p>
     </div>
     <div class="svc-card reveal">
+      <div class="svc-img">
+        <img src="photos/photo_04.jpg" alt="店頭イベント・販促活動">
+      </div>
       <div class="svc-num">03</div>
       <h3 class="svc-name">その他の事業</h3>
-      <p class="svc-desc">地域密着型の新規事業にも積極的に挑戦。スタッフのアイデアや情熱を事業化し、新しい価値を地域に届けていきます。</p>
+      <p class="svc-desc">店頭イベントや地域密着型の新規事業にも積極的に挑戦。スタッフのアイデアや情熱を事業化し、新しい価値を地域に届けていきます。</p>
     </div>
   </div>
 </section>
@@ -520,8 +569,12 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
       </div>
     </div>
     <div class="concept-right reveal">
-      <div class="concept-photo">PHOTO — TEAM</div>
-      <div class="concept-photo" style="aspect-ratio:16/7">PHOTO — OFFICE</div>
+      <div class="concept-photo">
+        <img src="photos/photo_15.jpg" alt="推し活を楽しむスタッフ">
+      </div>
+      <div class="concept-photo" style="aspect-ratio:16/7">
+        <img src="photos/photo_00.jpg" alt="チームイベント">
+      </div>
     </div>
   </div>
 </section>
@@ -538,10 +591,18 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
     <p class="reveal">現場の雰囲気、仲間との関係、オフの過ごし方。SageGroupのリアルな日常をご紹介します。</p>
   </div>
   <div class="life-grid">
-    <div class="life-cell span-2">PHOTO — MAIN</div>
-    <div class="life-cell">PHOTO</div>
-    <div class="life-cell">PHOTO</div>
-    <div class="life-cell">PHOTO</div>
+    <div class="life-cell span-2">
+      <img src="photos/photo_09.jpg" alt="チーム焼肉パーティ">
+    </div>
+    <div class="life-cell">
+      <img src="photos/photo_06.jpg" alt="アフターの楽しみ">
+    </div>
+    <div class="life-cell">
+      <img src="photos/photo_02.jpg" alt="チームディナー">
+    </div>
+    <div class="life-cell">
+      <img src="photos/photo_13.jpg" alt="オフの過ごし方">
+    </div>
   </div>
 </section>
 
@@ -563,6 +624,9 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
     あなたのペースで成長できる環境が整っています。
   </p>
   <a href="#" class="recruit-btn reveal">採用情報を見る &nbsp;→</a>
+  <div class="recruit-photo">
+    <img src="photos/photo_08.jpg" alt="採用活動">
+  </div>
 </section>
 
 <!-- FOOTER -->
