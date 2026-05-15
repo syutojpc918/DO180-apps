@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Preview New 2 — SageGroup TOP（エディトリアルグリッド×大胆タイポ）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+JP:wght@300;400;500;700&family=IBM+Plex+Sans+JP:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+/* ===== RESET & TOKENS ===== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gold:#9a7a3e;
+  --gold-l:#b8965a;
+  --gold-p:#d4b896;
+  --gold-pale:#f7f2ea;
+  --sage:#3a5c42;
+  --sage-l:#4d7a58;
+  --black:#0f0e0d;
+  --ink:#1a1714;
+  --body:#4a4540;
+  --off:#f5f4f2;
+  --rule:rgba(0,0,0,0.1);
+  --nav-h:70px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'IBM Plex Sans JP','Noto Sans JP',sans-serif;color:var(--body);background:var(--off);overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+
+/* ===== SCROLL PROGRESS ===== */
+#scrollBar{
+  position:fixed;left:0;top:0;width:3px;height:0%;
+  background:linear-gradient(180deg,var(--gold) 0%,var(--sage) 100%);
+  z-index:9999;transition:height 0.06s linear;
+}
+
+/* ===== NAV (bold editorial style) ===== */
+#nav{
+  position:fixed;top:0;left:0;right:0;height:var(--nav-h);
+  display:grid;grid-template-columns:auto 1fr auto;align-items:center;
+  padding:0 48px;z-index:1000;
+  border-bottom:1px solid transparent;
+  transition:background 0.4s,border-color 0.4s;
+}
+#nav.scrolled{
+  background:var(--off);
+  border-color:var(--rule);
+}
+.nav-logo{display:flex;align-items:center;gap:12px}
+.logo-ring{
+  width:34px;height:34px;border-radius:50%;
+  border:1.5px solid var(--gold);
+  display:flex;align-items:center;justify-content:center;
+}
+.logo-ring span{font-family:'Cormorant Garamond',serif;font-size:11px;color:var(--gold);letter-spacing:1px}
+.logo-wordmark{
+  font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:0.16em;color:var(--ink);
+}
+.nav-issue{
+  font-size:0.65rem;letter-spacing:0.22em;color:var(--body);
+  text-align:center;opacity:0.5;
+}
+.nav-links{display:flex;gap:24px;list-style:none;justify-content:flex-end}
+.nav-links a{font-size:0.7rem;letter-spacing:0.12em;color:var(--body);transition:color 0.25s}
+.nav-links a:hover{color:var(--gold)}
+
+/* ===== HERO (EDITORIAL SPLIT) ===== */
+.hero{
+  position:relative;
+  height:100vh;min-height:640px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  overflow:hidden;
+  padding-top:var(--nav-h);
+}
+/* LEFT: big number + copy */
+.hero-left{
+  background:var(--ink);
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:64px 56px 80px;
+  position:relative;z-index:1;
+}
+.hero-big-num{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(8rem,18vw,18rem);
+  line-height:0.85;
+  color:rgba(255,255,255,0.04);
+  position:absolute;top:var(--nav-h);left:0;
+  user-select:none;pointer-events:none;letter-spacing:-0.02em;
+}
+.hero-tag{
+  font-size:0.64rem;letter-spacing:0.42em;color:var(--gold-p);
+  margin-bottom:24px;display:block;
+  opacity:0;animation:fUp 0.7s ease forwards 0.4s;
+}
+.hero-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(3rem,7vw,7rem);
+  line-height:0.92;letter-spacing:0.02em;
+  margin-bottom:36px;
+}
+.hl{display:block;overflow:hidden}
+.hl-i{
+  display:block;color:var(--off);
+  opacity:0;animation:sUp 0.9s cubic-bezier(0.16,1,0.3,1) forwards;
+}
+.hl:nth-child(1) .hl-i{animation-delay:0.36s}
+.hl:nth-child(2) .hl-i{animation-delay:0.50s;color:var(--gold-p)}
+.hl:nth-child(3) .hl-i{animation-delay:0.64s}
+.hl:nth-child(4) .hl-i{animation-delay:0.78s;color:var(--gold-l)}
+@keyframes sUp{from{opacity:0;transform:translateY(100%)}to{opacity:1;transform:none}}
+@keyframes fUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+.hero-sub{
+  font-size:0.88rem;line-height:2;color:rgba(255,255,255,0.58);
+  max-width:340px;margin-bottom:32px;
+  opacity:0;animation:fUp 0.8s ease forwards 1.1s;
+}
+.hero-ctas{
+  display:flex;gap:12px;
+  opacity:0;animation:fUp 0.8s ease forwards 1.3s;
+}
+.btn-fill{
+  display:inline-block;padding:14px 32px;background:var(--gold);color:#fff;
+  font-size:0.74rem;letter-spacing:0.16em;
+  transition:background 0.3s,transform 0.2s;
+}
+.btn-fill:hover{background:var(--gold-l);transform:translateY(-2px)}
+.btn-line{
+  display:inline-block;padding:13px 32px;
+  border:1px solid rgba(255,255,255,0.3);color:rgba(255,255,255,0.72);
+  font-size:0.74rem;letter-spacing:0.16em;
+  transition:border-color 0.3s,color 0.3s,transform 0.2s;
+}
+.btn-line:hover{border-color:var(--gold-p);color:var(--gold-p);transform:translateY(-2px)}
+
+/* RIGHT: video panel */
+.hero-right{
+  position:relative;overflow:hidden;
+}
+.hero-video{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+}
+.hero-right-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(15,14,13,0.3) 0%,transparent 40%);
+}
+/* floating caption */
+.hero-caption{
+  position:absolute;bottom:40px;right:32px;
+  font-size:0.6rem;letter-spacing:0.22em;color:rgba(255,255,255,0.4);
+  writing-mode:vertical-rl;
+  opacity:0;animation:fUp 0.8s ease forwards 1.6s;
+}
+
+/* scroll line */
+.hero-scroll{
+  position:absolute;bottom:32px;left:56px;z-index:2;
+  display:flex;align-items:center;gap:12px;
+  opacity:0;animation:fUp 0.8s ease forwards 1.7s;
+}
+.hero-scroll span{font-size:0.58rem;letter-spacing:0.36em;color:rgba(255,255,255,0.35)}
+.scroll-h-line{width:40px;height:1px;background:var(--gold);animation:sp 2s ease-in-out infinite}
+@keyframes sp{0%,100%{transform:scaleX(1);opacity:1}50%{transform:scaleX(0.3);opacity:0.3;transform-origin:left}}
+
+/* ===== TICKER (editorial rule) ===== */
+.ticker{
+  border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+  background:var(--off);overflow:hidden;
+}
+.ticker-track{
+  display:flex;white-space:nowrap;animation:mq 20s linear infinite;padding:10px 0;
+}
+.ticker-item{font-size:0.67rem;letter-spacing:0.28em;color:var(--body);padding:0 24px}
+.ticker-dot{color:var(--gold);padding:0 8px}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ===== REVEAL ===== */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.8s ease,transform 0.8s ease}
+.reveal.vis{opacity:1;transform:none}
+.stagger .reveal:nth-child(2){transition-delay:0.1s}
+.stagger .reveal:nth-child(3){transition-delay:0.2s}
+.stagger .reveal:nth-child(4){transition-delay:0.3s}
+.reveal-left{opacity:0;transform:translateX(-24px);transition:opacity 0.8s ease,transform 0.8s ease}
+.reveal-left.vis{opacity:1;transform:none}
+
+/* ===== SECTION HEADER (editorial) ===== */
+.sec-header{
+  display:flex;align-items:baseline;gap:20px;
+  border-bottom:1px solid var(--rule);padding-bottom:12px;margin-bottom:44px;
+}
+.sec-num{
+  font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--gold);letter-spacing:0.1em;
+}
+.sec-en-sm{
+  font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:0.08em;color:var(--ink);
+}
+.sec-ja-sm{font-size:0.76rem;letter-spacing:0.18em;color:var(--body);margin-left:auto}
+
+/* ===== ABOUT (white) ===== */
+.about{background:#fff;padding:100px 48px}
+.about-layout{display:grid;grid-template-columns:5fr 4fr;gap:80px;align-items:start}
+
+.about-text{
+  display:flex;flex-direction:column;gap:0;
+}
+.about-intro{
+  font-size:1.6rem;font-weight:300;line-height:1.6;color:var(--ink);
+  margin-bottom:32px;letter-spacing:-0.01em;
+}
+.about-intro strong{font-weight:700;color:var(--gold)}
+.about-body{font-size:0.9rem;line-height:2.15;color:var(--body);margin-bottom:28px}
+.carrier-label{font-size:0.64rem;letter-spacing:0.3em;color:var(--sage);margin-bottom:10px}
+.carrier-row{display:flex;gap:10px;flex-wrap:wrap}
+.carrier-badge{
+  padding:6px 16px;border:1px solid var(--gold-p);
+  font-size:0.76rem;letter-spacing:0.1em;color:var(--gold);
+  transition:background 0.25s,color 0.25s;
+}
+.carrier-badge:hover{background:var(--gold);color:#fff}
+
+/* stats vertical */
+.about-stats{display:flex;flex-direction:column;gap:0}
+.stat-row{
+  padding:28px 0;border-bottom:1px solid var(--rule);
+  display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center;
+}
+.stat-row:first-child{border-top:1px solid var(--rule)}
+.stat-n{
+  font-family:'Bebas Neue',sans-serif;font-size:3.5rem;line-height:1;color:var(--ink);
+  min-width:90px;
+}
+.stat-label{font-size:0.8rem;color:var(--body)}
+.stat-sub{font-size:0.68rem;color:var(--gold);margin-top:2px}
+
+/* photo strip */
+.about-photo-strip{
+  display:grid;grid-template-columns:3fr 2fr;gap:8px;margin-top:48px;
+}
+.ps-block{
+  background:var(--off);border-radius:2px;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--rule);font-size:0.68rem;letter-spacing:0.1em;
+}
+
+/* ===== EDITORIAL GRID SECTION ===== */
+.ed-grid{background:var(--ink);padding:80px 48px;overflow:hidden}
+.ed-grid-inner{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  grid-template-rows:auto auto;
+  gap:2px;
+}
+.ed-cell{
+  background:var(--off);aspect-ratio:4/3;
+  display:flex;align-items:flex-end;
+  overflow:hidden;position:relative;
+  cursor:pointer;
+  transition:transform 0.35s;
+}
+.ed-cell:hover{transform:scale(1.02);z-index:2}
+.ed-cell-bg{
+  position:absolute;inset:0;background:var(--rule);
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.68rem;letter-spacing:0.1em;color:rgba(0,0,0,0.2);
+}
+.ed-cell-label{
+  position:relative;z-index:1;width:100%;
+  background:linear-gradient(0deg,rgba(15,14,13,0.8) 0%,transparent 100%);
+  padding:16px 18px;
+  font-size:0.76rem;font-weight:500;color:#fff;letter-spacing:0.08em;
+  opacity:0;transition:opacity 0.3s;
+}
+.ed-cell:hover .ed-cell-label{opacity:1}
+.ed-cell.wide{grid-column:span 2}
+.ed-cell.tall{grid-row:span 2;aspect-ratio:auto}
+
+.ed-text{
+  background:var(--gold);padding:40px 36px;
+  display:flex;flex-direction:column;justify-content:flex-end;
+}
+.ed-text h3{
+  font-family:'Bebas Neue',sans-serif;font-size:3rem;color:#fff;
+  line-height:1;letter-spacing:0.04em;margin-bottom:12px;
+}
+.ed-text p{font-size:0.82rem;line-height:1.9;color:rgba(255,255,255,0.82)}
+
+/* ===== SERVICES (off-white) ===== */
+.services{background:var(--off);padding:100px 48px}
+.svc-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  border-top:1px solid var(--rule);border-left:1px solid var(--rule);
+}
+.svc-card{
+  padding:48px 36px;
+  border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);
+  position:relative;overflow:hidden;
+  transition:background 0.3s;
+}
+.svc-card:hover{background:#fff}
+.svc-num{
+  font-family:'Cormorant Garamond',serif;font-size:4rem;font-weight:300;
+  line-height:1;margin-bottom:24px;color:rgba(154,122,62,0.2);
+}
+.svc-name{font-size:1rem;font-weight:700;color:var(--ink);margin-bottom:12px;letter-spacing:0.04em}
+.svc-desc{font-size:0.82rem;line-height:2;color:var(--body)}
+.svc-link{
+  display:inline-flex;align-items:center;gap:6px;margin-top:20px;
+  font-size:0.7rem;letter-spacing:0.14em;color:var(--gold);
+  transition:gap 0.25s;
+}
+.svc-card:hover .svc-link{gap:12px}
+
+/* ===== CONCEPT (dark) ===== */
+.concept{background:var(--ink);padding:100px 48px}
+.concept-layout{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.concept-num-big{
+  font-family:'Cormorant Garamond',serif;font-size:clamp(6rem,14vw,14rem);
+  font-weight:300;color:rgba(255,255,255,0.04);
+  line-height:1;margin-bottom:-30px;
+}
+.concept-quote{
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:1.7rem;font-weight:300;color:var(--gold-p);line-height:1.6;
+  margin-bottom:28px;letter-spacing:0.03em;
+}
+.concept-body{font-size:0.88rem;line-height:2.2;color:rgba(255,255,255,0.6);margin-bottom:24px}
+.val-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+.val-list li{
+  font-size:0.82rem;color:rgba(255,255,255,0.55);
+  padding:10px 16px;border:1px solid rgba(255,255,255,0.07);
+  transition:border-color 0.3s,color 0.3s;
+}
+.val-list li:hover{border-color:var(--gold);color:rgba(255,255,255,0.85)}
+.concept-photos{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:180px 180px;gap:8px}
+.c-photo{
+  background:rgba(255,255,255,0.04);border-radius:2px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.64rem;letter-spacing:0.1em;color:rgba(255,255,255,0.12);
+}
+.c-photo.wide{grid-column:span 2}
+
+/* ===== VOICE QUOTE ===== */
+.voice{background:#fff;padding:100px 48px}
+.voice-lead{
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:clamp(1.6rem,3.5vw,3rem);font-weight:300;
+  color:var(--ink);line-height:1.5;margin-bottom:56px;
+  max-width:800px;
+}
+.voice-lead em{color:var(--gold);font-style:italic}
+.voice-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  border-top:1px solid var(--rule);
+}
+.voice-card{
+  padding:36px 28px;border-right:1px solid var(--rule);
+  transition:background 0.25s;
+}
+.voice-card:last-child{border-right:none}
+.voice-card:hover{background:var(--off)}
+.voice-q{font-size:0.88rem;line-height:2;color:var(--body);margin-bottom:20px}
+.voice-attr{display:flex;align-items:center;gap:12px}
+.voice-avatar{
+  width:36px;height:36px;border-radius:50%;
+  background:var(--gold-pale);flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.6rem;color:var(--gold);
+}
+.voice-name{font-size:0.76rem;color:var(--ink);font-weight:500}
+.voice-role{font-size:0.66rem;color:var(--gold);letter-spacing:0.08em}
+
+/* ===== RECRUIT ===== */
+.recruit{background:var(--off);padding:100px 48px;border-top:1px solid var(--rule)}
+.recruit-layout{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:end}
+.recruit-big{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(2.8rem,6vw,6.5rem);
+  line-height:0.95;letter-spacing:0.02em;color:var(--ink);
+  word-break:keep-all;
+}
+.recruit-big em{color:var(--gold);font-style:normal}
+.recruit-right{display:flex;flex-direction:column;gap:20px}
+.recruit-body{font-size:0.9rem;line-height:2.1;color:var(--body)}
+.recruit-btn{
+  display:inline-block;padding:16px 48px;background:var(--ink);color:var(--off);
+  font-size:0.74rem;letter-spacing:0.2em;align-self:flex-start;
+  transition:background 0.3s,transform 0.2s;
+}
+.recruit-btn:hover{background:var(--gold);transform:translateY(-2px)}
+
+/* ===== FOOTER ===== */
+.footer{background:var(--ink);padding:48px;color:rgba(255,255,255,0.35);font-size:0.7rem;letter-spacing:0.1em}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.footer-logo{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:0.16em;color:rgba(255,255,255,0.55)}
+
+/* ===== MOBILE ===== */
+@media(max-width:767px){
+  :root{--nav-h:56px}
+  #nav{padding:0 20px;grid-template-columns:1fr auto}
+  .nav-issue{display:none}
+  .nav-links{display:none}
+  .hero{grid-template-columns:1fr}
+  .hero-right{display:none}
+  .hero-left{padding:40px 20px 60px}
+  .about,.services,.concept,.voice,.recruit{padding-left:20px;padding-right:20px}
+  .about-layout,.concept-layout,.recruit-layout{grid-template-columns:1fr}
+  .svc-grid,.voice-grid{grid-template-columns:1fr}
+  .concept-photos{grid-template-rows:140px 140px}
+  .ed-grid-inner{grid-template-columns:1fr}
+  .ed-cell.wide{grid-column:span 1}
+  .footer{padding:32px 20px}
+}
+</style>
+</head>
+<body>
+
+<div id="scrollBar"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-logo">
+    <div class="logo-ring"><span>SG</span></div>
+    <span class="logo-wordmark">SAGE GROUP</span>
+  </div>
+  <div class="nav-issue">SHIZUOKA × YAMANASHI — SINCE 2022</div>
+  <ul class="nav-links">
+    <li><a href="#">ABOUT</a></li>
+    <li><a href="#">SERVICE</a></li>
+    <li><a href="#">VOICE</a></li>
+    <li><a href="#">RECRUIT</a></li>
+  </ul>
+</nav>
+
+<!-- HERO (editorial split) -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-big-num">01</div>
+    <span class="hero-tag">SAGE GROUP — STAFFING & CAREERS</span>
+    <h1 class="hero-title">
+      <span class="hl"><span class="hl-i">仕事も、</span></span>
+      <span class="hl"><span class="hl-i">推しも、</span></span>
+      <span class="hl"><span class="hl-i">どっちも</span></span>
+      <span class="hl"><span class="hl-i">本気で。</span></span>
+    </h1>
+    <p class="hero-sub">SoftBank・au・docomoの正規代理店として、静岡・山梨エリアで活躍する仲間を募集しています。</p>
+    <div class="hero-ctas">
+      <a href="#" class="btn-fill">採用情報を見る</a>
+      <a href="#" class="btn-line">会社を知る</a>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-h-line"></div>
+      <span>SCROLL DOWN</span>
+    </div>
+  </div>
+  <div class="hero-right">
+    <video class="hero-video" autoplay muted loop playsinline src="hero.mp4"></video>
+    <div class="hero-right-overlay"></div>
+    <div class="hero-caption">SAGE GROUP — 2024</div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span class="ticker-item">SAGE GROUP</span><span class="ticker-dot">◆</span>
+    <span class="ticker-item">SOFTBANK PARTNER</span><span class="ticker-dot">◆</span>
+    <span class="ticker-item">AU PARTNER</span><span class="ticker-dot">◆</span>
+    <span class="ticker-item">DOCOMO PARTNER</span><span class="ticker-dot">◆</span>
+    <span class="ticker-item">SHIZUOKA</span><span class="ticker-dot">◆</span>
+    <span class="ticker-item">YAMANASHI</span><span class="ticker-dot">◆</span>
+    <span class="ticker-item">SINCE 2022</span><span class="ticker-dot">◆</span>
+    <span class="ticker-item">SAGE GROUP</span><span class="ticker-dot">◆</span>
+    <span class="ticker-item">SOFTBANK PARTNER</span><span class="ticker-dot">◆</span>
+    <span class="ticker-item">AU PARTNER</span><span class="ticker-dot">◆</span>
+    <span class="ticker-item">DOCOMO PARTNER</span><span class="ticker-dot">◆</span>
+    <span class="ticker-item">SHIZUOKA</span><span class="ticker-dot">◆</span>
+    <span class="ticker-item">YAMANASHI</span><span class="ticker-dot">◆</span>
+    <span class="ticker-item">SINCE 2022</span><span class="ticker-dot">◆</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="reveal sec-header">
+    <span class="sec-num">— 01</span>
+    <span class="sec-en-sm">ABOUT</span>
+    <span class="sec-ja-sm">私たちについて</span>
+  </div>
+  <div class="about-layout">
+    <div class="about-text">
+      <h2 class="about-intro reveal">
+        推しも仕事も、<br>
+        <strong>どっちも本気で</strong><br>
+        いられる職場。
+      </h2>
+      <p class="about-body reveal">合同会社SageGroupは2022年、静岡県で創業したキャリアサポート専門集団です。SoftBank・au・docomoの正規販売代理店として、地域のスマートフォンライフを支えながら、スタッフ一人ひとりが輝ける職場づくりを追求しています。推し活も仕事も諦めなくていい、そんな文化を大切に育てています。</p>
+      <div class="reveal">
+        <p class="carrier-label">OFFICIAL CARRIER PARTNER</p>
+        <div class="carrier-row">
+          <span class="carrier-badge">SoftBank</span>
+          <span class="carrier-badge">au</span>
+          <span class="carrier-badge">docomo</span>
+        </div>
+      </div>
+      <div class="about-photo-strip reveal" style="margin-top:36px">
+        <div class="ps-block" style="aspect-ratio:16/9">PHOTO — SHOP</div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div class="ps-block" style="aspect-ratio:1/1">PHOTO</div>
+          <div class="ps-block" style="aspect-ratio:1/1">PHOTO</div>
+        </div>
+      </div>
+    </div>
+    <div class="about-stats stagger">
+      <div class="stat-row reveal">
+        <div class="stat-n">2022</div>
+        <div>
+          <div class="stat-label">設立年</div>
+          <div class="stat-sub">FOUNDED IN SHIZUOKA</div>
+        </div>
+      </div>
+      <div class="stat-row reveal">
+        <div class="stat-n">21+</div>
+        <div>
+          <div class="stat-label">スタッフ数</div>
+          <div class="stat-sub">TEAM MEMBERS</div>
+        </div>
+      </div>
+      <div class="stat-row reveal">
+        <div class="stat-n">2</div>
+        <div>
+          <div class="stat-label">エリア</div>
+          <div class="stat-sub">SHIZUOKA + YAMANASHI</div>
+        </div>
+      </div>
+      <div class="stat-row reveal">
+        <div class="stat-n">3</div>
+        <div>
+          <div class="stat-label">事業種類</div>
+          <div class="stat-sub">BUSINESS CATEGORIES</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDITORIAL PHOTO GRID -->
+<div class="ed-grid">
+  <div class="ed-grid-inner reveal">
+    <div class="ed-cell wide" style="aspect-ratio:2/1">
+      <div class="ed-cell-bg">PHOTO — MAIN</div>
+      <div class="ed-cell-label">SageGroup — Working Environment</div>
+    </div>
+    <div class="ed-text">
+      <h3>LIFE<br>AT<br>SAGE</h3>
+      <p>現場のリアルを知ってほしい。楽しく、真剣に、毎日を過ごすスタッフたちの姿。</p>
+    </div>
+    <div class="ed-cell">
+      <div class="ed-cell-bg">PHOTO</div>
+      <div class="ed-cell-label">Team</div>
+    </div>
+    <div class="ed-cell">
+      <div class="ed-cell-bg">PHOTO</div>
+      <div class="ed-cell-label">Store</div>
+    </div>
+    <div class="ed-cell">
+      <div class="ed-cell-bg">PHOTO</div>
+      <div class="ed-cell-label">Event</div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="reveal sec-header">
+    <span class="sec-num">— 02</span>
+    <span class="sec-en-sm">SERVICES</span>
+    <span class="sec-ja-sm">事業内容</span>
+  </div>
+  <div class="svc-grid stagger">
+    <div class="svc-card reveal">
+      <div class="svc-num">01</div>
+      <h3 class="svc-name">キャリア販売事業</h3>
+      <p class="svc-desc">SoftBank・au・docomoの正規代理店として、スマートフォンや料金プランの提案から端末設定・アフターサポートまでをワンストップで提供します。</p>
+      <span class="svc-link">詳しく見る <span>→</span></span>
+    </div>
+    <div class="svc-card reveal">
+      <div class="svc-num">02</div>
+      <h3 class="svc-name">人材紹介・採用支援</h3>
+      <p class="svc-desc">推し活と仕事の両立を実現する採用・育成プログラムを展開。柔軟な働き方と充実したサポートで、スタッフの成長を支えます。</p>
+      <span class="svc-link">詳しく見る <span>→</span></span>
+    </div>
+    <div class="svc-card reveal">
+      <div class="svc-num">03</div>
+      <h3 class="svc-name">その他の事業</h3>
+      <p class="svc-desc">地域密着型の新規事業にも積極的に挑戦。スタッフのアイデアを形にし、新しい価値を地域に届けていきます。</p>
+      <span class="svc-link">詳しく見る <span>→</span></span>
+    </div>
+  </div>
+</section>
+
+<!-- CONCEPT -->
+<section class="concept" id="concept">
+  <div class="reveal sec-header" style="border-color:rgba(255,255,255,0.08)">
+    <span class="sec-num" style="color:var(--gold-l)">— 03</span>
+    <span class="sec-en-sm" style="color:rgba(255,255,255,0.8)">CONCEPT</span>
+    <span class="sec-ja-sm" style="color:rgba(255,255,255,0.35)">コンセプト</span>
+  </div>
+  <div class="concept-layout">
+    <div>
+      <div class="concept-num-big reveal">03</div>
+      <p class="concept-quote reveal">"好きなことを諦めない、<br>だから仕事にも本気になれる。"</p>
+      <p class="concept-body reveal">推し活を楽しむことで仕事へのエネルギーが増す——そんな好循環を当たり前にしたい。SageGroupはスタッフ一人ひとりの「好き」を尊重し、仕事もプライベートも両立できる職場をつくっています。</p>
+      <ul class="val-list stagger">
+        <li class="reveal">推し活応援・シフト融通OK</li>
+        <li class="reveal">丁寧な研修と成長できる環境</li>
+        <li class="reveal">仲間と楽しみながら働ける現場</li>
+        <li class="reveal">一人ひとりの個性を大切にする文化</li>
+      </ul>
+    </div>
+    <div class="concept-photos reveal">
+      <div class="c-photo">PHOTO</div>
+      <div class="c-photo">PHOTO</div>
+      <div class="c-photo wide">PHOTO — WIDE</div>
+    </div>
+  </div>
+</section>
+
+<!-- VOICE -->
+<section class="voice" id="voice">
+  <div class="reveal sec-header">
+    <span class="sec-num">— 04</span>
+    <span class="sec-en-sm">VOICE</span>
+    <span class="sec-ja-sm">スタッフの声</span>
+  </div>
+  <p class="voice-lead reveal">
+    "推し活があるから、<em>仕事も頑張れる。</em>"<br>
+    そんな声が、毎日聞こえてくる職場。
+  </p>
+  <div class="voice-grid stagger">
+    <div class="voice-card reveal">
+      <p class="voice-q">「SageGroupに入って、推し活のためのシフト調整が本当にしやすくて助かっています。仕事もやりがいがあって、毎日充実しています。」</p>
+      <div class="voice-attr">
+        <div class="voice-avatar">SB</div>
+        <div>
+          <div class="voice-name">Aさん / 20代女性</div>
+          <div class="voice-role">SoftBank担当 ・ 入社2年</div>
+        </div>
+      </div>
+    </div>
+    <div class="voice-card reveal">
+      <p class="voice-q">「未経験から始めましたが、研修が丁寧で安心できました。今では後輩の指導も任せてもらえて、成長を実感しています。」</p>
+      <div class="voice-attr">
+        <div class="voice-avatar">AU</div>
+        <div>
+          <div class="voice-name">Bさん / 20代男性</div>
+          <div class="voice-role">au担当 ・ 入社1年半</div>
+        </div>
+      </div>
+    </div>
+    <div class="voice-card reveal">
+      <p class="voice-q">「チームの雰囲気がすごくよくて、困ったときは必ず助けてくれる仲間がいます。毎日楽しく働けています。」</p>
+      <div class="voice-attr">
+        <div class="voice-avatar">DC</div>
+        <div>
+          <div class="voice-name">Cさん / 30代女性</div>
+          <div class="voice-role">docomo担当 ・ 入社3年</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RECRUIT -->
+<section class="recruit" id="recruit">
+  <div class="recruit-layout">
+    <div>
+      <div class="reveal sec-header">
+        <span class="sec-num">— 05</span>
+        <span class="sec-en-sm">RECRUIT</span>
+        <span class="sec-ja-sm">採用情報</span>
+      </div>
+      <h2 class="recruit-big reveal">
+        推しも仕事も、<br>
+        <em>あなたが</em><br>
+        いちばん<br>
+        輝ける場所へ。
+      </h2>
+    </div>
+    <div class="recruit-right">
+      <p class="recruit-body reveal">静岡・山梨エリアで一緒にキャリアを築きませんか。経験不問、推し活応援、研修充実。あなたのペースで成長できる環境が整っています。</p>
+      <a href="#" class="recruit-btn reveal">採用情報を見る →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <span class="footer-logo">SAGE GROUP</span>
+    <span>© 2024 合同会社SageGroup. All rights reserved.</span>
+  </div>
+</footer>
+
+<script>
+/* scroll progress */
+const sb=document.getElementById('scrollBar');
+window.addEventListener('scroll',()=>{
+  sb.style.height=(window.scrollY/(document.body.scrollHeight-innerHeight)*100)+'%';
+},{passive:true});
+
+/* nav scroll */
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40),{passive:true});
+
+/* intersection observer */
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis')});
+},{threshold:0.1});
+document.querySelectorAll('.reveal,.reveal-left').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

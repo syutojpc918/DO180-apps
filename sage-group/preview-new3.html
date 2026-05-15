@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Preview New 3 — SageGroup TOP（プレミアムミニマル×余白の美）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+JP:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+/* ===== RESET & TOKENS ===== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gold:#9a7a3e;
+  --gold-l:#b8965a;
+  --gold-p:#d4b896;
+  --gold-pale:#f7f2ea;
+  --sage:#3a5c42;
+  --sage-l:#4d7a58;
+  --white:#ffffff;
+  --snow:#fdfcfa;
+  --ink:#1a1714;
+  --body:#5a5450;
+  --rule:rgba(26,23,20,0.08);
+  --rule-g:rgba(154,122,62,0.18);
+  --nav-h:72px;
+  --gutter:80px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans JP',sans-serif;color:var(--body);background:var(--snow);overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+
+/* ===== SCROLL PROGRESS ===== */
+#scrollBar{
+  position:fixed;left:0;top:0;width:2px;height:0%;
+  background:var(--gold);z-index:9999;transition:height 0.06s linear;
+}
+
+/* ===== NAV (ultra clean) ===== */
+#nav{
+  position:fixed;top:0;left:0;right:0;height:var(--nav-h);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 var(--gutter);z-index:1000;
+  transition:background 0.5s,border-color 0.5s;
+  border-bottom:1px solid transparent;
+}
+#nav.scrolled{
+  background:rgba(253,252,250,0.96);
+  border-color:var(--rule);
+  backdrop-filter:blur(10px);
+}
+.nav-logo{display:flex;align-items:center;gap:12px}
+.logo-crest{width:32px;height:32px}
+.logo-name{font-family:'Cormorant Garamond',serif;font-size:1rem;letter-spacing:0.22em;color:var(--ink);font-weight:400}
+.nav-center{
+  position:absolute;left:50%;transform:translateX(-50%);
+  font-size:0.58rem;letter-spacing:0.5em;color:rgba(26,23,20,0.3);
+}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{
+  font-size:0.68rem;letter-spacing:0.18em;color:var(--body);
+  position:relative;transition:color 0.3s;
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-4px;left:0;right:0;
+  height:1px;background:var(--gold);
+  transform:scaleX(0);transform-origin:left;transition:transform 0.35s;
+}
+.nav-links a:hover{color:var(--gold)}
+.nav-links a:hover::after{transform:scaleX(1)}
+
+/* ===== HERO (full-bleed video + minimal text) ===== */
+.hero{
+  position:relative;height:100vh;min-height:640px;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  overflow:hidden;padding-top:var(--nav-h);
+}
+.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.hero-overlay{
+  position:absolute;inset:0;z-index:1;
+  background:linear-gradient(
+    to bottom,
+    rgba(26,23,20,0.1) 0%,
+    rgba(26,23,20,0.08) 40%,
+    rgba(26,23,20,0.5) 70%,
+    rgba(26,23,20,0.80) 100%
+  );
+}
+.hero-top-line{
+  position:absolute;top:0;left:0;right:0;height:1px;z-index:3;
+  background:linear-gradient(90deg,transparent,var(--gold-p) 50%,transparent);
+  transform:scaleX(0);animation:hLine 1.5s ease forwards 0.5s;
+}
+@keyframes hLine{to{transform:scaleX(1)}}
+.hero-content{
+  position:relative;z-index:2;
+  padding:0 var(--gutter) 80px;
+  display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:flex-end;
+}
+.hero-left-col{}
+.hero-eyebrow{
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:0.9rem;color:var(--gold-p);letter-spacing:0.1em;
+  margin-bottom:20px;display:block;
+  opacity:0;animation:fUp 0.7s ease forwards 0.4s;
+}
+.hero-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(3.2rem,9vw,8.5rem);
+  line-height:0.9;letter-spacing:0.02em;
+}
+.hl{display:block;overflow:hidden}
+.hl-i{
+  display:block;color:var(--white);
+  opacity:0;animation:sUp 0.95s cubic-bezier(0.16,1,0.3,1) forwards;
+}
+.hl:nth-child(1) .hl-i{animation-delay:0.38s}
+.hl:nth-child(2) .hl-i{animation-delay:0.52s;color:rgba(212,184,150,0.9)}
+.hl:nth-child(3) .hl-i{animation-delay:0.66s}
+.hl:nth-child(4) .hl-i{animation-delay:0.80s;color:var(--gold-l)}
+@keyframes sUp{from{opacity:0;transform:translateY(100%)}to{opacity:1;transform:none}}
+@keyframes fUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+.hero-right-col{
+  display:flex;flex-direction:column;justify-content:flex-end;gap:32px;
+  opacity:0;animation:fUp 0.9s ease forwards 1.1s;
+  padding-bottom:6px;
+}
+.hero-desc{
+  font-size:0.9rem;line-height:2.1;color:rgba(255,255,255,0.7);
+  border-left:1px solid rgba(154,122,62,0.5);padding-left:20px;
+}
+.hero-ctas{display:flex;gap:12px}
+.btn-primary{
+  display:inline-block;padding:14px 36px;background:var(--gold);color:#fff;
+  font-size:0.72rem;letter-spacing:0.2em;
+  transition:background 0.3s,transform 0.2s;
+}
+.btn-primary:hover{background:var(--gold-l);transform:translateY(-2px)}
+.btn-ghost{
+  display:inline-block;padding:13px 36px;
+  border:1px solid rgba(255,255,255,0.35);color:rgba(255,255,255,0.75);
+  font-size:0.72rem;letter-spacing:0.2em;
+  transition:border-color 0.3s,color 0.3s,transform 0.2s;
+}
+.btn-ghost:hover{border-color:var(--gold-p);color:var(--gold-p);transform:translateY(-2px)}
+
+.hero-scroll{
+  position:absolute;bottom:40px;left:50%;transform:translateX(-50%);z-index:2;
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  opacity:0;animation:fUp 0.7s ease forwards 1.8s;
+}
+.hero-scroll span{font-size:0.55rem;letter-spacing:0.45em;color:rgba(255,255,255,0.35)}
+.s-dot{
+  width:1px;height:40px;
+  background:linear-gradient(180deg,rgba(154,122,62,0.8) 0%,transparent 100%);
+  animation:sd 2s ease-in-out infinite;
+}
+@keyframes sd{0%,100%{opacity:1;transform:scaleY(1)}50%{opacity:0.25;transform:scaleY(0.4);transform-origin:top}}
+
+/* ===== RULE MARQUEE ===== */
+.rule-mq{
+  border-top:1px solid var(--rule-g);border-bottom:1px solid var(--rule-g);
+  background:var(--snow);overflow:hidden;
+}
+.rm-track{display:flex;white-space:nowrap;animation:mq 22s linear infinite;padding:11px 0}
+.rm-item{font-size:0.63rem;letter-spacing:0.35em;color:rgba(26,23,20,0.35);padding:0 28px}
+.rm-sep{color:var(--gold-p)}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ===== REVEAL ===== */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.9s ease,transform 0.9s ease}
+.reveal.vis{opacity:1;transform:none}
+.stagger .reveal:nth-child(2){transition-delay:0.1s}
+.stagger .reveal:nth-child(3){transition-delay:0.2s}
+.stagger .reveal:nth-child(4){transition-delay:0.3s}
+
+/* ===== SECTION LABEL (minimal) ===== */
+.sl{display:flex;align-items:center;gap:16px;margin-bottom:56px}
+.sl-num{font-family:'Cormorant Garamond',serif;font-size:0.8rem;color:var(--gold);letter-spacing:0.12em}
+.sl-en{font-size:0.63rem;letter-spacing:0.45em;color:rgba(26,23,20,0.38)}
+.sl-line{flex:1;height:1px;background:var(--rule-g)}
+.sl-ja{font-size:0.63rem;letter-spacing:0.2em;color:var(--body)}
+
+/* large display heading */
+.disp{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(2.8rem,6vw,5.5rem);
+  line-height:0.95;letter-spacing:0.03em;color:var(--ink);
+  margin-bottom:32px;
+}
+.disp em{color:var(--gold);font-style:normal}
+
+/* ===== ABOUT ===== */
+.about{background:var(--white);padding:120px var(--gutter)}
+.about-grid{display:grid;grid-template-columns:5fr 4fr;gap:96px;align-items:start}
+.about-sub{
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:1.4rem;color:var(--sage);letter-spacing:0.03em;
+  margin-bottom:24px;
+}
+.about-body{font-size:0.9rem;line-height:2.3;color:var(--body);margin-bottom:32px}
+.carrier-block{border-top:1px solid var(--rule);padding-top:24px}
+.carrier-label{font-size:0.62rem;letter-spacing:0.38em;color:var(--sage);margin-bottom:12px}
+.carrier-row{display:flex;gap:8px;flex-wrap:wrap}
+.carrier-badge{
+  padding:6px 18px;border:1px solid var(--gold-p);
+  font-size:0.74rem;letter-spacing:0.1em;color:var(--gold);
+  transition:background 0.25s,color 0.25s;
+}
+.carrier-badge:hover{background:var(--gold);color:#fff;border-color:var(--gold)}
+.about-nums{display:flex;flex-direction:column;gap:0}
+.num-row{
+  border-bottom:1px solid var(--rule);padding:32px 0;
+  display:flex;justify-content:space-between;align-items:flex-end;
+}
+.num-row:first-child{border-top:1px solid var(--rule)}
+.num-val{
+  font-family:'Cormorant Garamond',serif;
+  font-size:3rem;font-weight:300;line-height:1;color:var(--ink);
+}
+.num-meta{text-align:right}
+.num-label{font-size:0.78rem;color:var(--ink);font-weight:500}
+.num-sub{font-size:0.64rem;letter-spacing:0.1em;color:var(--gold);margin-top:2px}
+.about-photos{margin-top:48px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.a-photo{
+  background:var(--gold-pale);aspect-ratio:3/4;
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.62rem;letter-spacing:0.1em;color:var(--gold-p);
+  transition:transform 0.35s;
+}
+.a-photo:hover{transform:scale(1.03)}
+.a-photo.wide{grid-column:span 2;aspect-ratio:2/1}
+
+/* ===== SERVICE STRIP (horizontal scroll) ===== */
+.services{background:var(--snow);padding:120px 0}
+.services-header{padding:0 var(--gutter);margin-bottom:48px}
+.svc-strip-wrap{
+  overflow-x:auto;padding:0 var(--gutter) 24px;
+  scroll-snap-type:x mandatory;
+  scrollbar-width:thin;scrollbar-color:var(--gold-p) var(--rule);
+  display:flex;gap:24px;
+}
+.svc-strip-wrap::-webkit-scrollbar{height:2px}
+.svc-strip-wrap::-webkit-scrollbar-track{background:var(--rule)}
+.svc-strip-wrap::-webkit-scrollbar-thumb{background:var(--gold-p)}
+.svc-panel{
+  flex:0 0 360px;
+  background:var(--white);
+  border:1px solid var(--rule);
+  padding:48px 40px;
+  scroll-snap-align:start;
+  position:relative;overflow:hidden;
+  transition:border-color 0.3s,box-shadow 0.3s;
+}
+.svc-panel:hover{border-color:var(--rule-g);box-shadow:0 16px 48px rgba(0,0,0,0.04)}
+.svc-panel::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:2px;
+  background:var(--gold);
+  transform:scaleY(0);transform-origin:bottom;
+  transition:transform 0.45s cubic-bezier(0.22,1,0.36,1);
+}
+.svc-panel:hover::before{transform:scaleY(1)}
+.svc-icon{
+  width:48px;height:48px;border-radius:50%;
+  background:var(--gold-pale);margin-bottom:28px;
+  display:flex;align-items:center;justify-content:center;
+}
+.svc-icon span{font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--gold)}
+.svc-num{font-family:'Cormorant Garamond',serif;font-size:0.75rem;color:var(--gold);letter-spacing:0.12em;margin-bottom:8px}
+.svc-name{font-size:1.05rem;font-weight:700;color:var(--ink);margin-bottom:14px;letter-spacing:0.04em}
+.svc-desc{font-size:0.84rem;line-height:2;color:var(--body)}
+
+/* ===== CONCEPT (dark luxury) ===== */
+.concept{
+  background:var(--ink);
+  padding:140px var(--gutter);
+  position:relative;overflow:hidden;
+}
+.concept::before{
+  content:'SAGE';
+  position:absolute;right:-20px;top:50%;transform:translateY(-50%);
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(8rem,20vw,22rem);
+  color:rgba(255,255,255,0.02);
+  line-height:1;pointer-events:none;user-select:none;
+}
+.concept-grid{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:start;position:relative;z-index:1}
+.concept-big-quote{
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:clamp(1.6rem,3.5vw,3rem);font-weight:300;
+  color:rgba(255,255,255,0.9);line-height:1.55;
+  margin-bottom:40px;
+}
+.concept-big-quote em{color:var(--gold-l);font-style:italic}
+.concept-body{font-size:0.9rem;line-height:2.3;color:rgba(255,255,255,0.55);margin-bottom:36px}
+.concept-list{list-style:none;display:flex;flex-direction:column}
+.concept-list li{
+  padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);
+  display:flex;align-items:center;gap:12px;
+  font-size:0.84rem;color:rgba(255,255,255,0.5);
+  transition:color 0.3s;
+}
+.concept-list li:hover{color:rgba(255,255,255,0.85)}
+.concept-list li::before{
+  content:'';width:20px;height:1px;background:var(--gold);flex-shrink:0;
+}
+.concept-right{display:flex;flex-direction:column;gap:16px}
+.c-img{
+  background:rgba(255,255,255,0.04);
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.64rem;letter-spacing:0.12em;color:rgba(255,255,255,0.12);
+  border:1px solid rgba(255,255,255,0.04);
+}
+
+/* ===== LIFE SECTION ===== */
+.life{background:var(--white);padding:120px var(--gutter)}
+.life-layout{display:grid;grid-template-columns:1fr 2fr;gap:80px;align-items:start}
+.life-copy{position:sticky;top:calc(var(--nav-h) + 40px)}
+.life-copy p{font-size:0.9rem;line-height:2.2;color:var(--body);margin-top:24px}
+.life-mosaic{display:flex;flex-direction:column;gap:8px}
+.lm-row{display:flex;gap:8px}
+.lm-block{
+  background:var(--gold-pale);flex:1;
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.62rem;letter-spacing:0.1em;color:var(--gold-p);
+  transition:transform 0.3s,box-shadow 0.3s;
+}
+.lm-block:hover{transform:scale(1.02);box-shadow:0 8px 24px rgba(0,0,0,0.05)}
+.lm-2{flex:2}
+
+/* ===== RECRUIT ===== */
+.recruit{
+  background:var(--snow);
+  padding:140px var(--gutter);
+  border-top:1px solid var(--rule);
+}
+.recruit-layout{
+  display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:end;
+}
+.recruit-quote{
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:clamp(1.4rem,3vw,2.4rem);font-weight:300;
+  color:var(--ink);line-height:1.6;margin-bottom:0;
+}
+.recruit-quote strong{font-style:normal;font-weight:600;color:var(--gold)}
+.recruit-body{font-size:0.9rem;line-height:2.2;color:var(--body);margin-bottom:36px}
+.recruit-cta{display:flex;flex-direction:column;gap:12px}
+.btn-recruit{
+  display:inline-flex;align-items:center;gap:12px;
+  padding:18px 48px;background:var(--ink);color:rgba(255,255,255,0.9);
+  font-size:0.74rem;letter-spacing:0.22em;align-self:flex-start;
+  transition:background 0.3s,gap 0.3s,transform 0.2s;
+}
+.btn-recruit:hover{background:var(--gold);transform:translateY(-2px)}
+.btn-recruit .arrow{transition:transform 0.25s}
+.btn-recruit:hover .arrow{transform:translateX(4px)}
+.recruit-note{font-size:0.7rem;color:var(--body);letter-spacing:0.06em}
+
+/* ===== FOOTER ===== */
+.footer{background:var(--ink);padding:72px var(--gutter);border-top:1px solid rgba(255,255,255,0.05)}
+.footer-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;margin-bottom:48px}
+.footer-brand{}
+.footer-logo{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.1rem;letter-spacing:0.22em;color:rgba(255,255,255,0.7);
+  margin-bottom:6px;
+}
+.footer-tagline{font-size:0.68rem;letter-spacing:0.18em;color:rgba(255,255,255,0.28)}
+.footer-nav{display:flex;gap:20px;flex-wrap:wrap;justify-content:flex-end}
+.footer-nav a{font-size:0.68rem;letter-spacing:0.12em;color:rgba(255,255,255,0.3);transition:color 0.25s}
+.footer-nav a:hover{color:var(--gold-p)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.06);padding-top:24px}
+.footer-copy{font-size:0.64rem;letter-spacing:0.1em;color:rgba(255,255,255,0.2)}
+
+/* ===== MOBILE ===== */
+@media(max-width:767px){
+  :root{--nav-h:60px;--gutter:20px}
+  .nav-center,.nav-links{display:none}
+  #nav{padding:0 20px}
+  .hero-content{grid-template-columns:1fr;padding:0 20px 60px;gap:28px}
+  .hero-right-col{gap:20px}
+  .about-grid,.concept-grid,.life-layout,.recruit-layout,.footer-grid{grid-template-columns:1fr}
+  .about-nums{margin-top:0}
+  .about-photos{grid-template-columns:1fr 1fr}
+  .a-photo.wide{grid-column:span 2;aspect-ratio:16/7}
+  .svc-panel{flex:0 0 280px}
+  .concept::before{display:none}
+  .lm-2{flex:2}
+  .footer-nav{justify-content:flex-start}
+}
+</style>
+</head>
+<body>
+
+<div id="scrollBar"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-logo">
+    <svg class="logo-crest" width="32" height="32" viewBox="0 0 32 32" fill="none">
+      <circle cx="16" cy="16" r="14" stroke="#9a7a3e" stroke-width="1"/>
+      <text x="16" y="20" text-anchor="middle" font-family="Georgia,serif" font-size="9" fill="#9a7a3e" letter-spacing="1">SG</text>
+    </svg>
+    <span class="logo-name">SAGE GROUP</span>
+  </div>
+  <div class="nav-center">SHIZUOKA × YAMANASHI</div>
+  <ul class="nav-links">
+    <li><a href="#">会社概要</a></li>
+    <li><a href="#">事業内容</a></li>
+    <li><a href="#">スタッフの声</a></li>
+    <li><a href="#">採用情報</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <video class="hero-video" autoplay muted loop playsinline src="hero.mp4"></video>
+  <div class="hero-overlay"></div>
+  <div class="hero-top-line"></div>
+  <div class="hero-content">
+    <div class="hero-left-col">
+      <span class="hero-eyebrow">Careers that celebrate passion —</span>
+      <h1 class="hero-title">
+        <span class="hl"><span class="hl-i">仕事も、</span></span>
+        <span class="hl"><span class="hl-i">推しも、</span></span>
+        <span class="hl"><span class="hl-i">どっちも</span></span>
+        <span class="hl"><span class="hl-i">本気で。</span></span>
+      </h1>
+    </div>
+    <div class="hero-right-col">
+      <p class="hero-desc">SoftBank・au・docomoの正規販売代理店として、静岡・山梨エリアで活躍するスタッフを募集しています。推し活も仕事も、どちらも諦めなくていい場所。</p>
+      <div class="hero-ctas">
+        <a href="#" class="btn-primary">採用情報を見る</a>
+        <a href="#" class="btn-ghost">会社を知る</a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="s-dot"></div>
+    <span>SCROLL</span>
+  </div>
+</section>
+
+<!-- RULE MARQUEE -->
+<div class="rule-mq">
+  <div class="rm-track">
+    <span class="rm-item">SAGE GROUP</span><span class="rm-sep"> / </span>
+    <span class="rm-item">SOFTBANK PARTNER</span><span class="rm-sep"> / </span>
+    <span class="rm-item">AU PARTNER</span><span class="rm-sep"> / </span>
+    <span class="rm-item">DOCOMO PARTNER</span><span class="rm-sep"> / </span>
+    <span class="rm-item">SHIZUOKA</span><span class="rm-sep"> / </span>
+    <span class="rm-item">YAMANASHI</span><span class="rm-sep"> / </span>
+    <span class="rm-item">SINCE 2022</span><span class="rm-sep"> / </span>
+    <span class="rm-item">SAGE GROUP</span><span class="rm-sep"> / </span>
+    <span class="rm-item">SOFTBANK PARTNER</span><span class="rm-sep"> / </span>
+    <span class="rm-item">AU PARTNER</span><span class="rm-sep"> / </span>
+    <span class="rm-item">DOCOMO PARTNER</span><span class="rm-sep"> / </span>
+    <span class="rm-item">SHIZUOKA</span><span class="rm-sep"> / </span>
+    <span class="rm-item">YAMANASHI</span><span class="rm-sep"> / </span>
+    <span class="rm-item">SINCE 2022</span><span class="rm-sep"> / </span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="sl reveal">
+    <span class="sl-num">01</span>
+    <span class="sl-en">ABOUT US</span>
+    <div class="sl-line"></div>
+    <span class="sl-ja">私たちについて</span>
+  </div>
+  <div class="about-grid">
+    <div>
+      <div class="reveal">
+        <h2 class="disp">OUR<br><em>STORY</em></h2>
+        <p class="about-sub">"推しも仕事も、どちらも本気でいられる場所を。"</p>
+        <p class="about-body">合同会社SageGroupは2022年、静岡県で創業したキャリアサポート専門集団です。SoftBank・au・docomoの正規販売代理店として、地域のスマートフォンライフを支えながら、スタッフ一人ひとりが輝ける職場づくりを追求しています。推し活も仕事も諦めなくていい——そんな文化を大切に育てています。</p>
+      </div>
+      <div class="carrier-block reveal">
+        <p class="carrier-label">OFFICIAL CARRIER PARTNER</p>
+        <div class="carrier-row">
+          <span class="carrier-badge">SoftBank</span>
+          <span class="carrier-badge">au</span>
+          <span class="carrier-badge">docomo</span>
+        </div>
+      </div>
+      <div class="about-photos reveal" style="margin-top:40px">
+        <div class="a-photo wide">PHOTO — MAIN</div>
+        <div class="a-photo">PHOTO</div>
+        <div class="a-photo">PHOTO</div>
+      </div>
+    </div>
+    <div class="about-nums stagger">
+      <div class="num-row reveal">
+        <span class="num-val">2022</span>
+        <div class="num-meta">
+          <div class="num-label">設立年</div>
+          <div class="num-sub">FOUNDED</div>
+        </div>
+      </div>
+      <div class="num-row reveal">
+        <span class="num-val">21+</span>
+        <div class="num-meta">
+          <div class="num-label">スタッフ数</div>
+          <div class="num-sub">TEAM MEMBERS</div>
+        </div>
+      </div>
+      <div class="num-row reveal">
+        <span class="num-val">2</span>
+        <div class="num-meta">
+          <div class="num-label">エリア</div>
+          <div class="num-sub">AREAS</div>
+        </div>
+      </div>
+      <div class="num-row reveal">
+        <span class="num-val">3</span>
+        <div class="num-meta">
+          <div class="num-label">事業種類</div>
+          <div class="num-sub">BUSINESSES</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE STRIP -->
+<section class="services" id="services">
+  <div class="services-header">
+    <div class="sl reveal">
+      <span class="sl-num">02</span>
+      <span class="sl-en">SERVICES</span>
+      <div class="sl-line"></div>
+      <span class="sl-ja">事業内容</span>
+    </div>
+    <h2 class="disp reveal">WHAT WE <em>DO</em></h2>
+  </div>
+  <div class="svc-strip-wrap">
+    <div class="svc-panel">
+      <div class="svc-icon"><span>01</span></div>
+      <div class="svc-num">01 / CARRIER SALES</div>
+      <h3 class="svc-name">キャリア販売事業</h3>
+      <p class="svc-desc">SoftBank・au・docomoの正規代理店として、スマートフォンや料金プランの提案から端末設定・アフターサポートまでをワンストップで提供します。</p>
+    </div>
+    <div class="svc-panel">
+      <div class="svc-icon"><span>02</span></div>
+      <div class="svc-num">02 / STAFFING</div>
+      <h3 class="svc-name">人材紹介・採用支援</h3>
+      <p class="svc-desc">推し活と仕事の両立を実現する採用・育成プログラムを展開。柔軟な働き方と充実したサポートで、スタッフの成長を支えます。</p>
+    </div>
+    <div class="svc-panel">
+      <div class="svc-icon"><span>03</span></div>
+      <div class="svc-num">03 / NEW BUSINESS</div>
+      <h3 class="svc-name">その他の事業</h3>
+      <p class="svc-desc">地域密着型の新規事業にも積極的に挑戦。スタッフのアイデアを形にし、新しい価値を地域に届けていきます。</p>
+    </div>
+    <div class="svc-panel" style="background:var(--gold);border-color:var(--gold)">
+      <div style="height:100%;display:flex;flex-direction:column;justify-content:flex-end">
+        <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.4rem;color:rgba(255,255,255,0.9);line-height:1.6;margin-bottom:20px">"仕事も、推しも、<br>どっちも本気で。"</p>
+        <a href="#" style="display:inline-block;padding:12px 28px;border:1px solid rgba(255,255,255,0.5);color:rgba(255,255,255,0.85);font-size:0.7rem;letter-spacing:0.18em">詳しく見る →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONCEPT -->
+<section class="concept" id="concept">
+  <div class="concept-grid">
+    <div>
+      <div class="sl reveal" style="border-color:rgba(255,255,255,0.08)">
+        <span class="sl-num" style="color:var(--gold-l)">03</span>
+        <span class="sl-en" style="color:rgba(255,255,255,0.22)">CONCEPT</span>
+        <div class="sl-line" style="background:rgba(255,255,255,0.06)"></div>
+        <span class="sl-ja" style="color:rgba(255,255,255,0.25)">コンセプト</span>
+      </div>
+      <h2 class="disp reveal" style="color:rgba(255,255,255,0.9)">WHO<br>WE <em>ARE</em></h2>
+      <p class="concept-big-quote reveal">
+        "好きなことを<em>諦めない</em>、<br>だから仕事にも<br>本気になれる。"
+      </p>
+      <p class="concept-body reveal">推し活を楽しむことで仕事へのエネルギーが増す——そんな好循環を当たり前にしたい。SageGroupはスタッフ一人ひとりの「好き」を尊重し、仕事もプライベートも両立できる職場をつくっています。</p>
+      <ul class="concept-list stagger">
+        <li class="reveal">推し活応援・シフト融通OK</li>
+        <li class="reveal">丁寧な研修と成長できる環境</li>
+        <li class="reveal">仲間と楽しみながら働ける現場</li>
+        <li class="reveal">一人ひとりの個性を大切にする文化</li>
+      </ul>
+    </div>
+    <div class="concept-right reveal">
+      <div class="c-img" style="aspect-ratio:4/5">PHOTO — MAIN</div>
+      <div class="c-img" style="aspect-ratio:16/7">PHOTO — WIDE</div>
+    </div>
+  </div>
+</section>
+
+<!-- LIFE AT SAGE -->
+<section class="life" id="life">
+  <div class="life-layout">
+    <div class="life-copy">
+      <div class="sl reveal">
+        <span class="sl-num">04</span>
+        <span class="sl-en">LIFE AT SAGE</span>
+        <div class="sl-line"></div>
+        <span class="sl-ja">日常</span>
+      </div>
+      <h2 class="disp reveal">PEOPLE<br>&amp; <em>CULTURE</em></h2>
+      <p class="reveal">現場の雰囲気、仲間との関係、オフの過ごし方。SageGroupのリアルな日常をご紹介します。推し活のシフト調整、チームイベント、日常の風景——すべてが私たちの文化です。</p>
+    </div>
+    <div class="life-mosaic">
+      <div class="lm-row reveal">
+        <div class="lm-block lm-2" style="height:240px">PHOTO — TEAM</div>
+        <div class="lm-block" style="height:240px">PHOTO</div>
+      </div>
+      <div class="lm-row reveal">
+        <div class="lm-block" style="height:180px">PHOTO</div>
+        <div class="lm-block lm-2" style="height:180px">PHOTO — EVENT</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RECRUIT -->
+<section class="recruit" id="recruit">
+  <div class="sl reveal">
+    <span class="sl-num">05</span>
+    <span class="sl-en">RECRUIT</span>
+    <div class="sl-line"></div>
+    <span class="sl-ja">採用情報</span>
+  </div>
+  <div class="recruit-layout">
+    <div>
+      <p class="recruit-quote reveal">
+        推しも仕事も、<br>
+        <strong>あなたが</strong><br>
+        いちばん輝ける場所へ。
+      </p>
+    </div>
+    <div class="recruit-right">
+      <p class="recruit-body reveal">
+        静岡・山梨エリアで一緒にキャリアを築きませんか。経験不問、推し活応援、研修充実。あなたのペースで成長できる環境が整っています。
+      </p>
+      <div class="recruit-cta reveal">
+        <a href="#" class="btn-recruit">
+          採用情報を見る <span class="arrow">→</span>
+        </a>
+        <span class="recruit-note">新卒・中途・アルバイト 随時募集中</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="footer-logo">SAGE GROUP</div>
+      <div class="footer-tagline">仕事も、推しも、どっちも本気で。</div>
+    </div>
+    <nav class="footer-nav">
+      <a href="#">会社概要</a>
+      <a href="#">事業内容</a>
+      <a href="#">スタッフの声</a>
+      <a href="#">採用情報</a>
+      <a href="#">お問い合わせ</a>
+    </nav>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2024 合同会社SageGroup. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+/* scroll progress */
+const sb=document.getElementById('scrollBar');
+window.addEventListener('scroll',()=>{
+  sb.style.height=(window.scrollY/(document.body.scrollHeight-innerHeight)*100)+'%';
+},{passive:true});
+
+/* nav */
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40),{passive:true});
+
+/* intersection observer */
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis')});
+},{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
