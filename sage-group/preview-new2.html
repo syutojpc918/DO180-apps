@@ -370,24 +370,45 @@ a{text-decoration:none;color:inherit}
 .voice-name{font-size:0.76rem;color:var(--ink);font-weight:500}
 .voice-role{font-size:0.66rem;color:var(--gold);letter-spacing:0.08em}
 
+/* ===== SERVICES PHOTO ===== */
+.svc-img{
+  width:100%;height:180px;overflow:hidden;margin-bottom:24px;
+}
+.svc-img img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;
+  transition:transform 0.5s ease;
+}
+.svc-card:hover .svc-img img{transform:scale(1.04)}
+
 /* ===== RECRUIT ===== */
-.recruit{background:var(--off);padding:100px 48px;border-top:1px solid var(--rule)}
-.recruit-layout{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:end}
+.recruit{
+  display:grid;grid-template-columns:1fr 1fr;
+  min-height:600px;position:relative;overflow:hidden;
+}
+.recruit-content{
+  background:var(--ink);padding:120px 64px;
+  display:flex;flex-direction:column;justify-content:center;
+  position:relative;z-index:1;
+}
+.recruit-photo-panel{position:relative;overflow:hidden;}
+.recruit-photo-panel img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;}
+.recruit-photo-panel::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:60px;z-index:1;
+  background:linear-gradient(90deg,var(--ink) 0%,transparent 100%);
+}
 .recruit-big{
   font-family:'Bebas Neue',sans-serif;
   font-size:clamp(2.8rem,6vw,6.5rem);
-  line-height:0.95;letter-spacing:0.02em;color:var(--ink);
-  word-break:keep-all;
+  line-height:0.95;letter-spacing:0.02em;color:#fff;
+  word-break:keep-all;margin-bottom:32px;
 }
 .recruit-big em{color:var(--gold);font-style:normal}
-.recruit-right{display:flex;flex-direction:column;gap:20px}
-.recruit-body{font-size:0.9rem;line-height:2.1;color:var(--body)}
+.recruit-body{font-size:0.9rem;line-height:2.1;color:rgba(255,255,255,0.65);margin-bottom:28px}
 .recruit-btn{
-  display:inline-block;padding:16px 48px;background:var(--ink);color:var(--off);
+  display:inline-block;padding:16px 48px;background:var(--gold);color:#fff;
   font-size:0.74rem;letter-spacing:0.2em;align-self:flex-start;
   transition:background 0.3s,transform 0.2s;
 }
-.recruit-btn:hover{background:var(--gold);transform:translateY(-2px)}
+.recruit-btn:hover{background:var(--gold-l);transform:translateY(-2px)}
 
 /* ===== FOOTER ===== */
 .footer{background:var(--ink);padding:48px;color:rgba(255,255,255,0.35);font-size:0.7rem;letter-spacing:0.1em}
@@ -403,13 +424,27 @@ a{text-decoration:none;color:inherit}
   .hero{grid-template-columns:1fr}
   .hero-right{display:none}
   .hero-left{padding:40px 20px 60px}
-  .about,.services,.concept,.voice,.recruit{padding-left:20px;padding-right:20px}
-  .about-layout,.concept-layout,.recruit-layout{grid-template-columns:1fr}
+  .about,.services,.concept,.voice{padding-left:20px;padding-right:20px}
+  .about-layout,.concept-layout{grid-template-columns:1fr}
   .svc-grid,.voice-grid{grid-template-columns:1fr}
   .concept-photos{grid-template-rows:140px 140px}
   .ed-grid-inner{grid-template-columns:1fr}
   .ed-cell.wide{grid-column:span 1}
   .footer{padding:32px 20px}
+  /* recruit mobile — photo full background */
+  .recruit{grid-template-columns:1fr;min-height:520px;position:relative;}
+  .recruit-content{
+    padding:100px 20px 80px;background:transparent;
+    position:relative;z-index:2;
+  }
+  .recruit-photo-panel{position:absolute;inset:0;z-index:0;}
+  .recruit-photo-panel img{object-position:50% 15%;}
+  .recruit-photo-panel::after{
+    content:'';position:absolute;inset:0;z-index:1;
+    background:linear-gradient(160deg,rgba(26,23,20,0.88) 0%,rgba(26,23,20,0.7) 60%,rgba(26,23,20,0.55) 100%);
+  }
+  .recruit-photo-panel::before{display:none}
+  .recruit-big{font-size:clamp(2.4rem,12vw,5rem)}
 }
 </style>
 </head>
@@ -423,7 +458,7 @@ a{text-decoration:none;color:inherit}
     <div class="logo-ring"><span>SG</span></div>
     <span class="logo-wordmark">SAGE GROUP</span>
   </div>
-  <div class="nav-issue">SHIZUOKA × YAMANASHI — SINCE 2022</div>
+  <div class="nav-issue">SHIZUOKA × YAMANASHI × TOKYO — SINCE 2022</div>
   <ul class="nav-links">
     <li><a href="#">ABOUT</a></li>
     <li><a href="#">SERVICE</a></li>
@@ -443,7 +478,7 @@ a{text-decoration:none;color:inherit}
       <span class="hl"><span class="hl-i">どっちも</span></span>
       <span class="hl"><span class="hl-i">本気で。</span></span>
     </h1>
-    <p class="hero-sub">SoftBank・au・docomoの正規代理店として、静岡・山梨エリアで活躍する仲間を募集しています。</p>
+    <p class="hero-sub">モバイルショップ支援・イベントプロモーション・アイラッシュサロンの3事業で、静岡・山梨・東京エリアで活躍する仲間を募集しています。</p>
     <div class="hero-ctas">
       <a href="#" class="btn-fill">採用情報を見る</a>
       <a href="#" class="btn-line">会社を知る</a>
@@ -469,6 +504,7 @@ a{text-decoration:none;color:inherit}
     <span class="ticker-item">DOCOMO PARTNER</span><span class="ticker-dot">◆</span>
     <span class="ticker-item">SHIZUOKA</span><span class="ticker-dot">◆</span>
     <span class="ticker-item">YAMANASHI</span><span class="ticker-dot">◆</span>
+    <span class="ticker-item">TOKYO</span><span class="ticker-dot">◆</span>
     <span class="ticker-item">SINCE 2022</span><span class="ticker-dot">◆</span>
     <span class="ticker-item">SAGE GROUP</span><span class="ticker-dot">◆</span>
     <span class="ticker-item">SOFTBANK PARTNER</span><span class="ticker-dot">◆</span>
@@ -476,6 +512,7 @@ a{text-decoration:none;color:inherit}
     <span class="ticker-item">DOCOMO PARTNER</span><span class="ticker-dot">◆</span>
     <span class="ticker-item">SHIZUOKA</span><span class="ticker-dot">◆</span>
     <span class="ticker-item">YAMANASHI</span><span class="ticker-dot">◆</span>
+    <span class="ticker-item">TOKYO</span><span class="ticker-dot">◆</span>
     <span class="ticker-item">SINCE 2022</span><span class="ticker-dot">◆</span>
   </div>
 </div>
@@ -494,7 +531,7 @@ a{text-decoration:none;color:inherit}
         <strong>どっちも本気で</strong><br>
         いられる職場。
       </h2>
-      <p class="about-body reveal">合同会社SageGroupは2022年、静岡県で創業したキャリアサポート専門集団です。SoftBank・au・docomoの正規販売代理店として、地域のスマートフォンライフを支えながら、スタッフ一人ひとりが輝ける職場づくりを追求しています。推し活も仕事も諦めなくていい、そんな文化を大切に育てています。</p>
+      <p class="about-body reveal">合同会社SageGroupは2022年、静岡県で創業したスタッフィング＆キャリア支援企業です。モバイルショップ支援・イベントプロモーション・アイラッシュサロンの3事業を軸に、静岡・山梨・東京エリアで事業を展開。スタッフ一人ひとりの個性と「好き」を尊重し、推し活も仕事も本気で楽しめる職場づくりを追求しています。</p>
       <div class="reveal">
         <p class="carrier-label">OFFICIAL CARRIER PARTNER</p>
         <div class="carrier-row">
@@ -504,10 +541,16 @@ a{text-decoration:none;color:inherit}
         </div>
       </div>
       <div class="about-photo-strip reveal" style="margin-top:36px">
-        <div class="ps-block" style="aspect-ratio:16/9">PHOTO — SHOP</div>
+        <div class="ps-block" style="aspect-ratio:16/9;overflow:hidden;">
+          <img src="photos/photo_10.jpg" alt="SageGroup workplace" style="width:100%;height:100%;object-fit:cover;object-position:center;">
+        </div>
         <div style="display:flex;flex-direction:column;gap:8px">
-          <div class="ps-block" style="aspect-ratio:1/1">PHOTO</div>
-          <div class="ps-block" style="aspect-ratio:1/1">PHOTO</div>
+          <div class="ps-block" style="aspect-ratio:1/1;overflow:hidden;">
+            <img src="photos/photo_12.jpg" alt="SageGroup representative" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
+          </div>
+          <div class="ps-block" style="aspect-ratio:1/1;overflow:hidden;">
+            <img src="photos/photo_00.jpg" alt="SageGroup team BBQ" style="width:100%;height:100%;object-fit:cover;object-position:center;">
+          </div>
         </div>
       </div>
     </div>
@@ -527,10 +570,10 @@ a{text-decoration:none;color:inherit}
         </div>
       </div>
       <div class="stat-row reveal">
-        <div class="stat-n">2</div>
+        <div class="stat-n">3</div>
         <div>
           <div class="stat-label">エリア</div>
-          <div class="stat-sub">SHIZUOKA + YAMANASHI</div>
+          <div class="stat-sub">SHIZUOKA + YAMANASHI + TOKYO</div>
         </div>
       </div>
       <div class="stat-row reveal">
@@ -548,7 +591,7 @@ a{text-decoration:none;color:inherit}
 <div class="ed-grid">
   <div class="ed-grid-inner reveal">
     <div class="ed-cell wide" style="aspect-ratio:2/1">
-      <div class="ed-cell-bg">PHOTO — MAIN</div>
+      <img src="photos/photo_09.jpg" alt="SageGroup team" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;">
       <div class="ed-cell-label">SageGroup — Working Environment</div>
     </div>
     <div class="ed-text">
@@ -556,15 +599,15 @@ a{text-decoration:none;color:inherit}
       <p>現場のリアルを知ってほしい。楽しく、真剣に、毎日を過ごすスタッフたちの姿。</p>
     </div>
     <div class="ed-cell">
-      <div class="ed-cell-bg">PHOTO</div>
+      <img src="photos/photo_02.jpg" alt="Team dinner" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;">
       <div class="ed-cell-label">Team</div>
     </div>
     <div class="ed-cell">
-      <div class="ed-cell-bg">PHOTO</div>
+      <img src="photos/photo_14.jpg" alt="Carrier shop" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;">
       <div class="ed-cell-label">Store</div>
     </div>
     <div class="ed-cell">
-      <div class="ed-cell-bg">PHOTO</div>
+      <img src="photos/photo_06.jpg" alt="Staff event" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;">
       <div class="ed-cell-label">Event</div>
     </div>
   </div>
@@ -579,21 +622,30 @@ a{text-decoration:none;color:inherit}
   </div>
   <div class="svc-grid stagger">
     <div class="svc-card reveal">
+      <div class="svc-img">
+        <img src="photos/photo_19.jpg" alt="モバイルショップ支援">
+      </div>
       <div class="svc-num">01</div>
-      <h3 class="svc-name">キャリア販売事業</h3>
-      <p class="svc-desc">SoftBank・au・docomoの正規代理店として、スマートフォンや料金プランの提案から端末設定・アフターサポートまでをワンストップで提供します。</p>
+      <h3 class="svc-name">モバイルショップ支援</h3>
+      <p class="svc-desc">SoftBank・au・docomoの正規代理店として、スマートフォンや料金プランの提案から端末設定・アフターサポートまでをワンストップで提供。地域のスマートフォンライフを支えます。</p>
       <span class="svc-link">詳しく見る <span>→</span></span>
     </div>
     <div class="svc-card reveal">
+      <div class="svc-img">
+        <img src="photos/photo_04.jpg" alt="イベントプロモーション">
+      </div>
       <div class="svc-num">02</div>
-      <h3 class="svc-name">人材紹介・採用支援</h3>
-      <p class="svc-desc">推し活と仕事の両立を実現する採用・育成プログラムを展開。柔軟な働き方と充実したサポートで、スタッフの成長を支えます。</p>
+      <h3 class="svc-name">イベントプロモーション</h3>
+      <p class="svc-desc">太陽光をはじめとするエネルギー系イベントのプロモーション活動を展開。静岡・山梨・東京エリアで地域に根ざした販促イベントを企画・運営しています。</p>
       <span class="svc-link">詳しく見る <span>→</span></span>
     </div>
     <div class="svc-card reveal">
+      <div class="svc-img">
+        <img src="photos/photo_03.jpg" alt="アイラッシュサロンRia">
+      </div>
       <div class="svc-num">03</div>
-      <h3 class="svc-name">その他の事業</h3>
-      <p class="svc-desc">地域密着型の新規事業にも積極的に挑戦。スタッフのアイデアを形にし、新しい価値を地域に届けていきます。</p>
+      <h3 class="svc-name">アイラッシュサロン Ria</h3>
+      <p class="svc-desc">静岡市駿河区の完全個室・完全予約制アイラッシュサロン。口コミ平均★4.93・80件以上の実績を誇り、丁寧な施術で一人ひとりの魅力を引き出します。</p>
       <span class="svc-link">詳しく見る <span>→</span></span>
     </div>
   </div>
@@ -619,9 +671,15 @@ a{text-decoration:none;color:inherit}
       </ul>
     </div>
     <div class="concept-photos reveal">
-      <div class="c-photo">PHOTO</div>
-      <div class="c-photo">PHOTO</div>
-      <div class="c-photo wide">PHOTO — WIDE</div>
+      <div class="c-photo" style="overflow:hidden;padding:0;">
+        <img src="photos/photo_15.jpg" alt="推し活" style="width:100%;height:100%;object-fit:cover;object-position:center;">
+      </div>
+      <div class="c-photo" style="overflow:hidden;padding:0;">
+        <img src="photos/photo_13.jpg" alt="SageGroup staff" style="width:100%;height:100%;object-fit:cover;object-position:center;">
+      </div>
+      <div class="c-photo wide" style="overflow:hidden;padding:0;">
+        <img src="photos/photo_00.jpg" alt="SageGroup team outdoor" style="width:100%;height:100%;object-fit:cover;object-position:center;">
+      </div>
     </div>
   </div>
 </section>
@@ -673,24 +731,23 @@ a{text-decoration:none;color:inherit}
 
 <!-- RECRUIT -->
 <section class="recruit" id="recruit">
-  <div class="recruit-layout">
-    <div>
-      <div class="reveal sec-header">
-        <span class="sec-num">— 05</span>
-        <span class="sec-en-sm">RECRUIT</span>
-        <span class="sec-ja-sm">採用情報</span>
-      </div>
-      <h2 class="recruit-big reveal">
-        推しも仕事も、<br>
-        <em>あなたが</em><br>
-        いちばん<br>
-        輝ける場所へ。
-      </h2>
+  <div class="recruit-content">
+    <div class="reveal sec-header" style="border-color:rgba(255,255,255,0.1)">
+      <span class="sec-num" style="color:var(--gold-l)">— 05</span>
+      <span class="sec-en-sm" style="color:rgba(255,255,255,0.7)">RECRUIT</span>
+      <span class="sec-ja-sm" style="color:rgba(255,255,255,0.35)">採用情報</span>
     </div>
-    <div class="recruit-right">
-      <p class="recruit-body reveal">静岡・山梨エリアで一緒にキャリアを築きませんか。経験不問、推し活応援、研修充実。あなたのペースで成長できる環境が整っています。</p>
-      <a href="#" class="recruit-btn reveal">採用情報を見る →</a>
-    </div>
+    <h2 class="recruit-big reveal">
+      推しも仕事も、<br>
+      <em>あなたが</em><br>
+      いちばん<br>
+      輝ける場所へ。
+    </h2>
+    <p class="recruit-body reveal">静岡・山梨・東京エリアで一緒にキャリアを築きませんか。経験不問、推し活応援、研修充実。あなたのペースで成長できる環境が整っています。</p>
+    <a href="#" class="recruit-btn reveal">採用情報を見る →</a>
+  </div>
+  <div class="recruit-photo-panel">
+    <img src="photos/photo_08.jpg" alt="SageGroup recruit">
   </div>
 </section>
 
