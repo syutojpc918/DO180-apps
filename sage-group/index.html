@@ -83,6 +83,8 @@ a{text-decoration:none;color:inherit}
   display:flex;flex-direction:column;
   justify-content:flex-end;
   overflow:hidden;
+  /* ensure content never hides behind fixed nav */
+  padding-top:calc(var(--nav-h) + 20px);
 }
 /* video fills the full hero */
 .hero-video{
@@ -508,13 +510,69 @@ footer{
 @media(max-width:600px){
   :root{--pad:24px}
   .nav-links{display:none}
-  .hero-main{font-size:clamp(3.8rem,16vw,7rem)}
+  /* smaller font on mobile so 4 lines don't overflow behind nav */
+  .hero-main{font-size:clamp(3rem,13vw,5.5rem)}
   .hero-content{padding:0 var(--pad) 48px}
 }
 
 @keyframes ripple{
   from{transform:scale(0);opacity:1}
   to{transform:scale(4);opacity:0}
+}
+
+/* ============================================================
+   PHOTO PLACEHOLDERS
+   ============================================================ */
+.ph{
+  background:var(--cream-d);
+  border:1.5px dashed rgba(154,122,62,0.35);
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  gap:12px;overflow:hidden;
+  position:relative;
+}
+.ph svg{width:28px;height:28px;opacity:0.45;color:var(--gold)}
+.ph-lbl{font-size:0.7rem;letter-spacing:0.1em;color:var(--gold);opacity:0.7}
+/* sizes */
+.ph-tall{aspect-ratio:3/4;width:100%}
+.ph-wide{aspect-ratio:16/9;width:100%}
+.ph-sq{aspect-ratio:1/1;width:100%}
+
+/* ── ABOUT photo ── */
+/* restructure about-right so photo sits above fact cards */
+.about-right{gap:0}
+.about-photo{margin-bottom:20px}
+
+/* ── PHOTO STRIP (between services & concept) ── */
+.photo-strip{
+  background:var(--black);
+  padding:80px var(--pad);
+}
+.photo-strip-head{
+  display:flex;justify-content:space-between;align-items:baseline;
+  margin-bottom:32px;
+}
+.photo-strip-head .sec-tag{color:var(--gold-p);margin-bottom:0}
+.photo-strip-head p{font-size:0.8rem;letter-spacing:0.1em;color:rgba(255,255,255,0.35)}
+.photo-grid-3{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:12px;
+}
+.photo-grid-3 .ph{background:rgba(255,255,255,0.04);border-color:rgba(154,122,62,0.25)}
+.photo-grid-3 .ph svg{color:var(--gold-p)}
+.photo-grid-3 .ph-lbl{color:var(--gold-p)}
+
+/* ── CONCEPT photo ── */
+.concept-photo{margin-bottom:28px}
+
+@media(max-width:960px){
+  .photo-grid-3{grid-template-columns:1fr 1fr}
+  .photo-grid-3 .ph:last-child{grid-column:span 2}
+}
+@media(max-width:600px){
+  .photo-grid-3{grid-template-columns:1fr}
+  .photo-grid-3 .ph:last-child{grid-column:span 1}
 }
 </style>
 </head>
@@ -646,6 +704,17 @@ footer{
     </div>
 
     <div class="about-right reveal" style="transition-delay:0.2s">
+      <!-- 写真エリア① -->
+      <div class="about-photo">
+        <div class="ph ph-wide">
+          <svg viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="2" y="8" width="32" height="22" rx="2"/>
+            <circle cx="18" cy="19" r="6"/>
+            <path d="M13 8l2-4h6l2 4"/>
+          </svg>
+          <span class="ph-lbl">会社・オフィス写真</span>
+        </div>
+      </div>
       <div class="fact-card">
         <div class="fact-icon gold">
           <svg viewBox="0 0 20 20" fill="none" stroke="#9a7a3e" stroke-width="1.5">
@@ -730,6 +799,42 @@ footer{
 </section>
 
 <!-- ============================================================
+     PHOTO STRIP — 写真エリア②（社内の様子）
+     ============================================================ -->
+<section class="photo-strip">
+  <div class="photo-strip-head reveal">
+    <span class="sec-tag">LIFE AT SAGE</span>
+    <p>社内の様子</p>
+  </div>
+  <div class="photo-grid-3 reveal" style="transition-delay:0.1s">
+    <div class="ph ph-wide">
+      <svg viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.5">
+        <rect x="2" y="8" width="32" height="22" rx="2"/>
+        <circle cx="18" cy="19" r="6"/>
+        <path d="M13 8l2-4h6l2 4"/>
+      </svg>
+      <span class="ph-lbl">社内・チーム写真</span>
+    </div>
+    <div class="ph ph-wide">
+      <svg viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.5">
+        <rect x="2" y="8" width="32" height="22" rx="2"/>
+        <circle cx="18" cy="19" r="6"/>
+        <path d="M13 8l2-4h6l2 4"/>
+      </svg>
+      <span class="ph-lbl">現場・仕事風景</span>
+    </div>
+    <div class="ph ph-wide">
+      <svg viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.5">
+        <rect x="2" y="8" width="32" height="22" rx="2"/>
+        <circle cx="18" cy="19" r="6"/>
+        <path d="M13 8l2-4h6l2 4"/>
+      </svg>
+      <span class="ph-lbl">イベント・活動写真</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
      CONCEPT
      ============================================================ -->
 <section class="concept" id="concept">
@@ -743,6 +848,17 @@ footer{
       <div class="oshi-badge">✨ 推し活支援制度あります</div>
     </div>
     <div class="concept-right reveal" style="transition-delay:0.2s">
+      <!-- 写真エリア③ -->
+      <div class="concept-photo">
+        <div class="ph ph-wide" style="background:rgba(255,255,255,0.04);border-color:rgba(154,122,62,0.25)">
+          <svg viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--gold-p)">
+            <rect x="2" y="8" width="32" height="22" rx="2"/>
+            <circle cx="18" cy="19" r="6"/>
+            <path d="M13 8l2-4h6l2 4"/>
+          </svg>
+          <span class="ph-lbl" style="color:var(--gold-p)">ライフスタイル写真</span>
+        </div>
+      </div>
       <p class="closing">好きなことを、<br>諦めなくていい。</p>
       <div class="value-list">
         <div class="value-item">
@@ -773,7 +889,7 @@ footer{
   <div class="recruit-grid">
     <div class="recruit-left reveal">
       <span class="sec-tag">RECRUITMENT</span>
-      <h2 class="sec-en">あなたが「いい」と<br>思えたなら、<br>それがスタート。</h2>
+      <h2 class="sec-en" style="word-break:keep-all;font-size:clamp(2rem,4.5vw,4.5rem)">あなたが<br>「いい」と思えたなら、<br>それがスタート。</h2>
       <p class="sec-ja">採用情報</p>
       <div class="gold-bar"></div>
       <p><strong>学歴も、職歴も、関係ありません。</strong></p>
