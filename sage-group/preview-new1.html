@@ -311,12 +311,6 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
 .life-cell:hover img{transform:scale(1.06)}
 .life-cell.span-2{grid-row:span 2}
 
-/* ===== RECRUIT BG PHOTO ===== */
-.recruit-photo{
-  position:absolute;right:0;bottom:0;top:0;width:38%;
-  overflow:hidden;opacity:0.18;
-}
-.recruit-photo img{width:100%;height:100%;object-fit:cover;object-position:top}
 .concept-photo{
   background:var(--black);aspect-ratio:4/3;border-radius:6px;
   overflow:hidden;
@@ -324,13 +318,32 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
 .concept-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.45s ease}
 .concept-photo:hover img{transform:scale(1.04)}
 
-/* ===== RECRUIT (dark diagonal) ===== */
+/* ===== RECRUIT (photo background) ===== */
 .recruit{
-  background:var(--black);
-  padding:120px 64px;
-  clip-path:polygon(0 0,100% 0,100% 92%,0 100%);
+  padding:140px 64px;
   position:relative;overflow:hidden;
+  min-height:600px;
+  display:flex;flex-direction:column;justify-content:center;
+  clip-path:polygon(0 0,100% 0,100% 92%,0 100%);
 }
+/* full-bleed background photo */
+.recruit-bg{
+  position:absolute;inset:0;z-index:0;
+}
+.recruit-bg img{
+  width:100%;height:100%;object-fit:cover;object-position:center top;display:block;
+}
+/* dark overlay for text legibility */
+.recruit-bg::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(
+    105deg,
+    rgba(26,23,20,0.82) 0%,
+    rgba(26,23,20,0.72) 50%,
+    rgba(26,23,20,0.45) 100%
+  );
+}
+.recruit > *:not(.recruit-bg){position:relative;z-index:1}
 .recruit .sec-en{color:var(--white)}
 .recruit .sec-ja{color:var(--gold-l)}
 .recruit-head{
@@ -341,14 +354,15 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
   word-break:keep-all;
 }
 .recruit-head em{color:var(--gold-l);font-style:normal}
-.recruit-sub{font-size:0.92rem;line-height:2;color:rgba(255,255,255,0.65);max-width:560px;margin-bottom:48px}
+.recruit-sub{font-size:0.92rem;line-height:2;color:rgba(255,255,255,0.72);max-width:560px;margin-bottom:48px}
 .recruit-btn{
   display:inline-block;padding:18px 56px;
-  border:1.5px solid var(--gold-l);color:var(--gold-l);
+  background:var(--gold);color:#fff;
   font-size:0.76rem;letter-spacing:0.22em;border-radius:2px;
-  transition:background 0.35s,color 0.35s,transform 0.2s;
+  border:1.5px solid var(--gold);
+  transition:background 0.35s,transform 0.2s;
 }
-.recruit-btn:hover{background:var(--gold);border-color:var(--gold);color:#fff;transform:translateY(-2px)}
+.recruit-btn:hover{background:var(--gold-l);border-color:var(--gold-l);transform:translateY(-2px)}
 
 /* ===== FOOTER ===== */
 .footer{background:var(--black);padding:64px;color:rgba(255,255,255,0.4);font-size:0.72rem;letter-spacing:0.1em}
@@ -362,13 +376,16 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
   .nav-links{display:none}
   .hero-content{padding:0 20px 60px}
   .hero-title{font-size:clamp(2.8rem,11vw,5rem)}
-  .about,.services,.concept,.life,.recruit{padding-left:20px;padding-right:20px}
+  .about,.services,.concept,.life{padding-left:20px;padding-right:20px}
+  .recruit{padding:100px 20px;min-height:520px}
   .about-grid,.concept-grid{grid-template-columns:1fr}
   .svc-grid{grid-template-columns:1fr}
   .about-photo{grid-template-columns:1fr}
   .life-grid{grid-template-columns:1fr;grid-template-rows:auto}
   .life-cell.span-2{grid-row:auto}
   .footer{padding:40px 20px}
+  /* recruit photo always full bleed on mobile */
+  .recruit-bg img{object-position:50% 20%}
 }
 </style>
 </head>
@@ -450,15 +467,14 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
         <div class="gold-bar"></div>
       </div>
       <div class="reveal">
-        <p>合同会社SageGroupは2022年、静岡県で創業したキャリアサポート専門集団です。SoftBank・au・docomoの正規販売代理店として、地域のスマートフォンライフを支えながら、推し活も仕事もどちらも諦めないライフスタイルを実現できる職場環境をつくっています。</p>
-        <p>静岡・山梨を中心に約21名のスタッフが活躍中。現場を楽しみながら成長できる仕組みと、スタッフを主役にする文化が私たちの原点です。</p>
+        <p>合同会社SageGroupは2022年、静岡県で創業した人材・販売支援の専門集団です。モバイルショップ支援・イベントプロモーション・アイラッシュサロン運営の3事業を展開。推し活も仕事もどちらも諦めないライフスタイルを実現できる職場環境をつくっています。</p>
+        <p>静岡・愛知・東京の3拠点に約21名のスタッフが活躍中。現場を楽しみながら成長できる仕組みと、スタッフを主役にする文化が私たちの原点です。</p>
       </div>
       <div class="carrier-block reveal">
-        <p class="carrier-label">OFFICIAL CARRIER PARTNER</p>
+        <p class="carrier-label">CARRIER PARTNER</p>
         <div class="carrier-row">
           <span class="carrier-badge">SoftBank</span>
-          <span class="carrier-badge">au</span>
-          <span class="carrier-badge">docomo</span>
+          <span class="carrier-badge">楽天モバイル</span>
         </div>
       </div>
     </div>
@@ -481,10 +497,10 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
         </div>
       </div>
       <div class="fact-card reveal">
-        <div class="fact-num">2</div>
+        <div class="fact-num">3</div>
         <div class="fact-info">
           <div class="fval">活動エリア</div>
-          <div class="fdesc">静岡・山梨</div>
+          <div class="fdesc">静岡・愛知・東京</div>
         </div>
       </div>
       <div class="fact-card reveal">
@@ -522,27 +538,27 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
   <div class="svc-grid stagger">
     <div class="svc-card reveal">
       <div class="svc-img">
-        <img src="photos/photo_14.jpg" alt="キャリアショップでの接客">
+        <img src="photos/photo_19.jpg" alt="モバイルショップ支援">
       </div>
       <div class="svc-num">01</div>
-      <h3 class="svc-name">キャリア販売事業</h3>
-      <p class="svc-desc">SoftBank・au・docomoの正規代理店として、スマートフォンや料金プランの提案から端末の設定・アフターサポートまでをワンストップで提供します。</p>
+      <h3 class="svc-name">モバイルショップ支援</h3>
+      <p class="svc-desc">SoftBank・楽天モバイルをはじめとするキャリアショップへの人材派遣・販売サポート。採用から教育・現場フォローまで一貫して対応し、店舗の売上向上を支援します。</p>
     </div>
     <div class="svc-card reveal">
       <div class="svc-img">
-        <img src="photos/photo_03.jpg" alt="Riaエステ事業 施術">
+        <img src="photos/photo_04.jpg" alt="イベントプロモーション">
       </div>
       <div class="svc-num">02</div>
-      <h3 class="svc-name">美容・エステ事業 (Ria)</h3>
-      <p class="svc-desc">まつ毛エクステ専門サロン「Ria」を運営。推し活を楽しむスタッフが、お客様の美しさを全力でサポートします。</p>
+      <h3 class="svc-name">イベントプロモーション</h3>
+      <p class="svc-desc">太陽光発電をはじめとした販促イベントの企画・運営・スタッフ手配を一貫してサポート。豊富な現場経験を持つスタッフが、アポイント獲得から成約までをエスコートします。</p>
     </div>
     <div class="svc-card reveal">
       <div class="svc-img">
-        <img src="photos/photo_04.jpg" alt="店頭イベント・販促活動">
+        <img src="photos/photo_03.jpg" alt="eyelash salon Ria">
       </div>
       <div class="svc-num">03</div>
-      <h3 class="svc-name">その他の事業</h3>
-      <p class="svc-desc">店頭イベントや地域密着型の新規事業にも積極的に挑戦。スタッフのアイデアや情熱を事業化し、新しい価値を地域に届けていきます。</p>
+      <h3 class="svc-name">アイラッシュサロン（Ria）</h3>
+      <p class="svc-desc">静岡市駿河区にて「eyelash salon Ria」を自社運営。完全個室・完全予約制で、丁寧なカウンセリングと確かな技術でお客様の理想の目元を叶えます。口コミ評価★4.93（80件以上）。</p>
     </div>
   </div>
 </section>
@@ -608,6 +624,9 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
 
 <!-- RECRUIT -->
 <section class="recruit" id="recruit">
+  <div class="recruit-bg">
+    <img src="photos/photo_08.jpg" alt="採用活動">
+  </div>
   <div class="reveal">
     <span class="sec-tag" style="color:var(--gold-l)">JOIN US</span>
     <h2 class="sec-en" style="color:var(--white)">RECRUIT</h2>
@@ -620,13 +639,10 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
     いちばん輝ける場所へ。
   </h3>
   <p class="recruit-sub reveal">
-    静岡・山梨エリアで一緒にキャリアを築きませんか。経験不問、推し活応援、研修充実。<br>
+    静岡・愛知・東京エリアで一緒にキャリアを築きませんか。経験不問、推し活応援、研修充実。<br>
     あなたのペースで成長できる環境が整っています。
   </p>
   <a href="#" class="recruit-btn reveal">採用情報を見る &nbsp;→</a>
-  <div class="recruit-photo">
-    <img src="photos/photo_08.jpg" alt="採用活動">
-  </div>
 </section>
 
 <!-- FOOTER -->
