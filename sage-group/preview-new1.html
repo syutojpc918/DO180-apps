@@ -171,30 +171,53 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
 .gold-bar.vis{width:80px}
 
 /* ===== ABOUT (off-white + diagonal) ===== */
-.about{
-  background:var(--off);padding:100px 64px;
+.about{background:var(--off)}
+.about-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  min-height:680px;
 }
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.about-left{
+  background:#1d3526;
+  padding:80px 64px;
+  position:relative;overflow:hidden;
+  display:flex;flex-direction:column;justify-content:center;
+}
+/* 縦ゴールドライン装飾 */
+.about-left::before{
+  content:'';position:absolute;
+  left:26px;top:80px;bottom:80px;
+  width:1px;background:rgba(184,150,90,0.35);
+}
+.about-left::after{
+  content:'';position:absolute;
+  left:30px;top:80px;height:60px;
+  width:1px;background:var(--gold-l);
+}
+.about .sec-tag{color:rgba(184,150,90,0.75)}
+.about .sec-en{color:#fff}
+.about .sec-ja{color:rgba(255,255,255,0.45)}
 .about-copy{
   font-size:clamp(1.3rem,2.4vw,2.2rem);
   font-weight:400;line-height:1.7;
-  color:var(--black);margin-bottom:40px;
+  color:#fff;margin-bottom:40px;
 }
-.about-left p:not(.about-copy){font-size:1.05rem;line-height:2.1;color:var(--body)}
+.copy-line{display:block;}
+.copy-line:nth-child(2){transition-delay:0.18s}
+.copy-line:nth-child(3){transition-delay:0.36s}
+.about-left p:not(.about-copy){
+  font-size:1.0rem;line-height:2.1;
+  color:rgba(255,255,255,0.62);
+}
 .about-left p+p{margin-top:20px}
-.carrier-block{margin-top:36px}
-.carrier-label{font-size:0.66rem;letter-spacing:0.28em;color:var(--sage);margin-bottom:12px}
-.carrier-row{display:flex;gap:10px;flex-wrap:wrap}
-.carrier-badge{
-  padding:7px 18px;border:1.5px solid var(--gold-p);
-  font-size:0.78rem;letter-spacing:0.08em;color:var(--gold);
-  background:var(--white);font-weight:500;
-  border-radius:2px;transition:background 0.3s,color 0.3s;
+.about-right{position:relative;overflow:hidden;}
+.about-photo-stack{
+  position:absolute;inset:0;border-radius:0;
 }
-.carrier-badge:hover{background:var(--gold);color:#fff}
-.about-right{display:flex;flex-direction:column;gap:14px}
-.about-photo-stack{width:100%;overflow:hidden;border-radius:6px;}
-.about-photo-stack img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.5s ease;}
+.about-photo-stack img{
+  width:100%;height:100%;object-fit:cover;
+  object-position:center;display:block;
+  transition:transform 0.8s ease;
+}
 .about-photo-stack:hover img{transform:scale(1.03);}
 
 
@@ -360,7 +383,7 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
   .nav-links{display:none}
   .hero-content{padding:0 20px 60px}
   .hero-title{font-size:clamp(2.8rem,11vw,5rem)}
-  .about,.services,.concept,.life{padding-left:20px;padding-right:20px}
+  .services,.concept,.life{padding-left:20px;padding-right:20px}
   /* モバイル：recruitを写真フル背景に切り替え */
   .recruit{
     grid-template-columns:1fr;
@@ -386,6 +409,9 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
   /* 左→右グラデ不要（モバイルは縦） */
   .recruit-photo-panel::before{display:none}
   .about-grid,.concept-grid{grid-template-columns:1fr}
+  .about-left{padding:60px 24px}
+  .about-left::before,.about-left::after{left:14px}
+  .about-right{height:280px;position:relative}
   .svc-grid{grid-template-columns:1fr}
   .life-grid{grid-template-columns:1fr;grid-template-rows:auto}
   .life-cell.span-2{grid-row:auto}
@@ -471,7 +497,11 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
         <p class="sec-ja">私たちについて</p>
         <div class="gold-bar"></div>
       </div>
-      <p class="about-copy reveal">「自分にできるかな」<br>なんて思わなくていい。<br>一緒に楽しもう。</p>
+      <p class="about-copy">
+        <span class="copy-line reveal">「自分にできるかな」</span>
+        <span class="copy-line reveal">なんて思わなくていい。</span>
+        <span class="copy-line reveal">一緒に楽しもう。</span>
+      </p>
       <div class="reveal">
         <p>合同会社SageGroupは2022年、静岡県で創業しました。社名"Sage"には花言葉の「家族愛」「チームワーク」「堅実さ」という意味を込めており、みんなで助け合いながら一人ひとりが着実に歩んでいける集団を目指しています。</p>
         <p>その文化はスタッフ自身の言葉にも表れています。「相談がしやすすぎる」「友達と仕事してる感覚で楽しすぎる」——定期的な食事会やイベントで一体感を育みながら、自分らしく自由に働ける職場をつくってきました。</p>
