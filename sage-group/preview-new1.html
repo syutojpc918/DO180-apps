@@ -195,11 +195,13 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
 @keyframes wm-in{to{opacity:0.03}}
 .about-watermark{animation:wm-in 2.5s ease 1s forwards}
 /* ラベル行 */
-.about-label{
-  display:flex;align-items:center;gap:20px;
-  margin-bottom:44px;
+.about-label{margin-bottom:44px}
+.about-label .sec-tag{display:block;margin-bottom:6px}
+.about-label .sec-ja-sm{
+  display:block;font-size:0.76rem;
+  color:var(--body);margin-bottom:16px;
 }
-.about-label .gold-bar{margin:0;flex-shrink:0}
+.about-label .gold-bar{margin:0}
 /* ヘッドライン：各行スライドアップ */
 .ah-line{
   display:block;overflow:hidden;
@@ -252,12 +254,16 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
   padding-bottom:6px;transition:gap 0.3s,border-color 0.3s;
 }
 .about-cta-link:hover{gap:16px;border-color:var(--gold)}
-/* 右カラム：写真フルハイト */
-.about-right{position:relative;overflow:hidden;}
-.about-right img{
+/* 右カラム：写真2枚縦並び */
+.about-right{
+  display:grid;grid-template-rows:60fr 40fr;
+  overflow:hidden;
+}
+.about-right-photo{position:relative;overflow:hidden;}
+.about-right-photo img{
   position:absolute;inset:0;
   width:100%;height:105%;
-  object-fit:cover;object-position:center top;
+  object-fit:cover;object-position:center;
   transition:transform 0.1s linear;
 }
 
@@ -538,7 +544,7 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
 
       <div class="about-label reveal">
         <span class="sec-tag">ABOUT US</span>
-        <span class="sec-ja" style="color:var(--body);font-size:0.76rem">私たちについて</span>
+        <span class="sec-ja-sm">私たちについて</span>
         <div class="gold-bar"></div>
       </div>
 
@@ -575,9 +581,14 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
       <a href="#recruit" class="about-cta-link reveal">採用情報を見る →</a>
     </div>
 
-    <!-- 右カラム：写真フルハイト -->
+    <!-- 右カラム：写真2枚縦並び -->
     <div class="about-right">
-      <img src="photos/photo_00.jpg" alt="SageGroupチーム">
+      <div class="about-right-photo">
+        <img src="photos/photo_14.jpg" alt="キャリアショップ接客">
+      </div>
+      <div class="about-right-photo">
+        <img src="photos/photo_00.jpg" alt="SageGroupチーム">
+      </div>
     </div>
   </div>
 </section>
@@ -736,14 +747,14 @@ const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>40)},{passive:true});
 
 /* ===== ABOUT PHOTO PARALLAX ===== */
-const aboutImg=document.querySelector('.about-right img');
-window.addEventListener('scroll',()=>{
-  if(!aboutImg)return;
-  const rect=aboutImg.closest('.about-right').getBoundingClientRect();
-  const pct=(1-rect.top/window.innerHeight)*0.5;
-  const shift=Math.max(-12,Math.min(12,pct*24-12));
-  aboutImg.style.transform=`translateY(${shift}px)`;
-},{passive:true});
+document.querySelectorAll('.about-right-photo img').forEach(img=>{
+  window.addEventListener('scroll',()=>{
+    const rect=img.closest('.about-right-photo').getBoundingClientRect();
+    const pct=(1-rect.top/window.innerHeight)*0.5;
+    const shift=Math.max(-10,Math.min(10,pct*20-10));
+    img.style.transform=`translateY(${shift}px)`;
+  },{passive:true});
+});
 
 /* ===== INTERSECTION OBSERVER ===== */
 const io=new IntersectionObserver(entries=>{
