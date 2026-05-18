@@ -219,11 +219,11 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
 .bg-line.vis{width:var(--w,140px);}
 .bg-line.vert.vis{height:var(--h,140px);}
 /* ラベル行 */
-.about-label{margin-bottom:44px}
-.about-label .sec-tag{display:block;margin-bottom:6px}
+.about-label{margin-bottom:44px;position:relative;z-index:2;}
+.about-label .sec-tag{display:block;margin-bottom:6px;font-weight:600;color:var(--gold)}
 .about-label .sec-ja-sm{
-  display:block;font-size:0.76rem;
-  color:var(--body);margin-bottom:16px;
+  display:block;font-size:0.82rem;font-weight:600;
+  color:var(--black);margin-bottom:16px;
 }
 .about-label .gold-bar{margin:0}
 /* ヘッドライン：各行スライドアップ */
@@ -649,14 +649,9 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
 
 <!-- ABOUT -->
 <section class="about" id="about">
-  <span class="bg-shape circle ring-thick" style="width:220px;height:220px;top:5%;left:40%;animation:float-a 11s ease-in-out infinite"></span>
-  <span class="bg-shape circle" style="width:110px;height:110px;bottom:10%;left:28%;animation:float-b 13s ease-in-out infinite"></span>
-  <span class="bg-shape circle" style="width:60px;height:60px;top:55%;left:48%;animation:float-c 9s ease-in-out infinite"></span>
-  <span class="bg-shape dot" style="width:14px;height:14px;top:18%;left:8%;animation:float-c 9s ease-in-out infinite"></span>
-  <span class="bg-shape dot" style="width:10px;height:10px;bottom:30%;left:18%;animation:float-a 12s ease-in-out infinite"></span>
-  <span class="bg-line reveal" style="top:80px;left:0;--w:220px"></span>
-  <span class="bg-line vert reveal" style="top:0;left:46%;--h:280px"></span>
-  <span class="bg-line reveal" style="bottom:120px;left:30%;--w:140px"></span>
+  <span class="bg-shape circle" style="width:90px;height:90px;bottom:10%;left:12%;animation:float-b 13s ease-in-out infinite"></span>
+  <span class="bg-shape dot" style="width:10px;height:10px;bottom:30%;left:6%;animation:float-a 12s ease-in-out infinite"></span>
+  <span class="bg-line reveal" style="bottom:120px;left:8%;--w:140px"></span>
   <div class="about-inner">
     <!-- 左カラム -->
     <div class="about-left">
