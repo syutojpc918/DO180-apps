@@ -396,6 +396,7 @@ body.nav-locked{overflow:hidden}
 }
 .concept .sec-en{color:var(--black)}
 .concept .sec-ja{color:var(--body)}
+.sp-only{display:none}
 .concept-quote{
   font-family:'Cormorant Garamond',serif;font-style:italic;
   font-size:clamp(1.6rem,2.8vw,2.4rem);
@@ -626,8 +627,9 @@ body.nav-locked{overflow:hidden}
   /* WHO WE ARE：引用の不自然な改行を解消 */
   .concept-grid{grid-template-columns:1fr;gap:48px}
   .concept-visual::before{top:12px;left:12px;right:-12px;bottom:-12px}
-  .concept-quote{font-size:1.15rem;padding-left:22px;line-height:1.5}
+  .concept-quote{font-size:1.15rem;padding-left:22px;line-height:1.5;word-break:keep-all;overflow-wrap:break-word}
   .concept-quote::before{font-size:3rem;top:-14px}
+  .sp-only{display:inline}
 
   /* SERVICES */
   .svc-grid{grid-template-columns:1fr}
@@ -869,7 +871,7 @@ body.nav-locked{overflow:hidden}
         <div class="gold-bar"></div>
       </div>
       <div class="reveal">
-        <p class="concept-quote">好きなことを諦めない、だから仕事にも本気になれる。</p>
+        <p class="concept-quote">好きなことを諦めない、<br class="sp-only">だから仕事にも本気になれる。</p>
         <p class="concept-lead">推し活を楽しむことで仕事へのエネルギーが増す——そんな好循環を当たり前にしたい。SageGroupはスタッフ一人ひとりの「好き」を尊重し、仕事もプライベートも両立できる職場をつくっています。</p>
         <ul class="concept-vals">
           <li>推し活応援・シフト融通OK</li>
