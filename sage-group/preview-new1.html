@@ -360,6 +360,11 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
   top:24px;left:24px;right:-24px;bottom:-24px;
   border:2px solid var(--gold);
   z-index:1;pointer-events:none;
+  animation:frame-drift 7s ease-in-out infinite;
+}
+@keyframes frame-drift{
+  0%,100%{transform:translate(0,0) rotate(0)}
+  50%{transform:translate(-10px,-10px) rotate(0.4deg)}
 }
 .concept .sec-en{color:var(--black)}
 .concept .sec-ja{color:var(--body)}
@@ -709,15 +714,11 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
 
 <!-- CONCEPT (editorial pull-quote) -->
 <section class="concept" id="concept">
-  <span class="bg-shape circle ring-thick" style="width:240px;height:240px;top:6%;right:10%;animation:float-a 13s ease-in-out infinite"></span>
-  <span class="bg-shape circle" style="width:130px;height:130px;bottom:8%;right:38%;animation:float-b 11s ease-in-out infinite"></span>
   <span class="bg-shape circle" style="width:80px;height:80px;top:50%;right:4%;animation:float-c 10s ease-in-out infinite"></span>
-  <span class="bg-shape dot" style="width:16px;height:16px;top:22%;right:42%;animation:float-c 9s ease-in-out infinite"></span>
-  <span class="bg-shape dot" style="width:12px;height:12px;bottom:24%;right:8%;animation:float-a 12s ease-in-out infinite"></span>
-  <span class="bg-shape dot" style="width:10px;height:10px;top:38%;left:38%;animation:float-b 14s ease-in-out infinite"></span>
-  <span class="bg-line reveal" style="top:80px;right:0;--w:240px"></span>
-  <span class="bg-line reveal" style="bottom:80px;right:20%;--w:180px"></span>
-  <span class="bg-line vert reveal" style="top:0;right:38%;--h:220px"></span>
+  <span class="bg-shape dot" style="width:12px;height:12px;bottom:24%;right:6%;animation:float-a 12s ease-in-out infinite"></span>
+  <span class="bg-shape dot" style="width:10px;height:10px;top:10%;left:38%;animation:float-b 14s ease-in-out infinite"></span>
+  <span class="bg-line reveal" style="top:80px;right:0;--w:200px"></span>
+  <span class="bg-line reveal" style="bottom:80px;right:0;--w:160px"></span>
   <div class="concept-grid">
     <div class="concept-visual reveal">
       <img src="photos/photo_15.jpg" alt="推し活を楽しむスタッフ">
