@@ -6,7 +6,7 @@
 <title>社員の声 | 合同会社SageGroup</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,500;0,600;1,300;1,500;1,600&family=Noto+Sans+JP:wght@300;400;500;700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Caveat:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,500;0,600;1,300;1,500;1,600&family=Klee+One:wght@400;600&family=Noto+Sans+JP:wght@300;400;500;700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -130,17 +130,19 @@ a{text-decoration:none;color:inherit}
   position:relative;overflow:hidden;
 }
 .ceo-wm{
-  position:absolute;font-family:'Playfair Display',serif;font-style:italic;
-  font-size:clamp(8rem,18vw,18rem);
-  color:rgba(154,122,62,0.04);
-  bottom:-4%;right:-2%;letter-spacing:-0.02em;
-  pointer-events:none;user-select:none;line-height:0.9;
+  position:absolute;font-family:'Caveat',cursive;
+  font-size:clamp(10rem,22vw,22rem);
+  color:rgba(154,122,62,0.05);
+  bottom:-6%;right:-2%;letter-spacing:-0.02em;
+  pointer-events:none;user-select:none;line-height:0.9;font-weight:500;
+  transform:rotate(-4deg);
 }
 .ceo-inner{max-width:1280px;margin:0 auto;position:relative;z-index:1}
 .ceo-header{margin-bottom:64px;max-width:520px}
 .ceo-grid{
-  display:grid;grid-template-columns:0.7fr 1.3fr;gap:80px;align-items:start;
+  display:grid;grid-template-columns:0.85fr 1.15fr;gap:80px;align-items:start;
 }
+.ceo-photo-col{position:sticky;top:calc(var(--nav-h) + 40px)}
 .ceo-photo{
   position:relative;aspect-ratio:3/4;
 }
@@ -148,11 +150,14 @@ a{text-decoration:none;color:inherit}
   width:100%;height:100%;
   background:linear-gradient(135deg,var(--cream-mid),var(--cream-deep));
   display:flex;align-items:center;justify-content:center;
-  position:relative;z-index:1;
+  position:relative;z-index:1;overflow:hidden;
 }
-.ceo-photo-frame span{
+.ceo-photo-frame img{
+  width:100%;height:100%;object-fit:cover;display:block;
+}
+.ceo-photo-frame .ph-fallback{
   font-family:'Playfair Display',serif;font-style:italic;
-  font-size:1.4rem;color:var(--gold);opacity:0.5;
+  font-size:1.4rem;color:var(--gold);opacity:0.5;text-align:center;line-height:1.6;
 }
 .ceo-photo::before{
   content:'';position:absolute;
@@ -165,31 +170,91 @@ a{text-decoration:none;color:inherit}
   padding:10px 20px;font-family:'Bebas Neue',sans-serif;
   font-size:0.75rem;letter-spacing:0.2em;z-index:2;
 }
-.ceo-content{padding-top:8px}
+.ceo-photo-note{
+  position:absolute;top:-18px;left:-24px;z-index:3;
+  font-family:'Caveat',cursive;font-size:1.4rem;
+  color:var(--gold);transform:rotate(-6deg);
+  background:var(--white);padding:4px 14px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+.ceo-content{padding-top:8px;position:relative}
 .ceo-eyebrow{
   font-family:'Bebas Neue',sans-serif;font-size:0.7rem;
-  letter-spacing:0.3em;color:var(--gold);margin-bottom:16px;
+  letter-spacing:0.3em;color:var(--gold);margin-bottom:8px;
   display:flex;align-items:center;gap:14px;
 }
 .ceo-eyebrow::before{content:'';display:block;width:32px;height:1px;background:var(--gold)}
+.ceo-date{
+  font-family:'Caveat',cursive;font-size:1.2rem;color:var(--body);
+  opacity:0.6;margin-bottom:28px;display:block;
+  transform:rotate(-1deg);transform-origin:left;
+}
 .ceo-quote{
   font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500;
   font-size:clamp(1.6rem,2.8vw,2.4rem);
   color:var(--black);line-height:1.45;
-  margin-bottom:36px;
+  margin-bottom:40px;
 }
 .ceo-quote::before{
   content:'\201C';font-size:4rem;color:var(--gold);
   display:block;line-height:0.8;margin-bottom:8px;font-family:'Playfair Display',serif;
 }
-.ceo-body{font-size:0.92rem;line-height:2.2;color:var(--body);margin-bottom:18px;letter-spacing:0.04em}
+.ceo-greeting{
+  font-family:'Klee One',serif;font-size:1.05rem;
+  color:var(--black);line-height:1.9;margin-bottom:28px;
+  font-weight:600;letter-spacing:0.02em;
+}
+.ceo-body{font-size:0.92rem;line-height:2.2;color:var(--body);margin-bottom:20px;letter-spacing:0.04em}
+.ceo-body strong{color:var(--gold);font-weight:700;background:linear-gradient(transparent 65%,rgba(154,122,62,0.18) 65%);padding:0 2px}
+.ceo-callout{
+  margin:36px 0;padding:24px 28px 24px 32px;
+  background:var(--cream);border-left:3px solid var(--gold);
+  position:relative;
+}
+.ceo-callout-mark{
+  position:absolute;top:-18px;left:18px;
+  font-family:'Caveat',cursive;font-size:1.4rem;
+  color:var(--gold);background:var(--white);
+  padding:2px 12px;transform:rotate(-3deg);
+}
+.ceo-callout-text{
+  font-family:'Klee One',serif;font-size:1rem;
+  color:var(--black);line-height:1.85;font-weight:600;
+}
+.ceo-ps{
+  margin-top:36px;padding:20px 0;
+  border-top:1px dashed var(--gold);
+  font-family:'Caveat',cursive;font-size:1.4rem;
+  color:var(--black);line-height:1.5;
+  transform:rotate(-0.5deg);transform-origin:left;
+}
+.ceo-ps strong{
+  color:var(--gold);font-weight:700;margin-right:6px;
+}
 .ceo-sign{
-  display:flex;align-items:center;gap:18px;margin-top:32px;padding-top:24px;
+  display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:18px;
+  margin-top:48px;padding-top:32px;
   border-top:1px solid var(--gray);
 }
-.ceo-sign-line{
-  font-family:'Playfair Display',serif;font-style:italic;
-  font-size:1.6rem;color:var(--black);
+.ceo-sign-left{display:flex;align-items:flex-end;gap:22px}
+.ceo-sign-stamp{
+  width:64px;height:64px;border-radius:50%;
+  border:2px solid var(--gold);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Caveat',cursive;font-size:1rem;
+  color:var(--gold);transform:rotate(-8deg);
+  background:var(--white);
+}
+.ceo-sign-name{
+  font-family:'Caveat',cursive;font-weight:700;
+  font-size:2.4rem;color:var(--black);
+  line-height:1;margin-bottom:6px;
+  transform:rotate(-1.5deg);transform-origin:left;
+  display:inline-block;
+}
+.ceo-sign-jp{
+  font-family:'Klee One',serif;font-size:0.95rem;
+  color:var(--body);margin-bottom:4px;
 }
 .ceo-sign-role{font-family:'Bebas Neue',sans-serif;font-size:0.7rem;letter-spacing:0.2em;color:var(--gold)}
 
@@ -433,10 +498,18 @@ a{text-decoration:none;color:inherit}
   .voice-hero-photo.p3{width:52%}
   .voice-hero-meta{flex-wrap:wrap;gap:18px}
   .ceo{padding:72px 20px}
-  .ceo-grid{grid-template-columns:1fr;gap:64px}
+  .ceo-grid{grid-template-columns:1fr;gap:48px}
+  .ceo-photo-col{position:static}
   .ceo-photo{max-width:280px;margin:0 auto}
   .ceo-photo-cap{right:auto;left:50%;transform:translateX(-50%)}
+  .ceo-photo-note{left:-12px}
   .ceo-quote{font-size:1.3rem;padding-left:0;text-align:left}
+  .ceo-greeting{font-size:0.95rem}
+  .ceo-callout{padding:20px 22px;margin:28px 0}
+  .ceo-callout-text{font-size:0.92rem}
+  .ceo-ps{font-size:1.15rem}
+  .ceo-sign{flex-direction:column;align-items:flex-start;gap:14px}
+  .ceo-sign-name{font-size:2rem}
   .interview-intro{padding:72px 20px 56px}
   .interview-feature{padding:72px 20px}
   .if-inner,.if-inner.layout-a,.if-inner.layout-b{grid-template-columns:1fr;gap:56px}
@@ -519,7 +592,7 @@ a{text-decoration:none;color:inherit}
 
 <!-- CEO MESSAGE -->
 <section class="ceo" id="ceo">
-  <div class="ceo-wm">Letter from CEO</div>
+  <div class="ceo-wm">Dear you,</div>
   <div class="ceo-inner">
     <div class="ceo-header reveal">
       <span class="sec-tag">MESSAGE FROM CEO</span>
@@ -528,20 +601,53 @@ a{text-decoration:none;color:inherit}
     </div>
     <div class="ceo-grid">
       <div class="reveal-l">
-        <div class="ceo-photo">
-          <div class="ceo-photo-frame"><span>古賀 賢弥<br>CEO</span></div>
-          <div class="ceo-photo-cap">FOUNDER &amp; CEO</div>
+        <div class="ceo-photo-col">
+          <div class="ceo-photo">
+            <div class="ceo-photo-note">to you ✦</div>
+            <div class="ceo-photo-frame">
+              <img src="ceo.jpg" alt="代表取締役 古賀 賢弥" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="ph-fallback" style="display:none;width:100%;height:100%;align-items:center;justify-content:center">古賀 賢弥<br>CEO</div>
+            </div>
+            <div class="ceo-photo-cap">FOUNDER &amp; CEO</div>
+          </div>
         </div>
       </div>
       <div class="reveal-r ceo-content">
         <div class="ceo-eyebrow">EDITOR'S LETTER</div>
+        <span class="ceo-date">— a letter from Kenmi, founder.</span>
         <p class="ceo-quote">「家族のような集団」で、<br>着実に、共に成長する。</p>
-        <p class="ceo-body">「サージ（Sage）」という社名には、花言葉の「家族愛」「チームワーク」「堅実」という意味が込められています。お互いを思い合い、助け合いながら一人ひとりが着実に歩んでいける—そんな集団でありたいと考えています。</p>
-        <p class="ceo-body">特別なスキルは必要ありません。一歩を踏み出してくれたあなたを、私たちは全力でサポートします。「自分にできるだろうか」という不安はいりません。大変な時こそ、私たちが一緒になって壁を乗り越えていきます。</p>
+
+        <p class="ceo-greeting">はじめまして。<br>合同会社SageGroup 代表の古賀 賢弥です。</p>
+
+        <p class="ceo-body">数あるホームページの中から、ここまで読みに来てくださって本当にありがとうございます。私たちのことを少しでも知ってもらえたら嬉しくて、このページでは普段思っていることを、できるだけ素のままでお話しします。</p>
+
+        <p class="ceo-body">「サージ（Sage）」という社名には、花言葉にある<strong>「家族愛」「チームワーク」「堅実」</strong>という3つの意味を込めています。お互いを思い合い、困ったときには助け合う。ギスギスした関係ではなく、一人ひとりが安心して自分らしく働ける—そんな集団でありたいと心から願っています。</p>
+
+        <p class="ceo-body">私たちが大切にしているのは、結局のところ「人」です。事業は数字で測られますが、その数字をつくるのは一人ひとりのメンバー。だからこそ、メンバーが楽しく、安心して、長く働ける環境をつくることに全力を注いでいます。「仕事も、推しも、どっちも本気で。」という言葉は、ただのキャッチコピーではなく、私たちの本気の約束です。</p>
+
+        <div class="ceo-callout">
+          <span class="ceo-callout-mark">to you ✎</span>
+          <p class="ceo-callout-text">特別なスキルや経験は一切いりません。<br>必要なのは、ほんの少しの「やってみよう」という気持ちだけ。</p>
+        </div>
+
+        <p class="ceo-body">「自分にできるだろうか」「未経験だけど大丈夫かな」—そんな不安は、どうかいりません。最初は誰もが初心者です。大変な時こそ、私たちが一緒になって壁を乗り越えていきます。失敗を責める文化はありません。「次どうする？」を一緒に考えるのが、私たちのやり方です。</p>
+
+        <p class="ceo-body">静岡から始まったこの小さなチームは、今では愛知・東京へと広がり、たくさんの仲間が日々奮闘してくれています。一人だったら絶対に届かなかった景色を、みんなで見られていることが、何よりの誇りです。次にその景色を一緒に見るのは、あなたかもしれません。</p>
+
+        <p class="ceo-body">もし少しでも興味を持ってくれたら、まずは気軽に話を聞きに来てください。面接というより、お互いを知るための時間にできたらと思っています。あなたの「一歩」を、心から楽しみに待っています。</p>
+
+        <div class="ceo-ps">
+          <strong>P.S.</strong> 推し活、副業、家族の時間—全部大事にして大丈夫。<br>それが私たちのやり方です ✦
+        </div>
+
         <div class="ceo-sign">
-          <div>
-            <div class="ceo-sign-line">Kenmi Koga</div>
-            <div class="ceo-sign-role">合同会社SageGroup 代表取締役</div>
+          <div class="ceo-sign-left">
+            <div class="ceo-sign-stamp">SAGE</div>
+            <div>
+              <div class="ceo-sign-name">Kenmi Koga</div>
+              <div class="ceo-sign-jp">古賀 賢弥</div>
+              <div class="ceo-sign-role">合同会社SageGroup 代表取締役</div>
+            </div>
           </div>
         </div>
       </div>
