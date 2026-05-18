@@ -275,28 +275,28 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
 
 /* ===== SERVICE CARD IMAGE ===== */
 .svc-img{
-  width:100%;aspect-ratio:16/9;overflow:hidden;border-radius:4px;margin-bottom:18px;
+  width:100%;aspect-ratio:3/4;overflow:hidden;border-radius:0;margin-bottom:0;
 }
-.svc-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.45s ease}
-.svc-card:hover .svc-img img{transform:scale(1.04)}
+.svc-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.55s ease}
+.svc-card:hover .svc-img img{transform:scale(1.06)}
 
-/* ===== SERVICES (gray diagonal) ===== */
+/* ===== SERVICES ===== */
 .services{
-  background:var(--gray);
+  background:#fff;
   padding:100px 64px;
 }
-.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px}
 .svc-card{
-  background:var(--white);padding:44px 32px;
+  background:var(--white);padding:0;
   border-radius:6px;
-  border-top:3px solid var(--gray);
+  border-top:3px solid rgba(154,122,62,0.2);
   position:relative;overflow:hidden;
   transition:border-color 0.35s,transform 0.35s,box-shadow 0.35s;
 }
 .svc-card:hover{
   border-color:var(--gold);
   transform:translateY(-8px);
-  box-shadow:0 24px 48px rgba(0,0,0,0.07);
+  box-shadow:0 24px 48px rgba(0,0,0,0.09);
 }
 .svc-card::after{
   content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
@@ -304,8 +304,9 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
   transform:scaleX(0);transform-origin:left;transition:transform 0.45s cubic-bezier(0.22,1,0.36,1);
 }
 .svc-card:hover::after{transform:scaleX(1)}
-.svc-num{font-family:'Bebas Neue',sans-serif;font-size:4.5rem;line-height:1;margin-bottom:14px;color:rgba(154,122,62,0.12)}
-.svc-name{font-size:0.98rem;font-weight:700;color:var(--black);margin-bottom:10px}
+.svc-body{padding:28px 28px 36px;position:relative;}
+.svc-num{font-family:'Bebas Neue',sans-serif;font-size:5rem;line-height:1;color:rgba(154,122,62,0.1);position:absolute;top:16px;right:16px;pointer-events:none;user-select:none;}
+.svc-name{font-size:1.05rem;font-weight:700;color:var(--black);margin-bottom:10px}
 .svc-desc{font-size:0.83rem;line-height:1.95;color:var(--body)}
 
 /* ===== CONCEPT (dark) ===== */
@@ -458,6 +459,7 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
   .about-watermark{font-size:44vw}
   .concept-grid{grid-template-columns:1fr}
   .svc-grid{grid-template-columns:1fr}
+  .svc-img{aspect-ratio:4/3}
   .life-grid{grid-template-columns:1fr;grid-template-rows:auto}
   .life-cell.span-2{grid-row:auto}
   .footer{padding:40px 20px}
@@ -597,25 +599,31 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
       <div class="svc-img">
         <img src="photos/photo_19.jpg" alt="モバイルショップ支援">
       </div>
-      <div class="svc-num">01</div>
-      <h3 class="svc-name">モバイルショップ支援</h3>
-      <p class="svc-desc">SoftBank・au・docomoのキャリアショップへの人材派遣・販売サポート。採用から教育・現場フォローまで一貫して対応し、店舗の売上向上を支援します。</p>
+      <div class="svc-body">
+        <div class="svc-num">01</div>
+        <h3 class="svc-name">モバイルショップ支援</h3>
+        <p class="svc-desc">SoftBank・au・docomoのキャリアショップへの人材派遣・販売サポート。採用から教育・現場フォローまで一貫して対応し、店舗の売上向上を支援します。</p>
+      </div>
     </div>
     <div class="svc-card reveal">
       <div class="svc-img">
         <img src="photos/photo_04.jpg" alt="イベントプロモーション">
       </div>
-      <div class="svc-num">02</div>
-      <h3 class="svc-name">イベントプロモーション</h3>
-      <p class="svc-desc">太陽光発電をはじめとした販促イベントの企画・運営・スタッフ手配を一貫してサポート。豊富な現場経験を持つスタッフが、アポイント獲得から成約までをエスコートします。</p>
+      <div class="svc-body">
+        <div class="svc-num">02</div>
+        <h3 class="svc-name">イベントプロモーション</h3>
+        <p class="svc-desc">太陽光発電をはじめとした販促イベントの企画・運営・スタッフ手配を一貫してサポート。豊富な現場経験を持つスタッフが、アポイント獲得から成約までをエスコートします。</p>
+      </div>
     </div>
     <div class="svc-card reveal">
       <div class="svc-img">
         <img src="photos/photo_03.jpg" alt="eyelash salon Ria">
       </div>
-      <div class="svc-num">03</div>
-      <h3 class="svc-name">アイラッシュサロン（Ria）</h3>
-      <p class="svc-desc">静岡市駿河区にて「eyelash salon Ria」を自社運営。完全個室・完全予約制で、丁寧なカウンセリングと確かな技術でお客様の理想の目元を叶えます。口コミ評価★4.93（80件以上）。</p>
+      <div class="svc-body">
+        <div class="svc-num">03</div>
+        <h3 class="svc-name">アイラッシュサロン（Ria）</h3>
+        <p class="svc-desc">静岡市駿河区にて「eyelash salon Ria」を自社運営。完全個室・完全予約制で、丁寧なカウンセリングと確かな技術でお客様の理想の目元を叶えます。口コミ評価★4.93（80件以上）。</p>
+      </div>
     </div>
   </div>
 </section>
