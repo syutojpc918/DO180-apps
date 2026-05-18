@@ -176,6 +176,7 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
 .about-inner{
   display:grid;grid-template-columns:55fr 45fr;
   min-height:800px;
+  position:relative;z-index:1;
 }
 /* 左カラム */
 .about-left{
@@ -194,6 +195,26 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
 }
 @keyframes wm-in{to{opacity:0.03}}
 .about-watermark{animation:wm-in 2.5s ease 1s forwards}
+
+/* ===== BG DECORATIONS（白背景セクション用） ===== */
+@keyframes float-a{0%,100%{transform:translate(0,0)}50%{transform:translate(10px,-20px)}}
+@keyframes float-b{0%,100%{transform:translate(0,0)}50%{transform:translate(-14px,14px)}}
+@keyframes float-c{0%,100%{transform:translate(0,0) rotate(0)}50%{transform:translate(8px,-10px) rotate(8deg)}}
+.bg-shape{
+  position:absolute;pointer-events:none;
+  border:1px solid rgba(154,122,62,0.18);
+  z-index:0;
+}
+.bg-shape.circle{border-radius:50%}
+.bg-shape.dot{background:var(--gold);border:none;opacity:0.18;border-radius:50%}
+.bg-line{
+  position:absolute;height:1px;background:var(--gold);
+  width:0;opacity:0.4;pointer-events:none;z-index:0;
+  transition:width 1.4s cubic-bezier(0.16,1,0.3,1);
+}
+.bg-line.vert{height:0;width:1px;transition:height 1.4s cubic-bezier(0.16,1,0.3,1);}
+.bg-line.vis{width:var(--w,140px);}
+.bg-line.vert.vis{height:var(--h,140px);}
 /* ラベル行 */
 .about-label{margin-bottom:44px}
 .about-label .sec-tag{display:block;margin-bottom:6px}
@@ -284,7 +305,9 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
 .services{
   background:#fff;
   padding:100px 64px;
+  position:relative;overflow:hidden;
 }
+.services > .reveal,.services > .svc-grid,.services > .svc-cta-wrap{position:relative;z-index:1;}
 .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px}
 .svc-card{
   background:var(--white);padding:0;
@@ -483,6 +506,8 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
   .about-right{height:300px;position:relative}
   .ah-line{font-size:clamp(1.7rem,7vw,2.8rem)}
   .about-watermark{font-size:44vw}
+  .bg-shape{display:none}
+  .bg-line{display:none}
   .concept{padding:80px 20px}
   .concept-grid{grid-template-columns:1fr;gap:60px}
   .concept-visual::before{top:12px;left:12px;right:-12px;bottom:-12px}
@@ -565,6 +590,11 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
 
 <!-- ABOUT -->
 <section class="about" id="about">
+  <span class="bg-shape circle" style="width:140px;height:140px;top:7%;left:42%;animation:float-a 11s ease-in-out infinite"></span>
+  <span class="bg-shape circle" style="width:70px;height:70px;bottom:14%;left:30%;animation:float-b 13s ease-in-out infinite"></span>
+  <span class="bg-shape dot" style="width:10px;height:10px;top:18%;left:8%;animation:float-c 9s ease-in-out infinite"></span>
+  <span class="bg-line reveal" style="top:80px;left:0;--w:160px"></span>
+  <span class="bg-line vert reveal" style="top:0;left:46%;--h:200px"></span>
   <div class="about-inner">
     <!-- 左カラム -->
     <div class="about-left">
@@ -618,6 +648,12 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
 
 <!-- SERVICES (gray diagonal band) -->
 <section class="services" id="services">
+  <span class="bg-shape circle" style="width:180px;height:180px;top:12%;right:8%;animation:float-b 12s ease-in-out infinite"></span>
+  <span class="bg-shape circle" style="width:90px;height:90px;bottom:18%;left:5%;animation:float-a 14s ease-in-out infinite"></span>
+  <span class="bg-shape dot" style="width:8px;height:8px;top:30%;left:42%;animation:float-c 10s ease-in-out infinite"></span>
+  <span class="bg-shape dot" style="width:12px;height:12px;bottom:8%;right:30%;animation:float-a 11s ease-in-out infinite"></span>
+  <span class="bg-line reveal" style="top:64px;right:0;--w:200px"></span>
+  <span class="bg-line reveal" style="bottom:64px;left:0;--w:160px"></span>
   <div class="reveal">
     <span class="sec-tag">WHAT WE DO</span>
     <h2 class="sec-en">SERVICES</h2>
