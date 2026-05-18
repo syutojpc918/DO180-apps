@@ -401,28 +401,73 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
 }
 .concept-cta-link:hover{gap:16px;border-color:var(--gold)}
 
-/* ===== LIFE AT SAGE ===== */
-.life{background:var(--off);padding:110px 64px}
-.life-intro{max-width:500px;margin-bottom:48px}
-.life-intro p{font-size:0.92rem;line-height:2.1;color:var(--body)}
-.life-grid{
-  display:grid;
-  grid-template-columns:2fr 1fr 1fr;
-  grid-template-rows:200px 200px;
-  gap:12px;
+/* ===== PEOPLE & CULTURE (scrapbook) ===== */
+.life{
+  background:var(--off);
+  padding:110px 64px;
+  position:relative;overflow:hidden;
 }
-.life-cell{
-  background:var(--gray);border-radius:6px;
-  overflow:hidden;position:relative;
-  transition:transform 0.35s,box-shadow 0.35s;
+.life-header{text-align:center;max-width:720px;margin:0 auto 56px;position:relative;z-index:1;}
+.life-header .gold-bar{margin:14px auto 0}
+.life-header .sec-en{position:relative;display:inline-block}
+.life-header .sec-en::after{
+  content:'';position:absolute;left:-6px;right:-6px;bottom:6px;height:14px;
+  background:rgba(154,122,62,0.22);
+  z-index:-1;border-radius:2px;
 }
-.life-cell img{
-  width:100%;height:100%;object-fit:cover;display:block;
-  transition:transform 0.45s ease;
+.life-stats{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
+  max-width:900px;margin:0 auto 64px;
+  padding:32px 24px;background:#fff;border-radius:8px;
+  box-shadow:0 12px 32px rgba(0,0,0,0.06);
+  position:relative;z-index:1;
 }
-.life-cell:hover{transform:scale(1.02);box-shadow:0 12px 32px rgba(0,0,0,0.12)}
-.life-cell:hover img{transform:scale(1.06)}
-.life-cell.span-2{grid-row:span 2}
+.lstat{text-align:center;position:relative}
+.lstat+.lstat::before{content:'';position:absolute;left:0;top:20%;height:60%;width:1px;background:rgba(154,122,62,0.22);}
+.lstat-num{display:block;font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,3vw,2.6rem);color:var(--gold);line-height:1}
+.lstat-label{display:block;font-size:0.78rem;color:var(--body);margin-top:8px;letter-spacing:0.05em}
+.life-tagline{
+  text-align:center;max-width:600px;margin:0 auto 80px;
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:clamp(1.15rem,2vw,1.5rem);color:var(--black);line-height:1.7;
+  position:relative;z-index:1;
+}
+.life-scrap{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:36px;
+  max-width:1200px;margin:0 auto;padding-top:30px;
+  position:relative;z-index:1;
+}
+.polaroid{
+  background:#fff;padding:14px 14px 52px;
+  box-shadow:0 14px 30px rgba(0,0,0,0.12),0 3px 6px rgba(0,0,0,0.08);
+  position:relative;margin:0;
+  transition:transform 0.5s cubic-bezier(0.22,1,0.36,1),box-shadow 0.5s;
+}
+.polaroid img{
+  width:100%;aspect-ratio:1/1;object-fit:cover;display:block;
+}
+.polaroid figcaption{
+  position:absolute;bottom:14px;left:0;right:0;
+  text-align:center;
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:0.95rem;color:var(--black);padding:0 8px;
+}
+.polaroid::before{
+  content:'';position:absolute;
+  top:-10px;left:50%;width:64px;height:18px;
+  background:rgba(154,122,62,0.3);
+  transform:translateX(-50%) rotate(-3deg);
+  z-index:2;
+}
+.polaroid.p1{transform:rotate(-3deg)}
+.polaroid.p2{transform:rotate(2deg);margin-top:28px}
+.polaroid.p3{transform:rotate(-2deg);margin-top:-14px}
+.polaroid.p4{transform:rotate(3deg);margin-top:18px}
+.polaroid:hover{
+  transform:rotate(0) translateY(-14px) scale(1.04);
+  box-shadow:0 28px 50px rgba(0,0,0,0.2),0 4px 8px rgba(0,0,0,0.1);
+  z-index:5;
+}
 
 /* ===== RECRUIT — PC: 左黒 / 右写真  Mobile: 写真フル背景 ===== */
 .recruit{
@@ -524,8 +569,13 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
   .concept-quote::before{font-size:3.5rem;top:-18px}
   .svc-grid{grid-template-columns:1fr}
   .svc-img{aspect-ratio:4/3}
-  .life-grid{grid-template-columns:1fr;grid-template-rows:auto}
-  .life-cell.span-2{grid-row:auto}
+  .life{padding:80px 20px}
+  .life-stats{grid-template-columns:1fr;gap:18px;padding:24px}
+  .lstat+.lstat::before{display:none}
+  .lstat+.lstat{padding-top:18px;border-top:1px solid rgba(154,122,62,0.18)}
+  .life-scrap{grid-template-columns:1fr 1fr;gap:24px}
+  .polaroid.p1,.polaroid.p2,.polaroid.p3,.polaroid.p4{transform:rotate(0);margin-top:0}
+  .polaroid:hover{transform:rotate(0) scale(1.02)}
   .footer{padding:40px 20px}
 }
 </style>
@@ -747,28 +797,44 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
 
 <!-- LIFE AT SAGE -->
 <section class="life" id="life">
-  <div class="life-intro">
-    <div class="reveal">
-      <span class="sec-tag">LIFE AT SAGE</span>
-      <h2 class="sec-en">PEOPLE &<br>CULTURE</h2>
-      <p class="sec-ja">働く環境・仲間たち</p>
-      <div class="gold-bar"></div>
-    </div>
-    <p class="reveal">現場の雰囲気、仲間との関係、オフの過ごし方。SageGroupのリアルな日常をご紹介します。</p>
+  <div class="life-header reveal">
+    <span class="sec-tag">LIFE AT SAGE</span>
+    <h2 class="sec-en">PEOPLE &<br>CULTURE</h2>
+    <p class="sec-ja">働く環境・仲間たち</p>
+    <div class="gold-bar"></div>
   </div>
-  <div class="life-grid">
-    <div class="life-cell span-2">
+  <div class="life-stats reveal">
+    <div class="lstat">
+      <span class="lstat-num">21+</span>
+      <span class="lstat-label">メンバー</span>
+    </div>
+    <div class="lstat">
+      <span class="lstat-num">月1回</span>
+      <span class="lstat-label">食事会・イベント</span>
+    </div>
+    <div class="lstat">
+      <span class="lstat-num">100%</span>
+      <span class="lstat-label">シフト融通対応</span>
+    </div>
+  </div>
+  <p class="life-tagline reveal">「相談しやすすぎる」「友達と仕事してる感覚」<br>そんな声があふれる、SageGroupの日常。</p>
+  <div class="life-scrap reveal">
+    <figure class="polaroid p1">
       <img src="photos/photo_09.jpg" alt="チーム焼肉パーティ">
-    </div>
-    <div class="life-cell">
-      <img src="photos/photo_06.jpg" alt="アフターの楽しみ">
-    </div>
-    <div class="life-cell">
-      <img src="photos/photo_02.jpg" alt="チームディナー">
-    </div>
-    <div class="life-cell">
-      <img src="photos/photo_13.jpg" alt="オフの過ごし方">
-    </div>
+      <figcaption>チーム焼肉パーティ</figcaption>
+    </figure>
+    <figure class="polaroid p2">
+      <img src="photos/photo_06.jpg" alt="アフターでひと息">
+      <figcaption>アフターでひと息</figcaption>
+    </figure>
+    <figure class="polaroid p3">
+      <img src="photos/photo_02.jpg" alt="みんなでディナー">
+      <figcaption>みんなでディナー</figcaption>
+    </figure>
+    <figure class="polaroid p4">
+      <img src="photos/photo_13.jpg" alt="休日の過ごし方">
+      <figcaption>休日の過ごし方</figcaption>
+    </figure>
   </div>
 </section>
 
