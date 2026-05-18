@@ -171,54 +171,56 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
 .gold-bar.vis{width:80px}
 
 /* ===== ABOUT (off-white + diagonal) ===== */
-.about{background:var(--off)}
-.about-grid{
-  display:grid;grid-template-columns:1fr 1fr;
-  min-height:680px;
-}
-.about-left{
-  background:#1d3526;
-  padding:80px 64px;
+/* ===== ABOUT ===== */
+.about{
+  background:#fff;
+  padding:80px 64px 100px;
   position:relative;overflow:hidden;
-  display:flex;flex-direction:column;justify-content:center;
 }
-/* 縦ゴールドライン装飾 */
-.about-left::before{
-  content:'';position:absolute;
-  left:26px;top:80px;bottom:80px;
-  width:1px;background:rgba(184,150,90,0.35);
+.about-watermark{
+  position:absolute;right:-10px;bottom:-30px;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:24vw;line-height:0.8;
+  color:var(--black);opacity:0.03;
+  pointer-events:none;user-select:none;
+  letter-spacing:-0.02em;
 }
-.about-left::after{
-  content:'';position:absolute;
-  left:30px;top:80px;height:60px;
-  width:1px;background:var(--gold-l);
+.about-label{
+  display:flex;align-items:center;gap:24px;
+  margin-bottom:52px;
 }
-.about .sec-tag{color:rgba(184,150,90,0.75)}
-.about .sec-en{color:#fff}
-.about .sec-ja{color:rgba(255,255,255,0.45)}
-.about-copy{
-  font-size:clamp(1.3rem,2.4vw,2.2rem);
-  font-weight:400;line-height:1.7;
-  color:#fff;margin-bottom:40px;
+.about-label .gold-bar{margin:0}
+.ah-line{
+  display:block;
+  font-size:clamp(2.4rem,6vw,6rem);
+  font-weight:300;line-height:1.1;
+  color:var(--black);letter-spacing:-0.03em;
 }
-.copy-line{display:block;}
-.copy-line:nth-child(2){transition-delay:0.18s}
-.copy-line:nth-child(3){transition-delay:0.36s}
-.about-left p:not(.about-copy){
-  font-size:1.0rem;line-height:2.1;
-  color:rgba(255,255,255,0.62);
+.ah-line.gold{color:var(--gold)}
+.ah-line:nth-child(2){transition-delay:0.14s}
+.ah-line:nth-child(3){transition-delay:0.28s}
+.about-divider{
+  width:0;height:1px;
+  background:linear-gradient(90deg,var(--gold) 0%,rgba(154,122,62,0.1) 100%);
+  margin:56px 0;
+  transition:width 1.2s cubic-bezier(0.4,0,0.2,1);
 }
-.about-left p+p{margin-top:20px}
-.about-right{position:relative;overflow:hidden;}
-.about-photo-stack{
-  position:absolute;inset:0;border-radius:0;
+.about-divider.vis{width:100%}
+.about-lower{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:80px;align-items:start;
 }
-.about-photo-stack img{
+.about-body p{font-size:1.0rem;line-height:2.1;color:var(--body)}
+.about-body p+p{margin-top:20px}
+.about-photo-new{
+  width:100%;aspect-ratio:4/3;
+  overflow:hidden;border-radius:4px;
+}
+.about-photo-new img{
   width:100%;height:100%;object-fit:cover;
-  object-position:center;display:block;
-  transition:transform 0.8s ease;
+  display:block;transition:transform 0.7s ease;
 }
-.about-photo-stack:hover img{transform:scale(1.03);}
+.about-photo-new:hover img{transform:scale(1.03)}
 
 
 /* ===== PHOTO BLOCK (shared) ===== */
@@ -408,10 +410,10 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
   }
   /* 左→右グラデ不要（モバイルは縦） */
   .recruit-photo-panel::before{display:none}
-  .about-grid,.concept-grid{grid-template-columns:1fr}
-  .about-left{padding:60px 24px}
-  .about-left::before,.about-left::after{left:14px}
-  .about-right{height:280px;position:relative}
+  .about-grid,.concept-grid,.about-lower{grid-template-columns:1fr}
+  .about{padding:60px 20px 80px}
+  .ah-line{font-size:clamp(2rem,8vw,3rem)}
+  .about-watermark{font-size:40vw}
   .svc-grid{grid-template-columns:1fr}
   .life-grid{grid-template-columns:1fr;grid-template-rows:auto}
   .life-cell.span-2{grid-row:auto}
@@ -486,36 +488,34 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
   </div>
 </div>
 
-<!-- ABOUT (off-white + diagonal bottom) -->
+<!-- ABOUT -->
 <section class="about" id="about">
-  <div class="about-grid">
-    <!-- 左カラム: タイトル + 本文 + キャリアバッジ -->
-    <div class="about-left">
-      <div class="reveal">
-        <span class="sec-tag">ABOUT US</span>
-        <h2 class="sec-en">OUR STORY</h2>
-        <p class="sec-ja">私たちについて</p>
-        <div class="gold-bar"></div>
-      </div>
-      <p class="about-copy">
-        <span class="copy-line reveal">「自分にできるかな」</span>
-        <span class="copy-line reveal">なんて思わなくていい。</span>
-        <span class="copy-line reveal">一緒に楽しもう。</span>
-      </p>
-      <div class="reveal">
-        <p>合同会社SageGroupは2022年、静岡県で創業しました。社名"Sage"には花言葉の「家族愛」「チームワーク」「堅実さ」という意味を込めており、みんなで助け合いながら一人ひとりが着実に歩んでいける集団を目指しています。</p>
-        <p>その文化はスタッフ自身の言葉にも表れています。「相談がしやすすぎる」「友達と仕事してる感覚で楽しすぎる」——定期的な食事会やイベントで一体感を育みながら、自分らしく自由に働ける職場をつくってきました。</p>
-        <p>現在はモバイルショップ支援・イベントプロモーション・アイラッシュサロンの3事業を静岡・山梨・東京エリアで展開中。未経験でも丁寧な研修とフォローがあるので、安心してスタートできます。</p>
-      </div>
-    </div>
-    <!-- 右カラム: 集合写真1枚 -->
-    <div class="about-right">
-      <div class="about-photo-stack reveal" style="aspect-ratio:4/3">
-        <img src="photos/photo_00.jpg" alt="チームBBQパーティ">
-      </div>
-    </div>
+  <div class="about-watermark">OUR<br>STORY</div>
+
+  <div class="about-label reveal">
+    <span class="sec-tag">ABOUT US</span>
+    <span class="sec-ja" style="color:var(--body);font-size:0.78rem">私たちについて</span>
+    <div class="gold-bar"></div>
   </div>
 
+  <div class="about-headline">
+    <span class="ah-line reveal">「自分にできるかな」</span>
+    <span class="ah-line reveal">なんて思わなくていい。</span>
+    <span class="ah-line gold reveal">一緒に楽しもう。</span>
+  </div>
+
+  <div class="about-divider"></div>
+
+  <div class="about-lower">
+    <div class="about-body reveal">
+      <p>合同会社SageGroupは2022年、静岡県で創業しました。社名"Sage"には花言葉の「家族愛」「チームワーク」「堅実さ」という意味を込めており、みんなで助け合いながら一人ひとりが着実に歩んでいける集団を目指しています。</p>
+      <p>その文化はスタッフ自身の言葉にも表れています。「相談がしやすすぎる」「友達と仕事してる感覚で楽しすぎる」——定期的な食事会やイベントで一体感を育みながら、自分らしく自由に働ける職場をつくってきました。</p>
+      <p>現在はモバイルショップ支援・イベントプロモーション・アイラッシュサロンの3事業を静岡・山梨・東京エリアで展開中。未経験でも丁寧な研修とフォローがあるので、安心してスタートできます。</p>
+    </div>
+    <div class="about-photo-new reveal">
+      <img src="photos/photo_00.jpg" alt="チームBBQパーティ">
+    </div>
+  </div>
 </section>
 
 <!-- SERVICES (gray diagonal band) -->
@@ -681,7 +681,7 @@ const io=new IntersectionObserver(entries=>{
     }
   });
 },{threshold:0.12});
-document.querySelectorAll('.reveal,.gold-bar').forEach(el=>io.observe(el));
+document.querySelectorAll('.reveal,.gold-bar,.about-divider').forEach(el=>io.observe(el));
 </script>
 </body>
 </html>
