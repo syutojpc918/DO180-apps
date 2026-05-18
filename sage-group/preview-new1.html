@@ -528,9 +528,19 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
   :root{--nav-h:56px}
   #nav{padding:0 20px}
   .nav-links{display:none}
-  .hero-content{padding:0 20px 60px}
+
+  /* HERO：中央寄せで上部余白を解消 */
+  .hero{justify-content:center}
+  .hero-content{padding:8vh 20px 0}
+  .hero-desc{font-size:0.82rem;line-height:1.9}
+  .hero-desc br{display:none}   /* モバイルは自然に折り返し */
   .hero-title{font-size:clamp(2.8rem,11vw,5rem)}
-  .services,.concept,.life{padding-left:20px;padding-right:20px}
+
+  /* セクション間の余白を詰める */
+  .services{padding-top:72px;padding-right:20px;padding-bottom:72px;padding-left:20px}
+  .concept{padding:60px 20px 72px}
+  .life{padding:72px 20px}
+
   /* モバイル：recruitを写真フル背景に切り替え */
   .recruit{
     grid-template-columns:1fr;
@@ -539,22 +549,21 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
   }
   .recruit-content{
     padding:100px 20px 80px;
-    background:transparent; /* 背景を透明にして写真が見える */
+    background:transparent;
     position:relative;z-index:2;
   }
-  /* 写真パネルをabsoluteで背景へ */
   .recruit-photo-panel{
     position:absolute;inset:0;z-index:0;
   }
   .recruit-photo-panel img{object-position:50% 15%}
-  /* 写真の上に暗いオーバーレイ */
   .recruit-photo-panel::after{
     content:'';position:absolute;inset:0;
     background:linear-gradient(160deg,rgba(26,23,20,0.82) 0%,rgba(26,23,20,0.65) 60%,rgba(26,23,20,0.5) 100%);
     z-index:1;
   }
-  /* 左→右グラデ不要（モバイルは縦） */
   .recruit-photo-panel::before{display:none}
+
+  /* OUR STORY */
   .about-inner{grid-template-columns:1fr}
   .about-left{padding:60px 20px}
   .about-right{height:300px;position:relative}
@@ -562,20 +571,29 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
   .about-watermark{font-size:44vw}
   .bg-shape{display:none}
   .bg-line{display:none}
-  .concept{padding:80px 20px}
-  .concept-grid{grid-template-columns:1fr;gap:60px}
+
+  /* WHO WE ARE：引用の不自然な改行を解消 */
+  .concept-grid{grid-template-columns:1fr;gap:48px}
   .concept-visual::before{top:12px;left:12px;right:-12px;bottom:-12px}
-  .concept-quote{padding-left:32px}
-  .concept-quote::before{font-size:3.5rem;top:-18px}
+  .concept-quote{font-size:1.15rem;padding-left:22px;line-height:1.5}
+  .concept-quote::before{font-size:3rem;top:-14px}
+
+  /* SERVICES */
   .svc-grid{grid-template-columns:1fr}
   .svc-img{aspect-ratio:4/3}
-  .life{padding:80px 20px}
+
+  /* PEOPLE & CULTURE */
   .life-stats{grid-template-columns:1fr;gap:18px;padding:24px}
   .lstat+.lstat::before{display:none}
   .lstat+.lstat{padding-top:18px;border-top:1px solid rgba(154,122,62,0.18)}
-  .life-scrap{grid-template-columns:1fr 1fr;gap:24px}
+  .life-tagline{font-size:1rem}
+  .life-tagline br{display:none}
+  .life-scrap{grid-template-columns:1fr 1fr;gap:20px;padding-top:16px}
+  .polaroid{padding:10px 10px 40px}
+  .polaroid figcaption{font-size:0.76rem;bottom:10px}
   .polaroid.p1,.polaroid.p2,.polaroid.p3,.polaroid.p4{transform:rotate(0);margin-top:0}
   .polaroid:hover{transform:rotate(0) scale(1.02)}
+
   .footer{padding:40px 20px}
 }
 </style>
@@ -802,7 +820,7 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
   <div class="life-scrap reveal">
     <figure class="polaroid p1">
       <img src="photos/photo_09.jpg" alt="チーム焼肉パーティ">
-      <figcaption>チーム焼肉パーティ</figcaption>
+      <figcaption>焼肉パーティ</figcaption>
     </figure>
     <figure class="polaroid p2">
       <img src="photos/photo_06.jpg" alt="アフターでひと息">
