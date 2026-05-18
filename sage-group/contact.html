@@ -84,19 +84,36 @@ body.nav-locked{overflow:hidden}
 
 /* FORM SECTION */
 .form-wrap{
-  padding:120px var(--pad);background:var(--white);
+  padding:120px var(--pad);background:var(--cream);
   position:relative;overflow:hidden;
 }
 .form-wrap::before{
   content:'';position:absolute;
   top:-160px;right:-160px;width:480px;height:480px;
+  border:1px solid rgba(154,122,62,0.10);border-radius:50%;
+  pointer-events:none;
+}
+.form-wrap::after{
+  content:'';position:absolute;
+  bottom:-200px;left:-200px;width:520px;height:520px;
   border:1px solid rgba(154,122,62,0.08);border-radius:50%;
   pointer-events:none;
 }
 .form-grid{
   max-width:1180px;margin:0 auto;
-  display:grid;grid-template-columns:0.85fr 1.15fr;gap:80px;
-  position:relative;z-index:1;
+  display:grid;grid-template-columns:0.8fr 1.2fr;gap:64px;
+  position:relative;z-index:1;align-items:start;
+}
+
+/* FORM CARD */
+.form-card{
+  background:var(--white);padding:64px 56px;
+  box-shadow:0 24px 64px rgba(26,23,20,0.08);
+  position:relative;
+}
+.form-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--gold),var(--gold-p),transparent);
 }
 
 /* SIDE INFO */
@@ -133,8 +150,9 @@ body.nav-locked{overflow:hidden}
 .info-value a:hover{color:var(--gold)}
 
 .hours-card{
-  padding:24px 28px;background:var(--cream);
+  padding:24px 28px;background:var(--white);
   border-left:3px solid var(--gold);
+  box-shadow:0 8px 24px rgba(26,23,20,0.05);
 }
 .hours-card-title{
   font-family:'Bebas Neue',sans-serif;font-size:0.7rem;
@@ -215,7 +233,8 @@ body.nav-locked{overflow:hidden}
 /* SUCCESS MESSAGE */
 .form-success{
   display:none;padding:80px 40px;text-align:center;
-  background:var(--cream);border:1px solid rgba(154,122,62,0.2);
+  background:var(--white);border:1px solid rgba(154,122,62,0.2);
+  box-shadow:0 24px 64px rgba(26,23,20,0.08);
 }
 .form-success.show{display:block}
 .form-success-icon{
@@ -273,7 +292,8 @@ body.nav-locked{overflow:hidden}
 
   .contact-hero{padding:calc(var(--nav-h) + 40px) 20px 56px;min-height:auto}
   .form-wrap{padding:64px 20px}
-  .form-grid{grid-template-columns:1fr;gap:48px}
+  .form-grid{grid-template-columns:1fr;gap:40px}
+  .form-card{padding:36px 24px}
   .side-info{position:static}
   .field-row{grid-template-columns:1fr;gap:32px}
   .submit-btn{width:100%}
@@ -367,7 +387,7 @@ body.nav-locked{overflow:hidden}
     </aside>
 
     <!-- FORM -->
-    <div class="reveal-r">
+    <div class="reveal-r form-card">
       <form class="form" id="contactForm" novalidate>
         <div class="form-intro">
           <span class="form-intro-label">INQUIRY FORM</span>
