@@ -54,24 +54,42 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
   z-index:9999;transition:height 0.06s linear;
 }
 
-/* ===== NAV ===== */
-#nav{
-  position:fixed;top:0;left:0;right:0;height:var(--nav-h);
+/* ===== UNIFIED HEADER ===== */
+.site-nav{
+  position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:1000;
   display:flex;align-items:center;justify-content:space-between;
-  padding:0 64px;z-index:1000;
-  transition:background 0.45s,box-shadow 0.45s;
+  padding:0 64px;
+  transition:background 0.45s ease,box-shadow 0.45s ease;
 }
-#nav.scrolled{
+.site-nav.scrolled{
   background:rgba(255,255,255,0.97);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
   box-shadow:0 1px 0 rgba(154,122,62,0.14);
 }
-.nav-logo{display:flex;align-items:center;gap:10px}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
 .logo-text{
-  font-family:'Bebas Neue',sans-serif;font-size:1.25rem;letter-spacing:0.14em;color:var(--black);
+  font-family:'Bebas Neue',sans-serif;font-size:1.25rem;letter-spacing:0.14em;
+  color:#ffffff;transition:color 0.3s;
 }
-.nav-links{display:flex;gap:28px;list-style:none}
-.nav-links a{font-size:0.72rem;letter-spacing:0.14em;color:var(--body);transition:color 0.3s}
-.nav-links a:hover{color:var(--gold)}
+.site-nav.scrolled .logo-text{color:#1a1714}
+.nav-links{display:flex;gap:32px;list-style:none;align-items:center;margin:0;padding:0}
+.nav-links a{
+  font-size:0.72rem;letter-spacing:0.14em;
+  color:rgba(255,255,255,0.85);text-decoration:none;
+  transition:color 0.3s;
+}
+.site-nav.scrolled .nav-links a{color:#3a3530}
+.nav-links a:hover{color:#9a7a3e}
+.nav-links a[aria-current="page"]{color:#9a7a3e}
+.nav-links .nav-cta{
+  padding:9px 22px;
+  border:1px solid #9a7a3e;
+  color:#9a7a3e !important;
+  letter-spacing:0.14em;
+  transition:background 0.3s,color 0.3s;
+}
+.nav-links .nav-cta:hover{background:#9a7a3e;color:#fff !important}
 
 /* ===== HERO ===== */
 .hero{
@@ -526,7 +544,7 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
 /* ===== MOBILE ===== */
 @media(max-width:767px){
   :root{--nav-h:56px}
-  #nav{padding:0 20px}
+  .site-nav{padding:0 20px}
   .nav-links{display:none}
 
   /* HERO：中央寄せで上部余白を解消 */
@@ -605,19 +623,20 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
 <div id="scrollBar"></div>
 
 <!-- NAV -->
-<nav id="nav">
-  <div class="nav-logo">
-    <svg class="logo-crest" width="36" height="36" viewBox="0 0 36 36" fill="none">
+<nav class="site-nav" id="nav">
+  <a href="index.html" class="nav-logo">
+    <svg class="logo-crest" width="36" height="36" viewBox="0 0 36 36" fill="none" aria-hidden="true">
       <circle cx="18" cy="18" r="16" stroke="#9a7a3e" stroke-width="1.5"/>
       <text x="18" y="22" text-anchor="middle" font-family="Georgia,serif" font-size="10" fill="#9a7a3e" letter-spacing="1">SG</text>
     </svg>
     <span class="logo-text">SAGE GROUP</span>
-  </div>
+  </a>
   <ul class="nav-links">
-    <li><a href="#">会社概要</a></li>
-    <li><a href="#">事業内容</a></li>
-    <li><a href="#">スタッフの声</a></li>
-    <li><a href="#">採用情報</a></li>
+    <li><a href="index.html" aria-current="page">ホーム</a></li>
+    <li><a href="business.html">事業内容</a></li>
+    <li><a href="voice.html">社員の声</a></li>
+    <li><a href="infomation.html">会社情報</a></li>
+    <li><a href="https://en-gage.net/sagegroupshizuoka_saiyo/?banner=1" class="nav-cta" target="_blank" rel="noopener">採用情報</a></li>
   </ul>
 </nav>
 
