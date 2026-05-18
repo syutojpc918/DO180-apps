@@ -254,13 +254,9 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
   padding-bottom:6px;transition:gap 0.3s,border-color 0.3s;
 }
 .about-cta-link:hover{gap:16px;border-color:var(--gold)}
-/* 右カラム：写真2枚縦並び */
-.about-right{
-  display:grid;grid-template-rows:60fr 40fr;
-  overflow:hidden;
-}
-.about-right-photo{position:relative;overflow:hidden;}
-.about-right-photo img{
+/* 右カラム：写真フルハイト */
+.about-right{position:relative;overflow:hidden;}
+.about-right img{
   position:absolute;inset:0;
   width:100%;height:105%;
   object-fit:cover;object-position:center;
@@ -581,14 +577,9 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
       <a href="#recruit" class="about-cta-link reveal">採用情報を見る →</a>
     </div>
 
-    <!-- 右カラム：写真2枚縦並び -->
+    <!-- 右カラム：写真フルハイト -->
     <div class="about-right">
-      <div class="about-right-photo">
-        <img src="photos/photo_14.jpg" alt="キャリアショップ接客">
-      </div>
-      <div class="about-right-photo">
-        <img src="photos/photo_00.jpg" alt="SageGroupチーム">
-      </div>
+      <img src="photos/photo_14.jpg" alt="キャリアショップ接客">
     </div>
   </div>
 </section>
@@ -747,14 +738,14 @@ const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>40)},{passive:true});
 
 /* ===== ABOUT PHOTO PARALLAX ===== */
-document.querySelectorAll('.about-right-photo img').forEach(img=>{
-  window.addEventListener('scroll',()=>{
-    const rect=img.closest('.about-right-photo').getBoundingClientRect();
-    const pct=(1-rect.top/window.innerHeight)*0.5;
-    const shift=Math.max(-10,Math.min(10,pct*20-10));
-    img.style.transform=`translateY(${shift}px)`;
-  },{passive:true});
-});
+const aboutImg=document.querySelector('.about-right img');
+window.addEventListener('scroll',()=>{
+  if(!aboutImg)return;
+  const rect=aboutImg.closest('.about-right').getBoundingClientRect();
+  const pct=(1-rect.top/window.innerHeight)*0.5;
+  const shift=Math.max(-10,Math.min(10,pct*20-10));
+  aboutImg.style.transform=`translateY(${shift}px)`;
+},{passive:true});
 
 /* ===== INTERSECTION OBSERVER ===== */
 const io=new IntersectionObserver(entries=>{
