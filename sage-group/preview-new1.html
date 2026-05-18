@@ -180,13 +180,14 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
   clip-path:polygon(0 0,100% 0,100% 92%,0 100%);
 }
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
-.about-hero-photo{
-  width:100%;aspect-ratio:3/2;border-radius:6px;overflow:hidden;margin-bottom:16px;
+.about-copy{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(2.6rem,4.5vw,4.8rem);
+  line-height:1.05;letter-spacing:0.03em;
+  color:var(--black);margin-bottom:28px;
 }
-.about-hero-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.5s ease}
-.about-hero-photo:hover img{transform:scale(1.03)}
-.about-left p{font-size:0.92rem;line-height:2.1;color:var(--body)}
-.about-left p+p{margin-top:16px}
+.about-left p{font-size:1.05rem;line-height:2.1;color:var(--body)}
+.about-left p+p{margin-top:20px}
 .carrier-block{margin-top:36px}
 .carrier-label{font-size:0.66rem;letter-spacing:0.28em;color:var(--sage);margin-bottom:12px}
 .carrier-row{display:flex;gap:10px;flex-wrap:wrap}
@@ -198,22 +199,43 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
 }
 .carrier-badge:hover{background:var(--gold);color:#fff}
 .about-right{display:flex;flex-direction:column;gap:14px}
-.fact-card{
-  background:var(--white);border-left:3px solid var(--gray);
-  padding:22px 26px;display:flex;align-items:center;gap:18px;
-  border-radius:4px;
-  transition:border-color 0.3s,box-shadow 0.3s,transform 0.3s;
-}
-.fact-card:hover{border-color:var(--gold);transform:translateX(5px);box-shadow:4px 0 18px rgba(154,122,62,0.08)}
-.fact-num{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--black);line-height:1;min-width:60px}
-.fact-info .fval{font-size:0.88rem;font-weight:700;color:var(--black)}
-.fact-info .fdesc{font-size:0.74rem;color:var(--body)}
+.about-photo-stack{width:100%;overflow:hidden;border-radius:6px;}
+.about-photo-stack img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.5s ease;}
+.about-photo-stack:hover img{transform:scale(1.03);}
 
-/* ===== PHOTO AREA ===== */
-.about-photo{
-  margin-top:56px;
-  display:grid;grid-template-columns:2fr 1fr;gap:12px;
+/* ===== PRESIDENT SECTION ===== */
+.president-section{
+  margin-top:72px;
+  background:var(--white);
+  border-radius:8px;
+  display:grid;grid-template-columns:260px 1fr;
+  gap:60px;align-items:center;
+  padding:56px 64px;
+  border-left:4px solid var(--gold);
 }
+.pres-photo{
+  width:100%;aspect-ratio:3/4;border-radius:6px;overflow:hidden;flex-shrink:0;
+}
+.pres-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;}
+.pres-role{font-size:0.68rem;letter-spacing:0.22em;color:var(--sage);text-transform:uppercase;margin-bottom:6px}
+.pres-name{
+  font-family:'Bebas Neue',sans-serif;font-size:2.6rem;
+  letter-spacing:0.08em;color:var(--black);margin-bottom:24px;line-height:1;
+}
+.pres-quote{
+  font-size:1rem;line-height:2.1;color:var(--body);
+  padding-left:22px;border-left:3px solid var(--gold);
+  margin-bottom:36px;
+}
+.pres-btn{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:14px 40px;border:1.5px solid var(--gold);
+  font-size:0.76rem;letter-spacing:0.16em;color:var(--gold);
+  transition:background 0.3s,color 0.3s;
+}
+.pres-btn:hover{background:var(--gold);color:#fff;}
+
+/* ===== PHOTO BLOCK (shared) ===== */
 .photo-block{
   background:var(--gray);aspect-ratio:16/9;border-radius:4px;
   overflow:hidden;
@@ -407,7 +429,8 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
   .recruit-photo-panel::before{display:none}
   .about-grid,.concept-grid{grid-template-columns:1fr}
   .svc-grid{grid-template-columns:1fr}
-  .about-photo{grid-template-columns:1fr}
+  .president-section{grid-template-columns:1fr;padding:40px 20px;gap:32px}
+  .pres-photo{aspect-ratio:16/9;max-width:100%;}
   .life-grid{grid-template-columns:1fr;grid-template-rows:auto}
   .life-cell.span-2{grid-row:auto}
   .footer{padding:40px 20px}
@@ -484,6 +507,7 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
 <!-- ABOUT (off-white + diagonal bottom) -->
 <section class="about" id="about">
   <div class="about-grid">
+    <!-- 左カラム: タイトル + 本文 + キャリアバッジ -->
     <div class="about-left">
       <div class="reveal">
         <span class="sec-tag">ABOUT US</span>
@@ -491,9 +515,10 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
         <p class="sec-ja">私たちについて</p>
         <div class="gold-bar"></div>
       </div>
+      <p class="about-copy reveal">推しも仕事も、<br>どっちも本気で。</p>
       <div class="reveal">
-        <p>合同会社SageGroupは2022年、静岡県で創業した人材・販売支援の専門集団です。モバイルショップ支援・イベントプロモーション・アイラッシュサロン運営の3事業を展開。推し活も仕事もどちらも諦めないライフスタイルを実現できる職場環境をつくっています。</p>
-        <p>静岡・山梨・東京の3拠点に約21名のスタッフが活躍中。現場を楽しみながら成長できる仕組みと、スタッフを主役にする文化が私たちの原点です。</p>
+        <p>合同会社SageGroupは2022年、静岡県で創業しました。社名"Sage"には「家族愛」「チームワーク」「堅実さ」という意味を込めており、みんなで仲良く助け合いながら着実に成長できる集団を目指しています。</p>
+        <p>モバイルショップ支援・イベントプロモーション・アイラッシュサロンの3事業を軸に、静岡・山梨・東京エリアで展開中。推し活も仕事も諦めない、スタッフ一人ひとりが主役になれる職場をつくっています。</p>
       </div>
       <div class="carrier-block reveal">
         <p class="carrier-label">CARRIER PARTNER</p>
@@ -504,51 +529,27 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
         </div>
       </div>
     </div>
+    <!-- 右カラム: 写真2枚縦並び -->
     <div class="about-right stagger">
-      <div class="about-hero-photo reveal">
+      <div class="about-photo-stack reveal" style="aspect-ratio:4/3">
         <img src="photos/photo_00.jpg" alt="チームBBQパーティ">
       </div>
-      <div class="fact-card reveal">
-        <div class="fact-num">2022</div>
-        <div class="fact-info">
-          <div class="fval">設立年</div>
-          <div class="fdesc">静岡県で創業</div>
-        </div>
-      </div>
-      <div class="fact-card reveal">
-        <div class="fact-num">21+</div>
-        <div class="fact-info">
-          <div class="fval">スタッフ数</div>
-          <div class="fdesc">現在募集中</div>
-        </div>
-      </div>
-      <div class="fact-card reveal">
-        <div class="fact-num">3</div>
-        <div class="fact-info">
-          <div class="fval">活動エリア</div>
-          <div class="fdesc">静岡・山梨・東京</div>
-        </div>
-      </div>
-      <div class="fact-card reveal">
-        <div class="fact-num">3</div>
-        <div class="fact-info">
-          <div class="fval">事業種類</div>
-          <div class="fdesc">キャリア販売 他</div>
-        </div>
+      <div class="about-photo-stack reveal" style="aspect-ratio:16/9">
+        <img src="photos/photo_19.jpg" alt="キャリアショップでの接客風景">
       </div>
     </div>
   </div>
-  <div class="about-photo reveal">
-    <div class="photo-block" style="aspect-ratio:16/8">
-      <img src="photos/photo_19.jpg" alt="キャリアショップでの接客風景">
+
+  <!-- 代表者メッセージ -->
+  <div class="president-section reveal">
+    <div class="pres-photo">
+      <img src="photos/photo_12.jpg" alt="代表取締役">
     </div>
-    <div style="display:flex;flex-direction:column;gap:12px">
-      <div class="photo-block" style="aspect-ratio:1/1">
-        <img src="photos/photo_12.jpg" alt="代表スタッフ" style="object-position:top center">
-      </div>
-      <div class="photo-block" style="aspect-ratio:1/1">
-        <img src="photos/photo_10.jpg" alt="社内ミーティング">
-      </div>
+    <div class="pres-text">
+      <p class="pres-role">代表取締役 / FOUNDER</p>
+      <p class="pres-name">代表者名</p>
+      <p class="pres-quote">「自分にできるかな？」なんて不安に思わず、まずはガンガン応募してきてください。ここは「自分で勝手に頑張れ」という放任スタイルではありません。大変な時こそ、僕たちが一緒になって壁を乗り越えていきます。家族のような仲間たちと一緒に、ここで成長しましょう。</p>
+      <a href="voice.html" class="pres-btn">スタッフの声を見る <span>→</span></a>
     </div>
   </div>
 </section>
@@ -690,7 +691,7 @@ const ring = document.getElementById('cursor-ring');
 let mx=0,my=0,rx=0,ry=0;
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px'});
 (function animRing(){rx+=(mx-rx)*0.15;ry+=(my-ry)*0.15;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing)})();
-document.querySelectorAll('a,button,.svc-card,.fact-card').forEach(el=>{
+document.querySelectorAll('a,button,.svc-card,.pres-btn').forEach(el=>{
   el.addEventListener('mouseenter',()=>document.body.classList.add('hover-link'));
   el.addEventListener('mouseleave',()=>document.body.classList.remove('hover-link'));
 });
