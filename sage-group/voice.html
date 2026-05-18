@@ -434,7 +434,7 @@ a{text-decoration:none;color:inherit}
   .voice-hero-meta{flex-wrap:wrap;gap:18px}
   .ceo{padding:72px 20px}
   .ceo-grid{grid-template-columns:1fr;gap:64px}
-  .ceo-photo{max-width:280px;margin:0 auto}
+  .ceo-photo{max-width:440px;width:100%;margin:0 auto}
   .ceo-photo-cap{right:auto;left:50%;transform:translateX(-50%)}
   .ceo-quote{font-size:1.3rem;padding-left:0;text-align:left}
   .interview-intro{padding:72px 20px 56px}
@@ -442,8 +442,10 @@ a{text-decoration:none;color:inherit}
   .if-inner,.if-inner.layout-a,.if-inner.layout-b{grid-template-columns:1fr;gap:56px}
   .if-inner.layout-b .if-photo{order:1}
   .if-inner.layout-b .if-content{order:2}
-  .if-photo{max-width:320px;margin:0 auto}
-  .if-photo-num{font-size:3.2rem;top:-20px;left:-12px}
+  .if-photo{max-width:none;width:100%;margin:0 auto}
+  .if-photo::after{top:14px;left:14px;right:-10px;bottom:-10px}
+  .if-photo-num{font-size:4rem;top:-24px;left:-8px}
+  .if-photo-tag{font-size:0.68rem;padding:7px 16px}
   .if-quote{font-size:1.1rem;padding-left:18px;margin-bottom:32px}
   .activity{padding:72px 20px}
   .activity-grid{grid-template-columns:1fr 1fr;gap:18px}
