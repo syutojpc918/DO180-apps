@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>お問い合わせ | 合同会社SageGroup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,500;0,600;1,300;1,500;1,600&family=Noto+Sans+JP:wght@300;400;500;700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gold:#9a7a3e;--gold-l:#b8965a;--gold-p:#d4b896;--gold-pale:#f0e8d8;
+  --white:#ffffff;--off:#f4f3f1;--cream:#fdfbf7;--cream-mid:#f5f0e8;--cream-deep:#ede5d6;
+  --gray:#e8e6e2;--gray-m:#c8c4be;--black:#1a1714;--body:#4a4540;
+  --nav-h:68px;--pad:64px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans JP',sans-serif;color:var(--body);background:var(--white);overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+
+/* UNIFIED HEADER */
+.site-nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 var(--pad);transition:background 0.45s ease,box-shadow 0.45s ease}
+.site-nav.scrolled{background:rgba(255,255,255,0.97);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 1px 0 rgba(154,122,62,0.14)}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-text{font-family:'Bebas Neue',sans-serif;font-size:1.25rem;letter-spacing:0.14em;color:#1a1714;transition:color 0.3s}
+.nav-links{display:flex;gap:32px;list-style:none;align-items:center;margin:0;padding:0}
+.nav-links a{font-size:0.72rem;letter-spacing:0.14em;color:#3a3530;text-decoration:none;transition:color 0.3s}
+.nav-links a:hover{color:#9a7a3e}
+.nav-links a[aria-current="page"]{color:#9a7a3e}
+.nav-links .nav-cta{padding:9px 22px;border:1px solid #9a7a3e;color:#9a7a3e !important;letter-spacing:0.14em;transition:background 0.3s,color 0.3s}
+.nav-links .nav-cta:hover{background:#9a7a3e;color:#ffffff !important}
+
+/* HAMBURGER */
+.nav-toggle{display:none;background:none;border:none;padding:0;cursor:pointer;width:32px;height:32px;position:relative;z-index:1100}
+.nav-toggle-line{display:block;width:24px;height:1.5px;background:#1a1714;margin:6px auto;transition:background 0.3s,transform 0.4s ease,opacity 0.3s}
+.site-nav.nav-open .nav-toggle-line:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
+.site-nav.nav-open .nav-toggle-line:nth-child(2){opacity:0}
+.site-nav.nav-open .nav-toggle-line:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
+body.nav-locked{overflow:hidden}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.85s ease,transform 0.85s ease}
+.reveal.vis{opacity:1;transform:none}
+.reveal-l{opacity:0;transform:translateX(-32px);transition:opacity 0.85s ease,transform 0.85s ease}
+.reveal-l.vis{opacity:1;transform:none}
+.reveal-r{opacity:0;transform:translateX(32px);transition:opacity 0.85s ease,transform 0.85s ease}
+.reveal-r.vis{opacity:1;transform:none}
+
+/* SECTION COMMON */
+.sec-tag{display:block;font-family:'Bebas Neue',sans-serif;font-size:0.65rem;letter-spacing:0.38em;color:var(--gold);margin-bottom:10px}
+.sec-en{font-family:'Noto Sans JP',sans-serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:900;line-height:1.3;letter-spacing:-0.01em;color:var(--black);display:block;margin-bottom:14px}
+.gold-bar{width:0;height:2px;background:linear-gradient(90deg,var(--gold),var(--gold-p),transparent);margin-bottom:36px;transition:width 1.2s cubic-bezier(0.22,1,0.36,1)}
+.gold-bar.vis{width:80px}
+
+/* HERO */
+.contact-hero{
+  min-height:54vh;background:var(--cream);
+  display:flex;align-items:flex-end;
+  padding:calc(var(--nav-h) + 80px) var(--pad) 64px;
+  position:relative;overflow:hidden;
+}
+.contact-hero-bg{
+  position:absolute;font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(10rem,22vw,22rem);
+  color:rgba(154,122,62,0.05);
+  top:50%;left:50%;transform:translate(-50%,-50%);
+  letter-spacing:0.04em;pointer-events:none;user-select:none;
+  white-space:nowrap;line-height:1;
+}
+.contact-hero-inner{position:relative;z-index:1;max-width:1280px;width:100%;margin:0 auto}
+.contact-hero-eyebrow{
+  display:flex;align-items:center;gap:14px;
+  font-family:'Bebas Neue',sans-serif;font-size:0.72rem;
+  letter-spacing:0.4em;color:var(--gold);margin-bottom:24px;
+}
+.contact-hero-eyebrow::after{content:'';display:block;width:60px;height:1px;background:var(--gold)}
+.contact-hero h1{
+  font-family:'Noto Sans JP',sans-serif;font-weight:900;
+  font-size:clamp(2.4rem,5vw,4.2rem);line-height:1.2;
+  color:var(--black);margin-bottom:20px;letter-spacing:-0.02em;
+}
+.contact-hero p{font-size:0.92rem;line-height:2;color:var(--body);max-width:560px}
+
+/* FORM SECTION */
+.form-wrap{
+  padding:120px var(--pad);background:var(--white);
+  position:relative;overflow:hidden;
+}
+.form-wrap::before{
+  content:'';position:absolute;
+  top:-160px;right:-160px;width:480px;height:480px;
+  border:1px solid rgba(154,122,62,0.08);border-radius:50%;
+  pointer-events:none;
+}
+.form-grid{
+  max-width:1180px;margin:0 auto;
+  display:grid;grid-template-columns:0.85fr 1.15fr;gap:80px;
+  position:relative;z-index:1;
+}
+
+/* SIDE INFO */
+.side-info{position:sticky;top:calc(var(--nav-h) + 40px);align-self:start}
+.side-info-tag{
+  font-family:'Bebas Neue',sans-serif;font-size:0.7rem;
+  letter-spacing:0.3em;color:var(--gold);margin-bottom:14px;
+  display:flex;align-items:center;gap:14px;
+}
+.side-info-tag::before{content:'';display:block;width:32px;height:1px;background:var(--gold)}
+.side-info-title{
+  font-family:'Noto Sans JP',sans-serif;font-weight:900;
+  font-size:clamp(1.5rem,2.5vw,2rem);
+  color:var(--black);margin-bottom:24px;line-height:1.4;letter-spacing:-0.01em;
+}
+.side-info-desc{
+  font-size:0.85rem;line-height:2.1;color:var(--body);
+  margin-bottom:40px;letter-spacing:0.04em;
+}
+.info-list{list-style:none;padding:0;margin:0 0 40px}
+.info-list li{
+  padding:20px 0;border-bottom:1px solid var(--gray);
+  display:flex;align-items:flex-start;gap:18px;
+}
+.info-icon{
+  width:36px;height:36px;border:1px solid var(--gold);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;color:var(--gold);
+}
+.info-text{flex:1}
+.info-label{font-family:'Bebas Neue',sans-serif;font-size:0.66rem;letter-spacing:0.3em;color:var(--gold);margin-bottom:4px;display:block}
+.info-value{font-size:0.92rem;color:var(--black);line-height:1.6}
+.info-value a{transition:color 0.3s}
+.info-value a:hover{color:var(--gold)}
+
+.hours-card{
+  padding:24px 28px;background:var(--cream);
+  border-left:3px solid var(--gold);
+}
+.hours-card-title{
+  font-family:'Bebas Neue',sans-serif;font-size:0.7rem;
+  letter-spacing:0.3em;color:var(--gold);margin-bottom:10px;
+}
+.hours-card-text{font-size:0.85rem;color:var(--body);line-height:1.9}
+
+/* FORM */
+.form{padding:0}
+.form-intro{
+  margin-bottom:48px;padding-bottom:28px;
+  border-bottom:1px solid var(--gray);
+}
+.form-intro-label{font-family:'Bebas Neue',sans-serif;font-size:0.7rem;letter-spacing:0.3em;color:var(--gold);margin-bottom:12px;display:block}
+.form-intro-title{
+  font-family:'Noto Sans JP',sans-serif;font-weight:700;
+  font-size:1.2rem;color:var(--black);margin-bottom:14px;letter-spacing:-0.01em;
+}
+.form-intro-sub{font-size:0.85rem;color:var(--body);line-height:1.9}
+
+.field{margin-bottom:32px;position:relative}
+.field label{
+  display:block;font-family:'Bebas Neue',sans-serif;
+  font-size:0.66rem;letter-spacing:0.3em;color:var(--gold);
+  margin-bottom:10px;
+}
+.field label .req{color:#c8585f;margin-left:6px;font-size:0.75rem}
+.field label .opt{color:var(--gray-m);margin-left:8px;font-size:0.65rem;letter-spacing:0.18em}
+
+.field input,.field textarea,.field select{
+  width:100%;padding:14px 0;
+  font-family:'Noto Sans JP',sans-serif;font-size:0.95rem;
+  color:var(--black);background:transparent;
+  border:none;border-bottom:1px solid var(--gray);
+  outline:none;transition:border-color 0.3s;
+  letter-spacing:0.02em;
+}
+.field input:focus,.field textarea:focus,.field select:focus{border-bottom-color:var(--gold)}
+.field input::placeholder,.field textarea::placeholder{color:var(--gray-m)}
+.field textarea{resize:vertical;min-height:140px;line-height:1.8;padding:14px 0}
+.field select{
+  -webkit-appearance:none;appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239a7a3e' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 8px center;
+  padding-right:32px;cursor:pointer;
+}
+
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:32px}
+.field-row .field{margin-bottom:0}
+
+.consent{
+  display:flex;align-items:flex-start;gap:12px;
+  padding:20px 0;margin-bottom:32px;
+  font-size:0.82rem;color:var(--body);line-height:1.7;
+}
+.consent input[type="checkbox"]{
+  margin-top:3px;width:18px;height:18px;
+  accent-color:var(--gold);flex-shrink:0;cursor:pointer;
+}
+.consent label{cursor:pointer}
+.consent a{color:var(--gold);text-decoration:underline;text-underline-offset:3px}
+
+.submit-row{display:flex;flex-direction:column;align-items:flex-start;gap:18px;margin-top:24px}
+.submit-btn{
+  display:inline-flex;align-items:center;gap:18px;
+  padding:18px 56px;background:var(--black);color:var(--white);
+  font-family:'Noto Sans JP',sans-serif;font-size:0.85rem;
+  font-weight:500;letter-spacing:0.2em;border:none;cursor:pointer;
+  transition:background 0.3s,transform 0.3s,box-shadow 0.3s;
+  min-width:280px;justify-content:center;
+}
+.submit-btn:hover{background:var(--gold);transform:translateY(-2px);box-shadow:0 12px 28px rgba(154,122,62,0.25)}
+.submit-btn:disabled{opacity:0.4;cursor:not-allowed;transform:none;box-shadow:none}
+.submit-btn .arrow{transition:transform 0.3s}
+.submit-btn:hover .arrow{transform:translateX(4px)}
+.submit-note{font-size:0.76rem;color:var(--gray-m);letter-spacing:0.05em}
+
+/* SUCCESS MESSAGE */
+.form-success{
+  display:none;padding:80px 40px;text-align:center;
+  background:var(--cream);border:1px solid rgba(154,122,62,0.2);
+}
+.form-success.show{display:block}
+.form-success-icon{
+  width:72px;height:72px;border:2px solid var(--gold);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 24px;color:var(--gold);
+}
+.form-success-title{
+  font-family:'Noto Sans JP',sans-serif;font-weight:900;
+  font-size:1.6rem;color:var(--black);margin-bottom:14px;letter-spacing:-0.01em;
+}
+.form-success-text{font-size:0.9rem;color:var(--body);line-height:2;margin-bottom:32px}
+.form-success a{
+  display:inline-block;padding:14px 36px;
+  border:1px solid var(--gold);color:var(--gold);
+  font-size:0.75rem;letter-spacing:0.2em;
+  transition:background 0.3s,color 0.3s;
+}
+.form-success a:hover{background:var(--gold);color:var(--white)}
+
+/* FOOTER */
+.footer{background:#1a1714;color:#ffffff;padding:64px 64px 32px;position:relative;overflow:hidden}
+.footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,#9a7a3e 50%,transparent)}
+.ft-inner{max-width:1280px;margin:0 auto}
+.ft-top{display:flex;justify-content:space-between;align-items:flex-start;gap:48px;margin-bottom:48px;padding-bottom:40px;border-bottom:1px solid rgba(154,122,62,0.18)}
+.ft-brand{flex:1;max-width:420px}
+.ft-logo{display:flex;align-items:center;gap:10px;margin-bottom:18px}
+.ft-logo-text{font-family:'Bebas Neue',sans-serif;font-size:1.05rem;letter-spacing:0.14em;color:#ffffff}
+.ft-tagline{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:#9a7a3e;line-height:1.6;letter-spacing:0.02em}
+.ft-nav-list{display:flex;flex-direction:column;gap:12px;list-style:none;text-align:right}
+.ft-nav-list a{font-size:0.76rem;letter-spacing:0.1em;color:rgba(255,255,255,0.5);text-decoration:none;transition:color 0.3s}
+.ft-nav-list a:hover{color:#9a7a3e}
+.ft-breadcrumb{margin-bottom:28px;font-family:'Bebas Neue',sans-serif;font-size:0.66rem;letter-spacing:0.25em}
+.ft-breadcrumb ol{list-style:none;display:flex;gap:12px;flex-wrap:wrap;color:rgba(255,255,255,0.4)}
+.ft-breadcrumb li{display:flex;align-items:center;gap:12px}
+.ft-breadcrumb li:not(:last-child)::after{content:'/';color:rgba(154,122,62,0.4)}
+.ft-breadcrumb a{color:rgba(255,255,255,0.5);transition:color 0.3s}
+.ft-breadcrumb a:hover{color:#9a7a3e}
+.ft-breadcrumb [aria-current="page"]{color:#9a7a3e}
+.ft-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;font-size:0.7rem;letter-spacing:0.1em;color:rgba(255,255,255,0.35)}
+.ft-bottom span{color:#9a7a3e}
+
+/* MOBILE */
+@media(max-width:767px){
+  :root{--nav-h:56px;--pad:20px}
+  .site-nav{padding:0 20px}
+  .nav-toggle{display:block}
+  .nav-links{display:flex;flex-direction:column;position:fixed;top:0;left:0;right:0;min-height:100vh;background:#fdfbf7;padding:calc(var(--nav-h) + 40px) 32px 40px;gap:0;align-items:flex-start;transform:translateX(100%);transition:transform 0.5s cubic-bezier(0.22,1,0.36,1);z-index:1050;overflow-y:auto}
+  .site-nav.nav-open .nav-links{transform:translateX(0)}
+  .nav-links li{width:100%;border-bottom:1px solid rgba(154,122,62,0.18);list-style:none}
+  .nav-links a{display:block;padding:22px 0;color:#1a1714 !important;font-size:0.95rem;letter-spacing:0.1em}
+  .nav-links a[aria-current="page"]{color:#9a7a3e !important}
+  .nav-links li:last-child{border-bottom:none;margin-top:24px}
+  .nav-links .nav-cta{padding:16px 32px;text-align:center;color:#9a7a3e !important;width:100%}
+
+  .contact-hero{padding:calc(var(--nav-h) + 40px) 20px 56px;min-height:auto}
+  .form-wrap{padding:64px 20px}
+  .form-grid{grid-template-columns:1fr;gap:48px}
+  .side-info{position:static}
+  .field-row{grid-template-columns:1fr;gap:32px}
+  .submit-btn{width:100%}
+
+  .footer{padding:48px 20px 32px}
+  .ft-top{flex-direction:column;gap:28px;align-items:flex-start}
+  .ft-nav-list{flex-direction:row;flex-wrap:wrap;gap:14px;text-align:left}
+  .ft-bottom{flex-direction:column;gap:8px;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="site-nav scrolled" id="nav">
+  <a href="index.html" class="nav-logo">
+    <svg class="logo-crest" width="36" height="36" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+      <circle cx="18" cy="18" r="16" stroke="#9a7a3e" stroke-width="1.5"/>
+      <text x="18" y="22" text-anchor="middle" font-family="Georgia,serif" font-size="10" fill="#9a7a3e" letter-spacing="1">SG</text>
+    </svg>
+    <span class="logo-text">SAGE GROUP</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">ホーム</a></li>
+    <li><a href="infomation.html">会社情報</a></li>
+    <li><a href="business.html">事業内容</a></li>
+    <li><a href="voice.html">社員の声</a></li>
+    <li><a href="https://en-gage.net/sagegroupshizuoka_saiyo/?banner=1" class="nav-cta" target="_blank" rel="noopener">採用情報</a></li>
+  </ul>
+  <button class="nav-toggle" id="navToggle" aria-label="メニュー" aria-expanded="false">
+    <span class="nav-toggle-line"></span>
+    <span class="nav-toggle-line"></span>
+    <span class="nav-toggle-line"></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="contact-hero">
+  <div class="contact-hero-bg">CONTACT</div>
+  <div class="contact-hero-inner">
+    <div class="contact-hero-eyebrow">CONTACT US</div>
+    <h1>お問い合わせ</h1>
+    <p>採用・事業・取材など、どんなご相談でもお気軽にご連絡ください。<br>担当者よりご返信させていただきます。</p>
+  </div>
+</section>
+
+<!-- FORM -->
+<section class="form-wrap">
+  <div class="form-grid">
+    <!-- SIDE INFO -->
+    <aside class="side-info reveal-l">
+      <div class="side-info-tag">REACH OUT</div>
+      <h2 class="side-info-title">お電話・メールでも<br>承っております</h2>
+      <p class="side-info-desc">フォーム以外でも、お電話やメールでお問い合わせいただけます。営業時間内であれば即時対応いたします。</p>
+
+      <ul class="info-list">
+        <li>
+          <span class="info-icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>
+          </span>
+          <div class="info-text">
+            <span class="info-label">TEL</span>
+            <p class="info-value"><a href="tel:054-397-6631">054-397-6631</a></p>
+          </div>
+        </li>
+        <li>
+          <span class="info-icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>
+          </span>
+          <div class="info-text">
+            <span class="info-label">EMAIL</span>
+            <p class="info-value"><a href="mailto:info@sage-group.jp">info@sage-group.jp</a></p>
+          </div>
+        </li>
+        <li>
+          <span class="info-icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </span>
+          <div class="info-text">
+            <span class="info-label">ADDRESS</span>
+            <p class="info-value">〒422-0033<br>静岡県静岡市葵区昭和町3-1<br>昭和町ビル303</p>
+          </div>
+        </li>
+      </ul>
+
+      <div class="hours-card">
+        <div class="hours-card-title">BUSINESS HOURS</div>
+        <p class="hours-card-text">平日 10:00 - 19:00<br>土日祝はお休みをいただいております</p>
+      </div>
+    </aside>
+
+    <!-- FORM -->
+    <div class="reveal-r">
+      <form class="form" id="contactForm" novalidate>
+        <div class="form-intro">
+          <span class="form-intro-label">INQUIRY FORM</span>
+          <h3 class="form-intro-title">フォームでのお問い合わせ</h3>
+          <p class="form-intro-sub">下記フォームに必要事項をご入力のうえ送信してください。<br>2〜3営業日以内に担当者よりご連絡いたします。</p>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="f-name">お名前<span class="req">*</span></label>
+            <input type="text" id="f-name" name="name" required placeholder="山田 太郎">
+          </div>
+          <div class="field">
+            <label for="f-kana">フリガナ<span class="opt">任意</span></label>
+            <input type="text" id="f-kana" name="kana" placeholder="ヤマダ タロウ">
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="f-email">メールアドレス<span class="req">*</span></label>
+            <input type="email" id="f-email" name="email" required placeholder="example@email.com">
+          </div>
+          <div class="field">
+            <label for="f-tel">電話番号<span class="opt">任意</span></label>
+            <input type="tel" id="f-tel" name="tel" placeholder="000-0000-0000">
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="f-type">お問い合わせ種別<span class="req">*</span></label>
+          <select id="f-type" name="type" required>
+            <option value="">選択してください</option>
+            <option value="採用について">採用について</option>
+            <option value="事業について">事業について</option>
+            <option value="取材・メディア掲載">取材・メディア掲載</option>
+            <option value="その他">その他</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="f-message">お問い合わせ内容<span class="req">*</span></label>
+          <textarea id="f-message" name="message" required placeholder="ご相談内容をご記入ください"></textarea>
+        </div>
+
+        <div class="consent">
+          <input type="checkbox" id="f-consent" required>
+          <label for="f-consent">個人情報の取り扱いに同意のうえ送信します。<br>※ご入力いただいた情報は、お問い合わせへの返信目的でのみ使用します。</label>
+        </div>
+
+        <div class="submit-row">
+          <button type="submit" class="submit-btn" id="submitBtn">
+            <span>送信する</span>
+            <span class="arrow">→</span>
+          </button>
+          <p class="submit-note">送信ボタンを押すと、メールアプリが起動します。</p>
+        </div>
+      </form>
+
+      <!-- SUCCESS -->
+      <div class="form-success" id="formSuccess">
+        <div class="form-success-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h3 class="form-success-title">メールアプリを起動しました</h3>
+        <p class="form-success-text">入力内容が反映されたメール画面が開きます。<br>そのまま送信ボタンを押してご送信ください。</p>
+        <a href="index.html">トップへ戻る</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="ft-inner">
+    <div class="ft-top">
+      <div class="ft-brand">
+        <a href="index.html" class="ft-logo">
+          <svg width="28" height="28" viewBox="0 0 36 36" fill="none">
+            <circle cx="18" cy="18" r="16" stroke="#9a7a3e" stroke-width="1.5"/>
+            <text x="18" y="22" text-anchor="middle" font-family="Georgia,serif" font-size="10" fill="#9a7a3e" letter-spacing="1">SG</text>
+          </svg>
+          <span class="ft-logo-text">SAGE GROUP</span>
+        </a>
+        <p class="ft-tagline">仕事も、推しも、どっちも本気で。</p>
+      </div>
+      <ul class="ft-nav-list">
+        <li><a href="index.html">ホーム</a></li>
+        <li><a href="infomation.html">会社情報</a></li>
+        <li><a href="business.html">事業内容</a></li>
+        <li><a href="voice.html">社員の声</a></li>
+      </ul>
+    </div>
+    <nav class="ft-breadcrumb" aria-label="パンくずリスト">
+      <ol>
+        <li><a href="index.html">ホーム</a></li>
+        <li aria-current="page">お問い合わせ</li>
+      </ol>
+    </nav>
+    <div class="ft-bottom">
+      <p>&copy; 2022 <span>合同会社SageGroup</span>. All Rights Reserved.</p>
+      <p>〒422-0033 静岡県静岡市葵区昭和町3-1 昭和町ビル303</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* NAV SCROLL */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+}, {passive: true});
+
+/* HAMBURGER */
+const navToggle = document.getElementById('navToggle');
+if(navToggle){
+  navToggle.addEventListener('click', () => {
+    const open = nav.classList.toggle('nav-open');
+    navToggle.setAttribute('aria-expanded', open);
+    document.body.classList.toggle('nav-locked', open);
+  });
+  nav.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', () => {
+      nav.classList.remove('nav-open');
+      navToggle.setAttribute('aria-expanded', 'false');
+      document.body.classList.remove('nav-locked');
+    });
+  });
+}
+
+/* REVEAL */
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      e.target.classList.add('vis');
+      const bar = e.target.querySelector('.gold-bar');
+      if(bar) setTimeout(() => bar.classList.add('vis'), 200);
+      io.unobserve(e.target);
+    }
+  });
+}, {threshold: 0.12});
+document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach(el => io.observe(el));
+
+/* FORM SUBMIT → mailto */
+const form = document.getElementById('contactForm');
+const success = document.getElementById('formSuccess');
+
+form.addEventListener('submit', e => {
+  e.preventDefault();
+  if(!form.checkValidity()){
+    form.reportValidity();
+    return;
+  }
+  const fd = new FormData(form);
+  const name = (fd.get('name') || '').trim();
+  const kana = (fd.get('kana') || '').trim();
+  const email = (fd.get('email') || '').trim();
+  const tel = (fd.get('tel') || '').trim();
+  const type = (fd.get('type') || '').trim();
+  const message = (fd.get('message') || '').trim();
+
+  const subject = `【お問い合わせ】${type} / ${name}様`;
+  const body =
+`以下の内容でお問い合わせがありました。
+
+──────────────────
+お名前: ${name}
+フリガナ: ${kana || '(未入力)'}
+メールアドレス: ${email}
+電話番号: ${tel || '(未入力)'}
+お問い合わせ種別: ${type}
+──────────────────
+
+【お問い合わせ内容】
+${message}
+
+──────────────────
+※このメールは contact.html フォームから自動生成されました。`;
+
+  const mailto = `mailto:info@sage-group.jp?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  window.location.href = mailto;
+
+  setTimeout(() => {
+    form.style.display = 'none';
+    success.classList.add('show');
+    window.scrollTo({top: success.offsetTop - 100, behavior: 'smooth'});
+  }, 400);
+});
+</script>
+</body>
+</html>
