@@ -33,6 +33,15 @@ a{text-decoration:none;color:inherit}
 .nav-links .nav-cta{padding:9px 22px;border:1px solid #9a7a3e;color:#9a7a3e !important;letter-spacing:0.14em;transition:background 0.3s,color 0.3s}
 .nav-links .nav-cta:hover{background:#9a7a3e;color:#ffffff !important}
 
+/* HAMBURGER */
+.nav-toggle{display:none;background:none;border:none;padding:0;cursor:pointer;width:32px;height:32px;position:relative;z-index:1100}
+.nav-toggle-line{display:block;width:24px;height:1.5px;background:#ffffff;margin:6px auto;transition:background 0.3s,transform 0.4s ease,opacity 0.3s}
+.site-nav.scrolled .nav-toggle-line,.site-nav.nav-open .nav-toggle-line{background:#1a1714}
+.site-nav.nav-open .nav-toggle-line:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
+.site-nav.nav-open .nav-toggle-line:nth-child(2){opacity:0}
+.site-nav.nav-open .nav-toggle-line:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
+body.nav-locked{overflow:hidden}
+
 /* REVEAL */
 .reveal{opacity:0;transform:translateY(28px);transition:opacity 0.85s ease,transform 0.85s ease}
 .reveal.vis{opacity:1;transform:none}
@@ -423,7 +432,14 @@ a{text-decoration:none;color:inherit}
 @media(max-width:767px){
   :root{--nav-h:56px;--pad:20px}
   .site-nav{padding:0 20px}
-  .nav-links{display:none}
+  .nav-toggle{display:block}
+  .nav-links{display:flex;flex-direction:column;position:fixed;top:0;left:0;right:0;min-height:100vh;background:#fdfbf7;padding:calc(var(--nav-h) + 40px) 32px 40px;gap:0;align-items:flex-start;transform:translateX(100%);transition:transform 0.5s cubic-bezier(0.22,1,0.36,1);z-index:1050;overflow-y:auto}
+  .site-nav.nav-open .nav-links{transform:translateX(0)}
+  .nav-links li{width:100%;border-bottom:1px solid rgba(154,122,62,0.18);list-style:none}
+  .nav-links a{display:block;padding:22px 0;color:#1a1714 !important;font-size:0.95rem;letter-spacing:0.1em}
+  .nav-links a[aria-current="page"]{color:#9a7a3e !important}
+  .nav-links li:last-child{border-bottom:none;margin-top:24px}
+  .nav-links .nav-cta{padding:16px 32px;text-align:center;color:#9a7a3e !important;width:100%}
   .voice-hero{grid-template-columns:1fr;min-height:auto}
   .voice-hero-bg-word{font-size:32vw;top:auto;bottom:5%;left:-4%}
   .voice-hero-left{padding:80px 20px 40px}
@@ -488,11 +504,16 @@ a{text-decoration:none;color:inherit}
   </a>
   <ul class="nav-links">
     <li><a href="index.html">ホーム</a></li>
+    <li><a href="infomation.html">会社情報</a></li>
     <li><a href="business.html">事業内容</a></li>
     <li><a href="voice.html" aria-current="page">社員の声</a></li>
-    <li><a href="infomation.html">会社情報</a></li>
     <li><a href="https://en-gage.net/sagegroupshizuoka_saiyo/?banner=1" class="nav-cta" target="_blank" rel="noopener">採用情報</a></li>
   </ul>
+  <button class="nav-toggle" id="navToggle" aria-label="メニュー" aria-expanded="false">
+    <span class="nav-toggle-line"></span>
+    <span class="nav-toggle-line"></span>
+    <span class="nav-toggle-line"></span>
+  </button>
 </nav>
 
 <!-- HERO -->
@@ -820,6 +841,22 @@ const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
   nav.classList.toggle('scrolled', window.scrollY > 40);
 }, {passive: true});
+
+const navToggle = document.getElementById('navToggle');
+if(navToggle){
+  navToggle.addEventListener('click', () => {
+    const open = nav.classList.toggle('nav-open');
+    navToggle.setAttribute('aria-expanded', open);
+    document.body.classList.toggle('nav-locked', open);
+  });
+  nav.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', () => {
+      nav.classList.remove('nav-open');
+      navToggle.setAttribute('aria-expanded', 'false');
+      document.body.classList.remove('nav-locked');
+    });
+  });
+}
 
 const io = new IntersectionObserver(entries => {
   entries.forEach(e => {
