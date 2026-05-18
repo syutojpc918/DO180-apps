@@ -190,20 +190,28 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
   margin-bottom:52px;
 }
 .about-label .gold-bar{margin:0}
+/* headline: 各行が下からスライドアップするリビール */
 .ah-line{
-  display:block;
+  display:block;overflow:hidden;
   font-size:clamp(2.4rem,6vw,6rem);
-  font-weight:300;line-height:1.1;
-  color:var(--black);letter-spacing:-0.03em;
+  font-weight:300;line-height:1.15;
+  letter-spacing:-0.03em;
 }
-.ah-line.gold{color:var(--gold)}
-.ah-line:nth-child(2){transition-delay:0.14s}
-.ah-line:nth-child(3){transition-delay:0.28s}
+.ah-line.reveal{opacity:1;transform:none} /* .reveal デフォルト上書き */
+.ah-line .ah-inner{
+  display:block;color:var(--black);
+  transform:translateY(110%);
+  transition:transform 0.9s cubic-bezier(0.16,1,0.3,1);
+}
+.ah-line.gold .ah-inner{color:var(--gold)}
+.ah-line.reveal.vis .ah-inner{transform:translateY(0)}
+.ah-line:nth-child(2) .ah-inner{transition-delay:0.14s}
+.ah-line:nth-child(3) .ah-inner{transition-delay:0.28s}
 .about-divider{
   width:0;height:1px;
-  background:linear-gradient(90deg,var(--gold) 0%,rgba(154,122,62,0.1) 100%);
+  background:linear-gradient(90deg,var(--gold) 0%,rgba(154,122,62,0.08) 100%);
   margin:56px 0;
-  transition:width 1.2s cubic-bezier(0.4,0,0.2,1);
+  transition:width 1.4s cubic-bezier(0.4,0,0.2,1) 0.2s;
 }
 .about-divider.vis{width:100%}
 .about-lower{
@@ -212,15 +220,35 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
 }
 .about-body p{font-size:1.0rem;line-height:2.1;color:var(--body)}
 .about-body p+p{margin-top:20px}
+/* 左下 余白埋め */
+.about-meta{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-top:40px;padding-top:24px;
+  border-top:1px solid rgba(154,122,62,0.18);
+}
+.am-founded{display:flex;align-items:baseline;gap:8px}
+.am-label{font-size:0.6rem;letter-spacing:0.22em;color:var(--gold)}
+.am-num{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--black);line-height:1}
+.am-area{font-size:0.7rem;letter-spacing:0.1em;color:var(--body)}
+.about-cta-link{
+  font-size:0.74rem;letter-spacing:0.14em;color:var(--gold);
+  display:inline-flex;align-items:center;gap:8px;
+  transition:gap 0.3s;
+}
+.about-cta-link:hover{gap:14px}
+/* photo parallax: scale(1.08) で少し余白を確保しておく */
 .about-photo-new{
   width:100%;aspect-ratio:4/3;
   overflow:hidden;border-radius:4px;
 }
 .about-photo-new img{
-  width:100%;height:100%;object-fit:cover;
-  display:block;transition:transform 0.7s ease;
+  width:100%;height:108%;object-fit:cover;
+  display:block;margin-top:-4%;
+  transition:transform 0.1s linear;
 }
-.about-photo-new:hover img{transform:scale(1.03)}
+/* watermark fade-in */
+@keyframes wm-in{from{opacity:0}to{opacity:0.03}}
+.about-watermark{animation:wm-in 2.5s ease 0.8s both}
 
 
 /* ===== PHOTO BLOCK (shared) ===== */
@@ -499,9 +527,9 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
   </div>
 
   <div class="about-headline">
-    <span class="ah-line reveal">「自分にできるかな」</span>
-    <span class="ah-line reveal">なんて思わなくていい。</span>
-    <span class="ah-line gold reveal">一緒に楽しもう。</span>
+    <span class="ah-line reveal"><span class="ah-inner">「自分にできるかな」</span></span>
+    <span class="ah-line reveal"><span class="ah-inner">なんて思わなくていい。</span></span>
+    <span class="ah-line gold reveal"><span class="ah-inner">一緒に楽しもう。</span></span>
   </div>
 
   <div class="about-divider"></div>
@@ -511,6 +539,14 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
       <p>合同会社SageGroupは2022年、静岡県で創業しました。社名"Sage"には花言葉の「家族愛」「チームワーク」「堅実さ」という意味を込めており、みんなで助け合いながら一人ひとりが着実に歩んでいける集団を目指しています。</p>
       <p>その文化はスタッフ自身の言葉にも表れています。「相談がしやすすぎる」「友達と仕事してる感覚で楽しすぎる」——定期的な食事会やイベントで一体感を育みながら、自分らしく自由に働ける職場をつくってきました。</p>
       <p>現在はモバイルショップ支援・イベントプロモーション・アイラッシュサロンの3事業を静岡・山梨・東京エリアで展開中。未経験でも丁寧な研修とフォローがあるので、安心してスタートできます。</p>
+      <div class="about-meta reveal">
+        <div class="am-founded">
+          <span class="am-label">SINCE</span>
+          <span class="am-num">2022</span>
+          <span class="am-area">SHIZUOKA · YAMANASHI · TOKYO</span>
+        </div>
+        <a href="#recruit" class="about-cta-link">採用情報を見る →</a>
+      </div>
     </div>
     <div class="about-photo-new reveal">
       <img src="photos/photo_00.jpg" alt="チームBBQパーティ">
@@ -670,6 +706,16 @@ window.addEventListener('scroll',()=>{
 /* ===== NAV SCROLL ===== */
 const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>40)},{passive:true});
+
+/* ===== ABOUT PHOTO PARALLAX ===== */
+const aboutImg=document.querySelector('.about-photo-new img');
+window.addEventListener('scroll',()=>{
+  if(!aboutImg)return;
+  const rect=aboutImg.closest('.about-photo-new').getBoundingClientRect();
+  const pct=(1-rect.top/window.innerHeight)*0.5;
+  const shift=Math.max(-10,Math.min(10,pct*20-10));
+  aboutImg.style.transform=`translateY(${shift}px)`;
+},{passive:true});
 
 /* ===== INTERSECTION OBSERVER ===== */
 const io=new IntersectionObserver(entries=>{
