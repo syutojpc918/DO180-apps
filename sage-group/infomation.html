@@ -2,1147 +2,532 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SageGroup – 会社情報</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>会社情報 | 合同会社SageGroup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --black: #1a2e28;
-    --white: #ffffff;
-    --green: #3d8b6f;
-    --green-light: #5aab90;
-    --cream: #f0f7f4;
-    --cream-mid: #e0efe9;
-    --gray-text: #7a9e95;
-    --body-text: #4a6b62;
-    --border: rgba(61,139,111,0.2);
-    --pad: 60px;
-    --nav-h: 72px;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    background: var(--white);
-    color: var(--black);
-    font-family: 'Noto Sans JP', sans-serif;
-    font-weight: 300;
-    line-height: 1.9;
-    overflow-x: hidden;
-    word-break: normal;
-    overflow-wrap: break-word;
-    line-break: strict;
-  }
-
-  /* ==============================
-     NAVIGATION
-  ============================== */
-  .site-nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    height: var(--nav-h);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 var(--pad);
-    transition: background 0.4s ease, box-shadow 0.4s ease;
-  }
-
-  .site-nav.scrolled {
-    background: rgba(255,255,255,0.97);
-    backdrop-filter: blur(12px);
-    box-shadow: 0 2px 24px rgba(61,139,111,0.12);
-  }
-
-  .nav-logo {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 22px;
-    color: var(--green);
-    letter-spacing: 0.25em;
-    text-decoration: none;
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 32px;
-    list-style: none;
-    align-items: center;
-  }
-
-  .nav-links a {
-    font-size: 11px;
-    color: rgba(255,255,255,0.8);
-    text-decoration: none;
-    letter-spacing: 0.15em;
-    font-weight: 500;
-    transition: color 0.3s;
-    position: relative;
-  }
-
-  .nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: -4px; left: 0;
-    width: 0; height: 1px;
-    background: var(--green);
-    transition: width 0.3s ease;
-  }
-
-  .nav-links a:hover { color: var(--green-light); }
-  .nav-links a:hover::after { width: 100%; }
-
-  .nav-cta {
-    border: 1px solid var(--green) !important;
-    color: var(--green) !important;
-    padding: 8px 20px;
-    font-size: 10px !important;
-    letter-spacing: 0.2em !important;
-    transition: background 0.3s, color 0.3s !important;
-  }
-  .nav-cta::after { display: none !important; }
-  .nav-cta:hover { background: var(--green) !important; color: var(--white) !important; }
-
-  /* ==============================
-     HERO
-  ============================== */
-  .info-hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: calc(var(--nav-h) + 60px) var(--pad) 100px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .info-hero-bg {
-    position: absolute;
-    inset: 0;
-    background-image: url('https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1600&q=80');
-    background-size: cover;
-    background-position: center;
-    filter: brightness(0.38);
-    z-index: 0;
-    will-change: transform;
-  }
-
-  .info-hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(160deg, rgba(10,30,22,0.15) 0%, rgba(10,30,22,0.78) 100%);
-    z-index: 1;
-  }
-
-  /* 幾何学デコレーション */
-  .hero-deco { position: absolute; z-index: 1; pointer-events: none; }
-
-  .hero-deco-circle {
-    right: 8%; top: 50%;
-    transform: translateY(-50%);
-    width: 440px; height: 440px;
-    border: 1px solid rgba(61,139,111,0.1);
-    border-radius: 50%;
-    animation: rotateSlow 40s linear infinite;
-  }
-  .hero-deco-circle::before {
-    content: '';
-    position: absolute;
-    inset: 36px;
-    border: 1px solid rgba(61,139,111,0.07);
-    border-radius: 50%;
-    animation: rotateSlow 28s linear infinite reverse;
-  }
-  .hero-deco-circle::after {
-    content: '';
-    position: absolute;
-    inset: 72px;
-    border: 1px solid rgba(61,139,111,0.04);
-    border-radius: 50%;
-  }
-
-  .hero-deco-line {
-    top: 0; left: var(--pad);
-    width: 1px; height: 100%;
-    background: linear-gradient(to bottom, transparent, rgba(61,139,111,0.25) 30%, rgba(61,139,111,0.25) 70%, transparent);
-  }
-
-  .hero-content { position: relative; z-index: 2; max-width: 740px; }
-
-  .hero-eyebrow {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 11px;
-    letter-spacing: 0.5em;
-    color: var(--green);
-    margin-bottom: 32px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeUp 0.8s ease 0.3s forwards;
-  }
-  .hero-eyebrow::before {
-    content: '';
-    width: 48px; height: 1px;
-    background: var(--green);
-  }
-
-  .info-hero h1 {
-    font-size: clamp(44px, 6.5vw, 90px);
-    line-height: 1.15;
-    font-weight: 900;
-    letter-spacing: -0.01em;
-    color: #f0f7f4;
-    margin-bottom: 36px;
-  }
-
-  .info-hero h1 .word {
-    display: inline-block;
-    overflow: hidden;
-    vertical-align: bottom;
-  }
-  .info-hero h1 .word-inner {
-    display: inline-block;
-    opacity: 0;
-    transform: translateY(110%);
-    animation: slideUp 0.75s cubic-bezier(0.16,1,0.3,1) forwards;
-  }
-  .info-hero h1 em { font-style: normal; color: var(--green-light); }
-
-  .hero-sub {
-    font-size: 14px;
-    color: rgba(245,244,240,0.65);
-    max-width: 480px;
-    line-height: 2.1;
-    letter-spacing: 0.06em;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeUp 0.8s ease 1.3s forwards;
-  }
-
-  /* スクロールインジケーター */
-  .scroll-indicator {
-    position: absolute;
-    bottom: 40px; left: 50%;
-    transform: translateX(-50%);
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    opacity: 0;
-    animation: fadeUp 0.6s ease 1.8s forwards;
-  }
-
-  .scroll-indicator span {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 9px;
-    letter-spacing: 0.35em;
-    color: rgba(154,122,62,0.55);
-  }
-
-  .scroll-mouse {
-    width: 22px; height: 32px;
-    border: 1px solid rgba(154,122,62,0.35);
-    border-radius: 11px;
-    position: relative;
-  }
-  .scroll-mouse::after {
-    content: '';
-    position: absolute;
-    top: 6px; left: 50%;
-    transform: translateX(-50%);
-    width: 3px; height: 7px;
-    background: var(--green);
-    border-radius: 2px;
-    animation: scrollDot 1.6s ease infinite;
-  }
-
-  /* ==============================
-     STATS BAR
-  ============================== */
-  .stats-bar {
-    background: var(--green);
-    padding: 0 var(--pad);
-    display: flex;
-    justify-content: center;
-  }
-
-  .stat-item {
-    padding: 44px 64px;
-    text-align: center;
-    position: relative;
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
-
-  .stat-item.visible { opacity: 1; transform: translateY(0); }
-
-  .stat-item + .stat-item::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 28%; height: 44%;
-    width: 1px;
-    background: rgba(255,255,255,0.22);
-  }
-
-  .stat-num {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 56px;
-    color: var(--white);
-    line-height: 1;
-    letter-spacing: 0.05em;
-    display: flex;
-    align-items: baseline;
-    justify-content: center;
-    gap: 4px;
-  }
-  .stat-num .unit {
-    font-size: 22px;
-    color: rgba(255,255,255,0.75);
-  }
-
-  .stat-label {
-    font-size: 10px;
-    color: rgba(255,255,255,0.7);
-    letter-spacing: 0.22em;
-    margin-top: 10px;
-    font-weight: 500;
-  }
-
-  /* ==============================
-     SECTION COMMONS
-  ============================== */
-  .section-eyebrow {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 11px;
-    letter-spacing: 0.3em;
-    color: var(--green);
-    margin-bottom: 16px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  .section-eyebrow::after {
-    content: '';
-    display: block;
-    height: 1px;
-    background: var(--green);
-    flex-shrink: 0;
-    width: 0;
-    transition: width 0.9s ease 0.3s;
-  }
-  .section-eyebrow.visible::after { width: 32px; }
-
-  .section-title {
-    font-size: clamp(24px, 2.8vw, 36px);
-    font-weight: 900;
-    letter-spacing: 0.03em;
-    line-height: 1.3;
-  }
-
-  /* fade-up 汎用 */
-  .fade-up {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-  .fade-up.visible { opacity: 1; transform: translateY(0); }
-
-  /* ==============================
-     OVERVIEW
-  ============================== */
-  .overview-section {
-    background: var(--white);
-    padding: 120px var(--pad);
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: start;
-  }
-
-  .overview-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 48px;
-  }
-
-  .overview-table tr {
-    border-bottom: 1px solid var(--border);
-    opacity: 0;
-    transform: translateX(-24px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-  }
-  .overview-table tr:first-child { border-top: 1px solid var(--border); }
-  .overview-table tr.visible { opacity: 1; transform: translateX(0); }
-
-  .overview-table th {
-    padding: 22px 24px 22px 0;
-    width: 140px;
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--green);
-    letter-spacing: 0.1em;
-    vertical-align: top;
-    white-space: nowrap;
-  }
-
-  .overview-table td {
-    padding: 22px 0;
-    font-size: 14px;
-    color: var(--body-text);
-    line-height: 1.9;
-    letter-spacing: 0.04em;
-    vertical-align: top;
-  }
-
-  .overview-table td a {
-    color: var(--green);
-    text-decoration: none;
-    border-bottom: 1px solid var(--border);
-    transition: border-color 0.3s;
-  }
-  .overview-table td a:hover { border-color: var(--green); }
-
-  /* ビジョン */
-  .vision-block {
-    margin-top: 48px;
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-  }
-
-  .vision-card {
-    background: var(--cream);
-    padding: 40px 36px;
-    position: relative;
-    overflow: hidden;
-    opacity: 0;
-    transform: translateX(32px);
-    transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.35s ease, translate 0.35s ease;
-  }
-  .vision-card.visible { opacity: 1; transform: translateX(0); }
-
-  .vision-card:hover {
-    translate: 0 -4px;
-    box-shadow: 0 14px 48px rgba(154,122,62,0.14);
-  }
-
-  .vision-card::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 0;
-    width: 3px; height: 100%;
-    background: var(--green);
-    transform: scaleY(0);
-    transform-origin: top;
-    transition: transform 0.55s ease 0.3s;
-  }
-  .vision-card.visible::before { transform: scaleY(1); }
-
-  .vision-card-label {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 10px;
-    letter-spacing: 0.3em;
-    color: var(--green);
-    margin-bottom: 12px;
-  }
-
-  .vision-card-title {
-    font-size: 18px;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    line-height: 1.6;
-    margin-bottom: 12px;
-    color: var(--black);
-  }
-
-  .vision-card-desc {
-    font-size: 13px;
-    color: var(--body-text);
-    line-height: 2.1;
-    letter-spacing: 0.04em;
-  }
-
-  /* ==============================
-     NAME SECTION
-  ============================== */
-  .name-section {
-    background: var(--white);
-    padding: 120px var(--pad);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .name-section::before {
-    content: 'SAGE';
-    position: absolute;
-    top: 50%; right: -30px;
-    transform: translateY(-50%);
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 300px;
-    color: rgba(61,139,111,0.08);
-    line-height: 1;
-    pointer-events: none;
-    letter-spacing: -0.02em;
-    user-select: none;
-  }
-
-  .name-section .section-eyebrow { color: var(--green); }
-  .name-section .section-eyebrow::after { background: var(--green); }
-  .name-section .section-title { color: var(--black); }
-
-  .name-inner {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 64px;
-    margin-top: 56px;
-    align-items: center;
-  }
-
-  .name-lead {
-    font-size: 15px;
-    line-height: 2.3;
-    color: var(--body-text);
-    letter-spacing: 0.05em;
-    margin-bottom: 32px;
-  }
-
-  .name-keywords {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-
-  .name-keyword {
-    border: 1px solid rgba(61,139,111,0.4);
-    padding: 8px 18px;
-    font-size: 12px;
-    color: var(--green-light);
-    letter-spacing: 0.15em;
-    font-weight: 500;
-    cursor: default;
-    opacity: 0;
-    transform: scale(0.85);
-    transition: opacity 0.4s ease, transform 0.4s ease, background 0.3s, color 0.3s, border-color 0.3s;
-  }
-  .name-keyword.visible { opacity: 1; transform: scale(1); }
-  .name-keyword:hover {
-    background: var(--green);
-    color: var(--white);
-    border-color: var(--green);
-  }
-
-  .name-visual {
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-  }
-
-  .name-card {
-    background: var(--cream);
-    padding: 28px 36px;
-    display: flex;
-    align-items: center;
-    gap: 24px;
-    position: relative;
-    overflow: hidden;
-    opacity: 0;
-    transform: translateX(32px);
-    transition: opacity 0.5s ease, transform 0.5s ease, background 0.3s;
-  }
-  .name-card.visible { opacity: 1; transform: translateX(0); }
-  .name-card:hover { background: var(--cream-mid); }
-
-  .name-card::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 0;
-    width: 2px; height: 100%;
-    background: var(--green);
-    transform: scaleY(0);
-    transform-origin: bottom;
-    transition: transform 0.4s ease 0.2s;
-  }
-  .name-card.visible::before { transform: scaleY(1); }
-
-  .name-card-icon { width: 40px; height: 40px; flex-shrink: 0; }
-  .name-card-icon svg {
-    width: 40px; height: 40px;
-    stroke: var(--green-light);
-    fill: none;
-    stroke-width: 1.5;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-  }
-
-  .name-card-label {
-    font-size: 10px;
-    letter-spacing: 0.25em;
-    color: var(--green);
-    margin-bottom: 4px;
-    font-weight: 700;
-  }
-
-  .name-card-text {
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--black);
-    letter-spacing: 0.05em;
-  }
-
-  /* ==============================
-     ACCESS
-  ============================== */
-  .access-section {
-    background: var(--cream);
-    padding: 120px var(--pad);
-  }
-
-  .access-inner {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 64px;
-    margin-top: 56px;
-    align-items: start;
-  }
-
-  .access-item {
-    padding: 24px 0;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    gap: 20px;
-    align-items: flex-start;
-    opacity: 0;
-    transform: translateY(22px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-  }
-  .access-item:first-child { border-top: 1px solid var(--border); }
-  .access-item.visible { opacity: 1; transform: translateY(0); }
-
-  .access-icon { width: 28px; height: 28px; flex-shrink: 0; margin-top: 2px; }
-  .access-icon svg {
-    width: 24px; height: 24px;
-    stroke: var(--green);
-    fill: none;
-    stroke-width: 1.5;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-  }
-
-  .access-label {
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    color: var(--green);
-    font-weight: 700;
-    margin-bottom: 4px;
-  }
-
-  .access-value {
-    font-size: 14px;
-    color: var(--body-text);
-    line-height: 1.9;
-    letter-spacing: 0.04em;
-  }
-
-  .access-value a {
-    color: var(--green);
-    text-decoration: none;
-    border-bottom: 1px solid var(--border);
-    transition: border-color 0.3s;
-  }
-  .access-value a:hover { border-color: var(--green); }
-
-  .access-map { position: relative; }
-
-  .map-frame {
-    width: 100%;
-    aspect-ratio: 4/3;
-    border: none;
-    display: block;
-    opacity: 0;
-    transform: scale(0.97);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-  .map-frame.visible { opacity: 1; transform: scale(1); }
-
-  .map-label {
-    position: absolute;
-    top: 16px; left: 16px;
-    background: var(--green);
-    color: var(--white);
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 11px;
-    letter-spacing: 0.25em;
-    padding: 6px 14px;
-    z-index: 1;
-  }
-
-  /* ==============================
-     CTA
-  ============================== */
-  .info-cta {
-    background: var(--green);
-    padding: 88px var(--pad);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 32px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .info-cta::before {
-    content: 'CONTACT';
-    position: absolute;
-    left: -20px; top: 50%;
-    transform: translateY(-50%);
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 200px;
-    color: rgba(255,255,255,0.06);
-    line-height: 1;
-    pointer-events: none;
-    user-select: none;
-  }
-
-  .info-cta-text { position: relative; }
-
-  .info-cta h2 {
-    font-size: clamp(22px, 2.5vw, 32px);
-    color: var(--white);
-    font-weight: 900;
-    margin-bottom: 8px;
-  }
-
-  .info-cta p {
-    font-size: 13px;
-    color: rgba(255,255,255,0.72);
-    letter-spacing: 0.04em;
-  }
-
-  /* リップルボタン */
-  .btn-dark {
-    background: var(--green);
-    color: var(--white);
-    padding: 18px 48px;
-    font-size: 12px;
-    letter-spacing: 0.22em;
-    font-weight: 500;
-    text-decoration: none;
-    font-family: 'Noto Sans JP', sans-serif;
-    white-space: nowrap;
-    flex-shrink: 0;
-    display: inline-block;
-    position: relative;
-    overflow: hidden;
-    transition: opacity 0.3s, translate 0.3s;
-  }
-  .btn-dark:hover { opacity: 0.82; translate: 0 -3px; }
-
-  .btn-dark .ripple {
-    position: absolute;
-    border-radius: 50%;
-    transform: scale(0);
-    animation: rippleAnim 0.65s linear;
-    background: rgba(255,255,255,0.22);
-    pointer-events: none;
-  }
-
-  /* ==============================
-     FOOTER
-  ============================== */
-  footer {
-    background: var(--cream-mid);
-    padding: 36px var(--pad);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-top: 2px solid var(--green);
-  }
-
-  .footer-logo {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 20px;
-    color: var(--green);
-    letter-spacing: 0.25em;
-  }
-
-  .footer-copy {
-    font-size: 11px;
-    color: rgba(255,255,255,0.28);
-    letter-spacing: 0.1em;
-  }
-
-  /* ==============================
-     KEYFRAMES
-  ============================== */
-  @keyframes fadeUp {
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes slideUp {
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes scrollDot {
-    0%   { opacity: 1; transform: translateX(-50%) translateY(0); }
-    80%  { opacity: 0; transform: translateX(-50%) translateY(12px); }
-    100% { opacity: 0; transform: translateX(-50%) translateY(12px); }
-  }
-
-  @keyframes rippleAnim {
-    to { transform: scale(4); opacity: 0; }
-  }
-
-  @keyframes rotateSlow {
-    from { transform: translateY(-50%) rotate(0deg); }
-    to   { transform: translateY(-50%) rotate(360deg); }
-  }
-
-  /* ==============================
-     TABLET
-  ============================== */
-  @media (min-width: 768px) and (max-width: 1023px) {
-    :root { --pad: 36px; }
-    .overview-section  { grid-template-columns: 1fr; gap: 56px; }
-    .name-inner        { grid-template-columns: 1fr; gap: 40px; }
-    .access-inner      { grid-template-columns: 1fr; gap: 40px; }
-    .info-cta          { flex-direction: column; align-items: flex-start; gap: 24px; }
-    .nav-links         { display: none; }
-    .hero-deco-circle  { width: 300px; height: 300px; right: 3%; }
-    .stat-item         { padding: 36px 40px; }
-  }
-
-  /* ==============================
-     MOBILE
-  ============================== */
-  @media (max-width: 767px) {
-    :root { --pad: 20px; }
-    .site-nav     { padding: 0 20px; }
-    .nav-links    { display: none; }
-    .info-hero    { min-height: 100svh; padding: 120px var(--pad) 88px; }
-    .info-hero h1 { font-size: clamp(32px, 8.5vw, 50px); }
-    .hero-deco-circle { display: none; }
-    .hero-deco-line   { display: none; }
-    .stats-bar    { flex-wrap: wrap; justify-content: flex-start; }
-    .stat-item    { padding: 28px 36px; flex: 1 0 50%; }
-    .stat-item + .stat-item::before { display: none; }
-    .overview-section { grid-template-columns: 1fr; gap: 48px; padding: 72px var(--pad); }
-    .overview-table th { width: 110px; font-size: 11px; padding-right: 12px; }
-    .overview-table td { font-size: 13px; }
-    .overview-table th,
-    .overview-table td { padding: 18px 0; }
-    .vision-card  { padding: 28px 24px; }
-    .vision-card-title { font-size: 16px; }
-    .name-section { padding: 72px var(--pad); }
-    .name-inner   { grid-template-columns: 1fr; gap: 36px; margin-top: 36px; }
-    .name-card    { padding: 22px 20px; }
-    .access-section { padding: 72px var(--pad); }
-    .access-inner   { grid-template-columns: 1fr; gap: 36px; }
-    .info-cta     { flex-direction: column; align-items: stretch; gap: 24px; padding: 64px var(--pad); }
-    .btn-dark     { width: 100%; text-align: center; padding: 18px; }
-    footer        { flex-direction: column; gap: 10px; text-align: center; padding: 28px var(--pad); }
-  }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gold:#9a7a3e;--gold-l:#b8965a;--gold-p:#d4b896;--gold-pale:#f0e8d8;
+  --white:#ffffff;--off:#f4f3f1;--cream:#fdfbf7;--cream-mid:#f5f0e8;--cream-deep:#ede5d6;
+  --gray:#e8e6e2;--gray-m:#c8c4be;--black:#1a1714;--body:#4a4540;
+  --nav-h:68px;--pad:64px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans JP',sans-serif;color:var(--body);background:var(--white);overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+
+/* UNIFIED HEADER */
+.site-nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 var(--pad);transition:background 0.45s ease,box-shadow 0.45s ease}
+.site-nav.scrolled{background:rgba(255,255,255,0.97);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 1px 0 rgba(154,122,62,0.14)}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-text{font-family:'Bebas Neue',sans-serif;font-size:1.25rem;letter-spacing:0.14em;color:#ffffff;transition:color 0.3s}
+.site-nav.scrolled .logo-text{color:#1a1714}
+.nav-links{display:flex;gap:32px;list-style:none;align-items:center;margin:0;padding:0}
+.nav-links a{font-size:0.72rem;letter-spacing:0.14em;color:rgba(255,255,255,0.85);text-decoration:none;transition:color 0.3s}
+.site-nav.scrolled .nav-links a{color:#3a3530}
+.nav-links a:hover{color:#9a7a3e}
+.nav-links a[aria-current="page"]{color:#9a7a3e}
+.nav-links .nav-cta{padding:9px 22px;border:1px solid #9a7a3e;color:#9a7a3e !important;letter-spacing:0.14em;transition:background 0.3s,color 0.3s}
+.nav-links .nav-cta:hover{background:#9a7a3e;color:#ffffff !important}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.85s ease,transform 0.85s ease}
+.reveal.vis{opacity:1;transform:none}
+.reveal-l{opacity:0;transform:translateX(-32px);transition:opacity 0.85s ease,transform 0.85s ease}
+.reveal-l.vis{opacity:1;transform:none}
+.reveal-r{opacity:0;transform:translateX(32px);transition:opacity 0.85s ease,transform 0.85s ease}
+.reveal-r.vis{opacity:1;transform:none}
+.stagger .reveal:nth-child(2){transition-delay:0.12s}
+.stagger .reveal:nth-child(3){transition-delay:0.24s}
+
+/* SECTION LABELS */
+.sec-tag{display:block;font-family:'Bebas Neue',sans-serif;font-size:0.65rem;letter-spacing:0.38em;color:var(--gold);margin-bottom:10px}
+.sec-en{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.4rem,5vw,4.5rem);line-height:0.92;letter-spacing:0.03em;color:var(--black);display:block;margin-bottom:12px}
+.gold-bar{width:0;height:2px;background:linear-gradient(90deg,var(--gold),var(--gold-p),transparent);margin-bottom:36px;transition:width 1.2s cubic-bezier(0.22,1,0.36,1)}
+.gold-bar.vis{width:80px}
+
+/* HERO */
+.info-hero{min-height:100vh;background:var(--cream);display:flex;align-items:flex-end;padding:calc(var(--nav-h) + 60px) var(--pad) 80px;position:relative;overflow:hidden}
+.info-hero-bg-word{position:absolute;font-family:'Bebas Neue',sans-serif;font-size:clamp(120px,22vw,300px);letter-spacing:0.05em;color:rgba(154,122,62,0.055);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;white-space:nowrap;animation:bgDrift 12s ease-in-out infinite;user-select:none}
+@keyframes bgDrift{0%,100%{transform:translate(-50%,-52%)}50%{transform:translate(-50%,-48%)}}
+.hero-rings{position:absolute;top:-60px;right:-60px;width:520px;height:520px;pointer-events:none}
+.hero-ring{position:absolute;border-radius:50%;border:1px solid rgba(154,122,62,0.15)}
+.hero-ring:nth-child(1){inset:0;animation:spin 30s linear infinite}
+.hero-ring:nth-child(2){inset:80px;animation:spin 22s linear infinite reverse;border-color:rgba(154,122,62,0.2)}
+.hero-ring:nth-child(3){inset:160px;animation:spin 16s linear infinite;border-color:rgba(154,122,62,0.12)}
+.hero-ring:nth-child(4){inset:220px;background:radial-gradient(circle,rgba(154,122,62,0.08) 0%,transparent 70%);border:none}
+.hero-rings-bl{position:absolute;bottom:-100px;left:-80px;width:360px;height:360px;pointer-events:none}
+.hero-rings-bl .hero-ring:nth-child(1){inset:0;animation:spin 40s linear infinite reverse;border-color:rgba(154,122,62,0.08)}
+.hero-rings-bl .hero-ring:nth-child(2){inset:60px;animation:spin 28s linear infinite;border-color:rgba(154,122,62,0.1)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hero-line-accent{position:absolute;left:calc(var(--pad) - 32px);top:0;bottom:0;width:1px;background:linear-gradient(to bottom,transparent,var(--gold-pale) 30%,var(--gold-pale) 70%,transparent);animation:lineIn 1.2s ease 0.4s both}
+@keyframes lineIn{from{transform:scaleY(0);transform-origin:top}to{transform:scaleY(1);transform-origin:top}}
+.hero-content{position:relative;z-index:1;max-width:760px}
+.hero-eyebrow{font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:0.45em;color:var(--gold);margin-bottom:24px;display:flex;align-items:center;gap:16px;animation:fadeUp 0.8s ease 0.3s both}
+.hero-eyebrow::before{content:'';display:block;width:32px;height:1px;background:var(--gold);flex-shrink:0}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.hero-h1{font-size:clamp(36px,6vw,76px);font-weight:900;line-height:1.2;letter-spacing:-0.01em;color:var(--black);margin-bottom:28px;animation:fadeUp 0.8s ease 0.5s both}
+.hero-h1 em{font-style:normal;color:var(--gold)}
+.hero-sub{font-size:14px;color:var(--body);line-height:2.1;max-width:500px;letter-spacing:0.04em;animation:fadeUp 0.8s ease 0.7s both}
+.hero-scroll{position:absolute;bottom:36px;right:var(--pad);display:flex;flex-direction:column;align-items:center;gap:8px;font-family:'Bebas Neue',sans-serif;font-size:9px;letter-spacing:0.3em;color:var(--gold-pale);animation:fadeUp 0.8s ease 1s both}
+.hero-scroll-bar{width:1px;height:48px;background:var(--cream-deep);overflow:hidden;position:relative}
+.hero-scroll-bar::after{content:'';position:absolute;top:-100%;width:100%;height:100%;background:var(--gold);animation:scrollBar 1.6s ease-in-out infinite}
+@keyframes scrollBar{0%{top:-100%}60%,100%{top:100%}}
+
+/* STATS BAR */
+.stats-bar{background:var(--black);padding:56px var(--pad);display:flex;justify-content:center}
+.stats-inner{display:flex;justify-content:center;max-width:800px;width:100%}
+.stat-item{flex:1;text-align:center;position:relative}
+.stat-item+.stat-item::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);height:52px;width:1px;background:rgba(154,122,62,0.25)}
+.stat-num{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.8rem,5vw,4.2rem);color:var(--gold);line-height:1;display:block;margin-bottom:8px}
+.stat-unit{font-size:0.8rem;color:rgba(255,255,255,0.45);letter-spacing:0.12em}
+.stat-label{font-size:0.68rem;letter-spacing:0.16em;color:rgba(255,255,255,0.35);margin-top:6px;display:block}
+
+/* OVERVIEW */
+.overview{background:var(--white);padding:120px var(--pad);position:relative;overflow:hidden}
+.overview-wm{position:absolute;font-family:'Bebas Neue',sans-serif;font-size:clamp(8rem,16vw,18rem);color:var(--black);opacity:0.025;right:-2%;bottom:5%;letter-spacing:0.1em;pointer-events:none;user-select:none;line-height:1}
+.overview-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;position:relative;z-index:1}
+.overview-desc{font-size:0.9rem;color:var(--body);line-height:2.1;letter-spacing:0.04em}
+.overview-table{width:100%;border-collapse:collapse}
+.overview-table tr{border-bottom:1px solid var(--gray);transition:background 0.2s}
+.overview-table tr:hover{background:var(--cream)}
+.overview-table th{width:140px;padding:20px 12px 20px 0;font-size:0.72rem;letter-spacing:0.14em;color:var(--gold);font-weight:500;vertical-align:top;white-space:nowrap}
+.overview-table td{padding:20px 0;font-size:0.88rem;line-height:1.9;color:var(--body)}
+.overview-table td a{color:var(--gold);border-bottom:1px solid rgba(154,122,62,0.3);transition:border-color 0.2s}
+.overview-table td a:hover{border-color:var(--gold)}
+
+/* MISSION */
+.mission{background:var(--cream);padding:120px var(--pad)}
+.mission-inner{max-width:1200px;margin:0 auto}
+.mission-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;margin-top:64px}
+.mission-quote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1.6rem,3vw,2.6rem);color:var(--black);line-height:1.5;border-left:3px solid var(--gold);padding-left:32px;margin-bottom:32px}
+.mission-body{font-size:0.9rem;color:var(--body);line-height:2.2;letter-spacing:0.04em}
+.mission-img-wrap{position:relative;aspect-ratio:4/5;overflow:hidden}
+.mission-img-wrap::before{content:'';position:absolute;top:20px;left:20px;right:-20px;bottom:-20px;border:1.5px solid var(--gold);z-index:0;opacity:0.5;pointer-events:none}
+.mission-img-placeholder{width:100%;height:100%;background:linear-gradient(135deg,var(--cream-mid) 0%,var(--cream-deep) 100%);display:flex;align-items:center;justify-content:center;position:relative;z-index:1}
+.mission-img-placeholder span{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,4vw,4rem);color:var(--gold);opacity:0.3;letter-spacing:0.1em}
+
+/* VALUES */
+.values{background:var(--off);padding:120px var(--pad)}
+.values-inner{max-width:1200px;margin:0 auto}
+.values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px}
+.value-card{background:var(--white);padding:48px 36px;border-top:3px solid transparent;transition:border-color 0.4s,box-shadow 0.4s,transform 0.4s}
+.value-card:hover{border-color:var(--gold);box-shadow:0 20px 60px rgba(154,122,62,0.10);transform:translateY(-6px)}
+.value-card-num{font-family:'Bebas Neue',sans-serif;font-size:3.5rem;color:var(--gold);opacity:0.2;line-height:1;margin-bottom:20px}
+.value-card-title{font-size:1.15rem;font-weight:700;color:var(--black);margin-bottom:16px;letter-spacing:0.04em}
+.value-card-desc{font-size:0.84rem;color:var(--body);line-height:2.1}
+
+/* NAME */
+.name-section{background:var(--white);padding:120px var(--pad);position:relative;overflow:hidden}
+.name-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.name-lead{font-size:0.9rem;color:var(--body);line-height:2.2;letter-spacing:0.04em;margin-bottom:36px}
+.name-keywords{display:flex;flex-wrap:wrap;gap:12px}
+.name-keyword{padding:9px 22px;border:1px solid rgba(154,122,62,0.4);font-size:0.76rem;letter-spacing:0.14em;color:var(--gold);transition:background 0.3s,color 0.3s}
+.name-keyword:hover{background:var(--gold);color:var(--white)}
+.name-visual{position:relative;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center}
+.name-visual-ring{position:absolute;border-radius:50%;border:1px solid rgba(154,122,62,0.18)}
+.name-visual-ring:nth-child(1){inset:0;animation:spin 25s linear infinite}
+.name-visual-ring:nth-child(2){inset:40px;animation:spin 18s linear infinite reverse;border-color:rgba(154,122,62,0.28)}
+.name-visual-ring:nth-child(3){inset:90px;animation:spin 12s linear infinite;border-color:rgba(154,122,62,0.15)}
+.name-visual-center{position:relative;z-index:1;text-align:center}
+.name-visual-word{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,6vw,5rem);color:var(--gold);letter-spacing:0.1em;line-height:1;margin-bottom:8px}
+.name-visual-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1rem;color:var(--body);letter-spacing:0.08em}
+
+/* ACCESS */
+.access{background:var(--cream);padding:120px var(--pad)}
+.access-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+.access-info{padding-top:8px}
+.access-item{display:flex;gap:20px;align-items:flex-start;padding:22px 0;border-bottom:1px solid var(--gray)}
+.access-item:first-child{border-top:1px solid var(--gray)}
+.access-icon{width:40px;height:40px;flex-shrink:0;display:flex;align-items:center;justify-content:center;border:1px solid rgba(154,122,62,0.3);border-radius:50%}
+.access-label{font-size:0.68rem;letter-spacing:0.16em;color:var(--gold);margin-bottom:4px;display:block}
+.access-value{font-size:0.9rem;color:var(--body);line-height:1.8}
+.access-value a{color:var(--gold);border-bottom:1px solid rgba(154,122,62,0.3);transition:border-color 0.2s}
+.access-value a:hover{border-color:var(--gold)}
+.map-wrap{overflow:hidden;aspect-ratio:4/3;border:1px solid var(--gray)}
+.map-wrap iframe{width:100%;height:100%;border:none;filter:grayscale(15%) contrast(0.95);display:block}
+
+/* CTA */
+.info-cta{background:var(--black);padding:100px var(--pad);text-align:center;position:relative;overflow:hidden}
+.info-cta::before{content:'CONTACT';position:absolute;font-family:'Bebas Neue',sans-serif;font-size:clamp(8rem,18vw,20rem);color:rgba(154,122,62,0.04);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;user-select:none;white-space:nowrap}
+.info-cta-inner{position:relative;z-index:1}
+.info-cta-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,4vw,3.5rem);color:var(--white);letter-spacing:0.08em;margin-bottom:16px}
+.info-cta-sub{font-size:0.82rem;color:rgba(255,255,255,0.45);letter-spacing:0.1em;margin-bottom:40px;line-height:2}
+.cta-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.btn-g{display:inline-block;padding:16px 48px;border:1px solid var(--gold);color:var(--gold);font-size:0.75rem;letter-spacing:0.18em;transition:background 0.3s,color 0.3s}
+.btn-g:hover{background:var(--gold);color:var(--white)}
+
+/* UNIFIED FOOTER */
+.footer{background:#0a0806;padding:64px 64px 44px;border-top:1px solid rgba(154,122,62,0.1)}
+.ft-inner{max-width:1400px;margin:0 auto}
+.ft-top{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:1px solid rgba(154,122,62,0.08);padding-bottom:40px;margin-bottom:24px}
+.ft-logo{display:flex;align-items:center;gap:10px;margin-bottom:10px;text-decoration:none}
+.ft-logo-text{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:#9a7a3e;letter-spacing:0.1em}
+.ft-tagline{font-size:0.76rem;letter-spacing:0.1em;color:rgba(255,255,255,0.4)}
+.ft-nav-list{display:flex;flex-direction:column;gap:12px;list-style:none;text-align:right}
+.ft-nav-list a{font-size:0.76rem;letter-spacing:0.1em;color:rgba(255,255,255,0.5);text-decoration:none;transition:color 0.3s}
+.ft-nav-list a:hover{color:#9a7a3e}
+.ft-breadcrumb{padding:18px 0;margin-bottom:24px;border-bottom:1px solid rgba(154,122,62,0.08)}
+.ft-breadcrumb ol{list-style:none;display:flex;align-items:center;margin:0;padding:0}
+.ft-breadcrumb li{font-size:0.68rem;letter-spacing:0.1em;color:rgba(255,255,255,0.35)}
+.ft-breadcrumb li+li::before{content:'›';margin:0 10px;color:rgba(154,122,62,0.5)}
+.ft-breadcrumb a{color:rgba(255,255,255,0.5);text-decoration:none;transition:color 0.2s}
+.ft-breadcrumb a:hover{color:#9a7a3e}
+.ft-breadcrumb [aria-current="page"]{color:#9a7a3e}
+.ft-bottom{display:flex;justify-content:space-between;align-items:center;font-size:0.72rem;letter-spacing:0.06em;color:rgba(255,255,255,0.4)}
+.ft-bottom span{color:#9a7a3e}
+
+/* MOBILE */
+@media(max-width:767px){
+  :root{--nav-h:56px;--pad:20px}
+  .site-nav{padding:0 20px}
+  .nav-links{display:none}
+  .info-hero{padding:calc(var(--nav-h) + 40px) 20px 60px}
+  .info-hero-bg-word{font-size:38vw}
+  .hero-rings,.hero-rings-bl,.hero-line-accent{display:none}
+  .hero-h1{font-size:clamp(2.2rem,8vw,3.5rem)}
+  .stats-bar{padding:40px 20px}
+  .overview{padding:72px 20px}
+  .overview-inner{grid-template-columns:1fr;gap:48px}
+  .overview-wm{display:none}
+  .mission{padding:72px 20px}
+  .mission-grid{grid-template-columns:1fr;gap:48px}
+  .mission-img-wrap{aspect-ratio:3/2}
+  .values{padding:72px 20px}
+  .values-grid{grid-template-columns:1fr;gap:16px}
+  .name-section{padding:72px 20px}
+  .name-inner{grid-template-columns:1fr;gap:40px}
+  .name-visual{max-width:260px;margin:0 auto}
+  .access{padding:72px 20px}
+  .access-inner{grid-template-columns:1fr;gap:40px}
+  .info-cta{padding:72px 20px}
+  .footer{padding:48px 20px 32px}
+  .ft-top{flex-direction:column;gap:28px}
+  .ft-nav-list{flex-direction:row;flex-wrap:wrap;gap:14px;text-align:left}
+  .ft-bottom{flex-direction:column;gap:8px;text-align:center}
+}
 </style>
 </head>
 <body>
 
-<!-- NAVIGATION -->
-<nav class="site-nav" id="siteNav">
-  <a href="#" class="nav-logo">SAGE GROUP</a>
+<!-- NAV -->
+<nav class="site-nav" id="nav">
+  <a href="index.html" class="nav-logo">
+    <svg class="logo-crest" width="36" height="36" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+      <circle cx="18" cy="18" r="16" stroke="#9a7a3e" stroke-width="1.5"/>
+      <text x="18" y="22" text-anchor="middle" font-family="Georgia,serif" font-size="10" fill="#9a7a3e" letter-spacing="1">SG</text>
+    </svg>
+    <span class="logo-text">SAGE GROUP</span>
+  </a>
   <ul class="nav-links">
-    <li><a href="#overview">会社概要</a></li>
-    <li><a href="#vision">ビジョン</a></li>
-    <li><a href="#name">社名の由来</a></li>
-    <li><a href="#access">アクセス</a></li>
-    <li><a href="mailto:info@sage-group.jp" class="nav-cta">お問い合わせ</a></li>
+    <li><a href="index.html">ホーム</a></li>
+    <li><a href="business.html">事業内容</a></li>
+    <li><a href="voice.html">社員の声</a></li>
+    <li><a href="infomation.html" aria-current="page">会社情報</a></li>
+    <li><a href="https://en-gage.net/sagegroupshizuoka_saiyo/?banner=1" class="nav-cta" target="_blank" rel="noopener">採用情報</a></li>
   </ul>
 </nav>
 
 <!-- HERO -->
-<div class="info-hero">
-  <div class="info-hero-bg" id="heroBg"></div>
-  <div class="hero-deco hero-deco-circle"></div>
-  <div class="hero-deco hero-deco-line"></div>
+<section class="info-hero">
+  <div class="info-hero-bg-word">COMPANY</div>
+  <div class="hero-rings">
+    <div class="hero-ring"></div>
+    <div class="hero-ring"></div>
+    <div class="hero-ring"></div>
+    <div class="hero-ring"></div>
+  </div>
+  <div class="hero-rings-bl">
+    <div class="hero-ring"></div>
+    <div class="hero-ring"></div>
+  </div>
+  <div class="hero-line-accent"></div>
   <div class="hero-content">
-    <div class="hero-eyebrow">COMPANY — 会社情報</div>
-    <h1>
-      <span class="word"><span class="word-inner" style="animation-delay:.55s">誠実に、</span></span>
-      <span class="word"><span class="word-inner" style="animation-delay:.75s">共に、</span></span><br>
-      <span class="word"><span class="word-inner" style="animation-delay:.95s"><em>着実に。</em></span></span>
-    </h1>
+    <div class="hero-eyebrow">COMPANY INFO — 会社情報</div>
+    <h1 class="hero-h1">誠実に、共に、<br><em>着実に。</em></h1>
     <p class="hero-sub">合同会社SageGroupは「家族愛」「チームワーク」「堅実」を企業理念に、静岡・愛知・東京で事業を展開しています。</p>
   </div>
-  <div class="scroll-indicator">
-    <div class="scroll-mouse"></div>
-    <span>SCROLL</span>
+  <div class="hero-scroll">
+    <div class="hero-scroll-bar"></div>
+    SCROLL
   </div>
-</div>
+</section>
 
 <!-- STATS BAR -->
 <div class="stats-bar" id="statsBar">
-  <div class="stat-item">
-    <div class="stat-num"><span id="statYear">2022</span></div>
-    <div class="stat-label">FOUNDED YEAR</div>
-  </div>
-  <div class="stat-item" style="transition-delay:.12s">
-    <div class="stat-num"><span id="statArea">0</span><span class="unit">都市</span></div>
-    <div class="stat-label">展開エリア</div>
-  </div>
-  <div class="stat-item" style="transition-delay:.24s">
-    <div class="stat-num"><span id="statBiz">0</span><span class="unit">事業</span></div>
-    <div class="stat-label">事業領域</div>
-  </div>
-</div>
-
-<!-- 会社概要 -->
-<div class="overview-section" id="overview">
-  <div>
-    <div class="section-eyebrow fade-up">OVERVIEW</div>
-    <h2 class="section-title fade-up" style="transition-delay:.1s">会社概要</h2>
-    <table class="overview-table" id="overviewTable">
-      <tr><th>会社名</th><td>合同会社SageGroup</td></tr>
-      <tr><th>代表者</th><td>古賀 賢弥</td></tr>
-      <tr><th>設立</th><td>2022年5月</td></tr>
-      <tr><th>所在地</th><td>〒422-0033<br>静岡県静岡市葵区昭和町3-1<br>昭和町ビル303</td></tr>
-      <tr><th>電話番号</th><td><a href="tel:0543976631">054-397-6631</a></td></tr>
-      <tr><th>メール</th><td><a href="mailto:info@sage-group.jp">info@sage-group.jp</a></td></tr>
-      <tr><th>事業内容</th><td>モバイルショップ支援<br>イベントプロモーション<br>アイラッシュサロン運営</td></tr>
-    </table>
-  </div>
-
-  <div id="vision">
-    <div class="section-eyebrow fade-up">VISION</div>
-    <h2 class="section-title fade-up" style="transition-delay:.1s">私たちのビジョン</h2>
-    <div class="vision-block">
-      <div class="vision-card">
-        <div class="vision-card-label">MISSION</div>
-        <div class="vision-card-title">人と企業の可能性を、最大限に引き出す。</div>
-        <div class="vision-card-desc">どんな人にも可能性を感じ、その可能性を最大限に引き出すサポートをしていきたいと考えています。「人間性」を重視した誠実な姿勢で、多くの人と手を取り合い共に成長していくパートナーであり続けます。</div>
-      </div>
-      <div class="vision-card" style="transition-delay:.18s">
-        <div class="vision-card-label">VALUES</div>
-        <div class="vision-card-title">家族のような集団で、着実に歩む。</div>
-        <div class="vision-card-desc">お互いを思い合い、困ったときは助け合う。ギスギスした関係ではなく、チームワークを一番に大切にする会社でありたいと考えています。</div>
-      </div>
+  <div class="stats-inner">
+    <div class="stat-item">
+      <span class="stat-num" id="statYear">2022</span>
+      <span class="stat-unit">年</span>
+      <span class="stat-label">設立年</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num" id="statArea">3</span>
+      <span class="stat-unit">都市</span>
+      <span class="stat-label">展開エリア</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num" id="statBiz">3</span>
+      <span class="stat-unit">事業</span>
+      <span class="stat-label">事業分野</span>
     </div>
   </div>
 </div>
 
-<!-- 社名の由来 -->
-<div class="name-section" id="name">
-  <div class="section-eyebrow fade-up">ABOUT OUR NAME</div>
-  <h2 class="section-title fade-up" style="transition-delay:.1s">社名「サージ」の由来</h2>
+<!-- OVERVIEW -->
+<section class="overview" id="overview">
+  <div class="overview-wm">OVERVIEW</div>
+  <div class="overview-inner">
+    <div class="reveal-l">
+      <span class="sec-tag">COMPANY OVERVIEW</span>
+      <span class="sec-en">会社概要</span>
+      <div class="gold-bar"></div>
+      <p class="overview-desc">2022年に静岡で生まれた合同会社SageGroup。モバイル・イベント・アイラッシュの3事業を軸に、静岡・愛知・東京へと着実に歩みを広げています。「家族愛・チームワーク・堅実」を企業理念に掲げ、人と企業の可能性を最大限に引き出すことを使命としています。</p>
+    </div>
+    <div class="reveal-r">
+      <table class="overview-table">
+        <tr><th>会社名</th><td>合同会社SageGroup</td></tr>
+        <tr><th>代表者</th><td>古賀 賢弥</td></tr>
+        <tr><th>設立</th><td>2022年5月</td></tr>
+        <tr><th>所在地</th><td>〒422-0033<br>静岡県静岡市葵区昭和町3-1<br>昭和町ビル303</td></tr>
+        <tr><th>TEL</th><td><a href="tel:054-397-6631">054-397-6631</a></td></tr>
+        <tr><th>メール</th><td><a href="mailto:info@sage-group.jp">info@sage-group.jp</a></td></tr>
+        <tr><th>事業内容</th><td>モバイルショップ支援<br>イベントプロモーション<br>アイラッシュサロン運営</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION -->
+<section class="mission" id="vision">
+  <div class="mission-inner">
+    <div class="reveal">
+      <span class="sec-tag">MISSION &amp; VISION</span>
+      <span class="sec-en">ミッション</span>
+      <div class="gold-bar"></div>
+    </div>
+    <div class="mission-grid">
+      <div class="reveal-l">
+        <p class="mission-quote">人と企業の可能性を、<br>最大限に引き出す。</p>
+        <p class="mission-body">どんな人にも可能性を感じ、その可能性を最大限に引き出すサポートをしていきたいと考えています。「人間性」を重視した誠実な姿勢で、多くの人と手を取り合い共に成長していくパートナーであり続けます。</p>
+      </div>
+      <div class="reveal-r">
+        <div class="mission-img-wrap">
+          <div class="mission-img-placeholder">
+            <span>SAGE GROUP</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="values" id="values">
+  <div class="values-inner">
+    <div class="reveal">
+      <span class="sec-tag">CORE VALUES</span>
+      <span class="sec-en">企業理念</span>
+      <div class="gold-bar"></div>
+    </div>
+    <div class="values-grid stagger">
+      <div class="value-card reveal">
+        <div class="value-card-num">01</div>
+        <div class="value-card-title">家族愛</div>
+        <p class="value-card-desc">お互いを思い合い、困ったときは助け合う。ギスギスした関係ではなく、温かい絆を大切にする集団でありたいと考えています。</p>
+      </div>
+      <div class="value-card reveal">
+        <div class="value-card-num">02</div>
+        <div class="value-card-title">チームワーク</div>
+        <p class="value-card-desc">チームワークを一番に大切にする会社でありたい。一人ひとりの力を合わせて、大きな目標へと着実に前進していきます。</p>
+      </div>
+      <div class="value-card reveal">
+        <div class="value-card-num">03</div>
+        <div class="value-card-title">堅実</div>
+        <p class="value-card-desc">一人ひとりが賢く着実に歩んでいける集団でありたいという思いを込めて名付けました。誠実に、共に、着実に。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NAME -->
+<section class="name-section" id="name">
   <div class="name-inner">
-    <div class="name-text fade-up" style="transition-delay:.2s">
+    <div class="reveal-l">
+      <span class="sec-tag">ABOUT THE NAME</span>
+      <span class="sec-en">社名の由来</span>
+      <div class="gold-bar"></div>
       <p class="name-lead">「サージ（Sage）」という名前には、花言葉にある「家族愛」や「チームワーク」という意味が込められています。また「堅実」という意味もあり、みんなで仲良く助け合いながらも、一人ひとりが賢く着実に歩んでいける集団でありたいという思いを込めて名付けました。</p>
       <div class="name-keywords">
-        <div class="name-keyword">家族愛</div>
-        <div class="name-keyword" style="transition-delay:.08s">チームワーク</div>
-        <div class="name-keyword" style="transition-delay:.16s">堅実</div>
-        <div class="name-keyword" style="transition-delay:.24s">誠実</div>
-        <div class="name-keyword" style="transition-delay:.32s">共に成長</div>
+        <span class="name-keyword">家族愛</span>
+        <span class="name-keyword">チームワーク</span>
+        <span class="name-keyword">堅実</span>
+        <span class="name-keyword">誠実</span>
+        <span class="name-keyword">共に成長</span>
       </div>
     </div>
-    <div class="name-visual">
-      <div class="name-card">
-        <div class="name-card-icon">
-          <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-            <path d="M20 34S6 25 6 14a9 9 0 0 1 14-7.4A9 9 0 0 1 34 14c0 11-14 20-14 20z"/>
-          </svg>
-        </div>
-        <div>
-          <div class="name-card-label">FAMILY LOVE</div>
-          <div class="name-card-text">家族愛</div>
-        </div>
-      </div>
-      <div class="name-card" style="transition-delay:.14s">
-        <div class="name-card-icon">
-          <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="13" cy="11" r="4"/>
-            <path d="M4 32c0-6 4-9 9-9s9 3 9 9"/>
-            <circle cx="30" cy="11" r="4"/>
-            <path d="M21 32c0-6 4-9 9-9s9 3 9 9" opacity="0.5"/>
-          </svg>
-        </div>
-        <div>
-          <div class="name-card-label">TEAMWORK</div>
-          <div class="name-card-text">チームワーク</div>
-        </div>
-      </div>
-      <div class="name-card" style="transition-delay:.28s">
-        <div class="name-card-icon">
-          <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-            <path d="M20 4l14 6v10c0 8-6 14-14 16C12 34 6 28 6 20V10l14-6z"/>
-            <path d="M13 20l5 5 9-9" opacity="0.7"/>
-          </svg>
-        </div>
-        <div>
-          <div class="name-card-label">STEADY</div>
-          <div class="name-card-text">堅実</div>
+    <div class="reveal-r">
+      <div class="name-visual">
+        <div class="name-visual-ring"></div>
+        <div class="name-visual-ring"></div>
+        <div class="name-visual-ring"></div>
+        <div class="name-visual-center">
+          <div class="name-visual-word">SAGE</div>
+          <div class="name-visual-sub">family · teamwork · steadiness</div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- アクセス -->
-<div class="access-section" id="access">
-  <div class="section-eyebrow fade-up">ACCESS</div>
-  <h2 class="section-title fade-up" style="transition-delay:.1s">アクセス</h2>
+<!-- ACCESS -->
+<section class="access" id="access">
   <div class="access-inner">
-    <div class="access-info">
-      <div class="access-item">
-        <div class="access-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2C8.1 2 5 5.1 5 9c0 6 7 13 7 13s7-7 7-13c0-3.9-3.1-7-7-7z"/>
-            <circle cx="12" cy="9" r="2.5"/>
-          </svg>
+    <div class="reveal-l">
+      <span class="sec-tag">ACCESS &amp; CONTACT</span>
+      <span class="sec-en">アクセス</span>
+      <div class="gold-bar"></div>
+      <div class="access-info">
+        <div class="access-item">
+          <div class="access-icon">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="#9a7a3e" aria-hidden="true">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+            </svg>
+          </div>
+          <div>
+            <span class="access-label">所在地</span>
+            <span class="access-value">〒422-0033<br>静岡県静岡市葵区昭和町3-1 昭和町ビル303</span>
+          </div>
         </div>
-        <div>
-          <div class="access-label">ADDRESS</div>
-          <div class="access-value">〒422-0033<br>静岡県静岡市葵区昭和町3-1<br>昭和町ビル303</div>
+        <div class="access-item">
+          <div class="access-icon">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="#9a7a3e" aria-hidden="true">
+              <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+            </svg>
+          </div>
+          <div>
+            <span class="access-label">TEL</span>
+            <span class="access-value"><a href="tel:054-397-6631">054-397-6631</a></span>
+          </div>
         </div>
-      </div>
-      <div class="access-item" style="transition-delay:.1s">
-        <div class="access-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/>
-          </svg>
-        </div>
-        <div>
-          <div class="access-label">PHONE</div>
-          <div class="access-value"><a href="tel:0543976631">054-397-6631</a></div>
-        </div>
-      </div>
-      <div class="access-item" style="transition-delay:.2s">
-        <div class="access-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <rect x="2" y="4" width="20" height="16" rx="2"/>
-            <path d="M2 4l10 9 10-9"/>
-          </svg>
-        </div>
-        <div>
-          <div class="access-label">EMAIL</div>
-          <div class="access-value"><a href="mailto:info@sage-group.jp">info@sage-group.jp</a></div>
-        </div>
-      </div>
-      <div class="access-item" style="transition-delay:.3s">
-        <div class="access-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="12" cy="12" r="9"/>
-            <path d="M12 7v5l3 3"/>
-          </svg>
-        </div>
-        <div>
-          <div class="access-label">BUSINESS HOURS</div>
-          <div class="access-value">お問い合わせはメール・お電話にて<br>いつでもお気軽にどうぞ</div>
+        <div class="access-item">
+          <div class="access-icon">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="#9a7a3e" aria-hidden="true">
+              <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+            </svg>
+          </div>
+          <div>
+            <span class="access-label">メール</span>
+            <span class="access-value"><a href="mailto:info@sage-group.jp">info@sage-group.jp</a></span>
+          </div>
         </div>
       </div>
     </div>
-    <div class="access-map">
-      <div class="map-label">MAP</div>
-      <iframe
-        class="map-frame"
-        src="https://maps.google.com/maps?q=静岡県静岡市葵区昭和町3-1昭和町ビル&output=embed"
-        allowfullscreen=""
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-        title="SageGroup 所在地"
-      ></iframe>
+    <div class="reveal-r">
+      <div class="map-wrap">
+        <iframe
+          title="SageGroup所在地"
+          src="https://maps.google.com/maps?q=静岡県静岡市葵区昭和町3-1昭和町ビル&output=embed"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen
+        ></iframe>
+      </div>
     </div>
   </div>
-</div>
+</section>
 
 <!-- CTA -->
-<div class="info-cta fade-up">
-  <div class="info-cta-text">
-    <h2>お問い合わせはお気軽に</h2>
-    <p>電話・メール・SNSにていつでもご連絡ください。</p>
+<section class="info-cta">
+  <div class="info-cta-inner reveal">
+    <h2 class="info-cta-title">お問い合わせはお気軽に</h2>
+    <p class="info-cta-sub">電話・メールにていつでもご連絡ください。</p>
+    <div class="cta-btns">
+      <a href="tel:054-397-6631" class="btn-g">054-397-6631</a>
+      <a href="mailto:info@sage-group.jp" class="btn-g">info@sage-group.jp</a>
+    </div>
   </div>
-  <a href="mailto:info@sage-group.jp" class="btn-dark" id="ctaBtn">お問い合わせ →</a>
-</div>
+</section>
 
-<footer>
-  <div class="footer-logo">SAGE GROUP</div>
-  <div class="footer-copy">© SAGEGROUP 2026</div>
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="ft-inner">
+    <div class="ft-top">
+      <div class="ft-brand">
+        <a href="index.html" class="ft-logo">
+          <svg width="28" height="28" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+            <circle cx="18" cy="18" r="16" stroke="#9a7a3e" stroke-width="1.5"/>
+            <text x="18" y="22" text-anchor="middle" font-family="Georgia,serif" font-size="10" fill="#9a7a3e" letter-spacing="1">SG</text>
+          </svg>
+          <span class="ft-logo-text">SAGE GROUP</span>
+        </a>
+        <p class="ft-tagline">仕事も、推しも、どっちも本気で。</p>
+      </div>
+      <ul class="ft-nav-list">
+        <li><a href="index.html">ホーム</a></li>
+        <li><a href="business.html">事業内容</a></li>
+        <li><a href="voice.html">社員の声</a></li>
+        <li><a href="infomation.html">会社情報</a></li>
+      </ul>
+    </div>
+    <nav class="ft-breadcrumb" aria-label="パンくずリスト">
+      <ol>
+        <li><a href="index.html">ホーム</a></li>
+        <li aria-current="page">会社情報</li>
+      </ol>
+    </nav>
+    <div class="ft-bottom">
+      <p>&copy; 2022 <span>合同会社SageGroup</span>. All Rights Reserved.</p>
+      <p>〒422-0033 静岡県静岡市葵区昭和町3-1 昭和町ビル303</p>
+    </div>
+  </div>
 </footer>
 
 <script>
-// NAV: スクロールで背景変化
-const nav = document.getElementById('siteNav');
+const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 60);
-}, { passive: true });
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+}, {passive: true});
 
-// PARALLAX: ヒーロー背景
-const heroBg = document.getElementById('heroBg');
-window.addEventListener('scroll', () => {
-  if (window.scrollY < window.innerHeight * 1.2) {
-    heroBg.style.transform = `translateY(${window.scrollY * 0.28}px)`;
-  }
-}, { passive: true });
-
-// INTERSECTION OBSERVER: フェードアニメーション
-const io = new IntersectionObserver((entries) => {
+const io = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if (e.isIntersecting) {
-      e.target.classList.add('visible');
+      e.target.classList.add('vis');
+      const bar = e.target.querySelector('.gold-bar');
+      if (bar) setTimeout(() => bar.classList.add('vis'), 200);
       io.unobserve(e.target);
     }
   });
-}, { threshold: 0.14 });
+}, {threshold: 0.12});
+document.querySelectorAll('.reveal, .reveal-l, .reveal-r, .gold-bar').forEach(el => io.observe(el));
 
-document.querySelectorAll(
-  '.fade-up, .vision-card, .name-card, .name-keyword, ' +
-  '.access-item, .map-frame, .stat-item, .section-eyebrow'
-).forEach(el => io.observe(el));
-
-// テーブル行: stagger
-document.querySelectorAll('.overview-table tr').forEach((tr, i) => {
-  tr.style.transitionDelay = `${i * 0.07 + 0.1}s`;
-  io.observe(tr);
-});
-
-// COUNTER ANIMATION
 function countUp(el, target, duration) {
   const start = performance.now();
-  (function tick(now) {
-    const p = Math.min((now - start) / duration, 1);
-    const ease = 1 - Math.pow(1 - p, 3);
-    el.textContent = Math.round(ease * target);
-    if (p < 1) requestAnimationFrame(tick);
-    else el.textContent = target;
-  })(start);
+  const isYear = target > 100;
+  const from = isYear ? 2018 : 0;
+  function step(now) {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    el.textContent = Math.round(from + (target - from) * eased);
+    if (progress < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
 }
 
+const statsBar = document.getElementById('statsBar');
 let counted = false;
-new IntersectionObserver((entries) => {
+new IntersectionObserver(entries => {
   if (entries[0].isIntersecting && !counted) {
     counted = true;
-    countUp(document.getElementById('statArea'), 3, 1100);
-    countUp(document.getElementById('statBiz'),  3, 1100);
+    countUp(document.getElementById('statYear'), 2022, 1200);
+    countUp(document.getElementById('statArea'), 3, 900);
+    countUp(document.getElementById('statBiz'), 3, 900);
   }
-}, { threshold: 0.4 }).observe(document.getElementById('statsBar'));
-
-// RIPPLE: CTAボタン
-document.getElementById('ctaBtn').addEventListener('click', function (e) {
-  const r = this.getBoundingClientRect();
-  const d = Math.max(this.clientWidth, this.clientHeight);
-  const span = document.createElement('span');
-  span.className = 'ripple';
-  span.style.cssText =
-    `width:${d}px;height:${d}px;` +
-    `left:${e.clientX - r.left - d / 2}px;` +
-    `top:${e.clientY - r.top  - d / 2}px;`;
-  this.appendChild(span);
-  setTimeout(() => span.remove(), 700);
-});
+}, {threshold: 0.3}).observe(statsBar);
 </script>
 </body>
 </html>
