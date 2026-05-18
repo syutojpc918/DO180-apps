@@ -142,10 +142,6 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
 }
 @keyframes sp{0%,100%{opacity:1}50%{opacity:0.2}}
 
-/* ===== DIAGONAL DIVIDER ===== */
-/* slanted bottom edge via clip-path on sections */
-.diag-bot{clip-path:polygon(0 0, 100% 0, 100% 88%, 0 100%)}
-.diag-top{margin-top:-6vw}
 
 /* ===== MARQUEE ===== */
 .mq-wrap{background:var(--gold);overflow:hidden}
@@ -176,8 +172,7 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
 
 /* ===== ABOUT (off-white + diagonal) ===== */
 .about{
-  background:var(--off);padding:110px 64px 140px;
-  clip-path:polygon(0 0,100% 0,100% 92%,0 100%);
+  background:var(--off);padding:100px 64px;
 }
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
 .about-copy{
@@ -223,9 +218,7 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
 /* ===== SERVICES (gray diagonal) ===== */
 .services{
   background:var(--gray);
-  padding:110px 64px 140px;
-  margin-top:-8vw;
-  clip-path:polygon(0 6%,100% 0,100% 94%,0 100%);
+  padding:100px 64px;
 }
 .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 .svc-card{
@@ -253,9 +246,7 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
 /* ===== CONCEPT (dark) ===== */
 .concept{
   background:var(--black);
-  padding:120px 64px;
-  margin-top:-8vw;
-  clip-path:polygon(0 6%,100% 0,100% 100%,0 100%);
+  padding:100px 64px;
 }
 .concept-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
 .concept .sec-en{color:var(--white)}
@@ -312,7 +303,6 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
 /* ===== RECRUIT — PC: 左黒 / 右写真  Mobile: 写真フル背景 ===== */
 .recruit{
   position:relative;overflow:hidden;
-  clip-path:polygon(0 0,100% 0,100% 92%,0 100%);
   /* PC: 2カラムグリッド */
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -499,7 +489,7 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
 </section>
 
 <!-- SERVICES (gray diagonal band) -->
-<section class="services diag-top" id="services">
+<section class="services" id="services">
   <div class="reveal">
     <span class="sec-tag">WHAT WE DO</span>
     <h2 class="sec-en">SERVICES</h2>
