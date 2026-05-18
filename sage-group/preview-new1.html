@@ -312,32 +312,62 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
 .svc-cta-link{display:inline-flex;align-items:center;gap:10px;font-size:0.78rem;letter-spacing:0.18em;color:var(--gold);border-bottom:1px solid rgba(154,122,62,0.35);padding-bottom:8px;transition:gap 0.3s,border-color 0.3s;}
 .svc-cta-link:hover{gap:16px;border-color:var(--gold)}
 
-/* ===== CONCEPT (dark) ===== */
+/* ===== CONCEPT (editorial pull-quote) ===== */
 .concept{
-  background:var(--black);
-  padding:100px 64px;
+  background:var(--cream);
+  padding:120px 64px;
+  position:relative;
+  overflow:hidden;
 }
-.concept-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
-.concept .sec-en{color:var(--white)}
-.concept .sec-ja{color:var(--gold-l)}
-.concept-lead{
-  font-size:0.92rem;line-height:2.2;color:rgba(255,255,255,0.72);margin-bottom:24px;
+.concept-grid{
+  display:grid;grid-template-columns:45fr 55fr;gap:96px;
+  align-items:center;max-width:1400px;margin:0 auto;
 }
+.concept-visual{position:relative;aspect-ratio:4/5}
+.concept-visual img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  position:relative;z-index:2;
+}
+.concept-visual::before{
+  content:'';position:absolute;
+  top:24px;left:24px;right:-24px;bottom:-24px;
+  border:2px solid var(--gold);
+  z-index:1;pointer-events:none;
+}
+.concept .sec-en{color:var(--black)}
+.concept .sec-ja{color:var(--body)}
 .concept-quote{
   font-family:'Cormorant Garamond',serif;font-style:italic;
-  font-size:1.6rem;color:var(--gold-l);line-height:1.5;margin-bottom:28px;
+  font-size:clamp(1.6rem,2.8vw,2.4rem);
+  color:var(--black);line-height:1.4;
+  margin:32px 0 28px;
+  position:relative;padding-left:48px;
 }
-.concept-vals{list-style:none;display:flex;flex-direction:column;gap:10px}
+.concept-quote::before{
+  content:'"';
+  position:absolute;left:0;top:-28px;
+  font-size:5rem;line-height:1;
+  color:var(--gold);
+  font-family:'Cormorant Garamond',serif;
+}
+.concept-lead{
+  font-size:0.92rem;line-height:2.1;color:var(--body);margin-bottom:32px;
+}
+.concept-vals{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:36px}
 .concept-vals li{
-  font-size:0.84rem;color:rgba(255,255,255,0.62);padding-left:18px;position:relative;
+  font-size:0.86rem;color:var(--black);padding-left:24px;position:relative;
 }
-.concept-vals li::before{content:'—';position:absolute;left:0;color:var(--gold)}
-.concept-right{display:flex;flex-direction:column;gap:16px}
-.concept-photo{
-  background:rgba(255,255,255,0.06);aspect-ratio:4/3;border-radius:6px;
-  display:flex;align-items:center;justify-content:center;
-  color:rgba(255,255,255,0.18);font-size:0.7rem;letter-spacing:0.1em;
+.concept-vals li::before{
+  content:'';position:absolute;left:0;top:11px;
+  width:14px;height:1px;background:var(--gold);
 }
+.concept-cta-link{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:0.78rem;letter-spacing:0.18em;
+  color:var(--gold);border-bottom:1px solid rgba(154,122,62,0.35);
+  padding-bottom:8px;transition:gap 0.3s,border-color 0.3s;
+}
+.concept-cta-link:hover{gap:16px;border-color:var(--gold)}
 
 /* ===== LIFE AT SAGE ===== */
 .life{background:var(--off);padding:110px 64px}
@@ -361,13 +391,6 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
 .life-cell:hover{transform:scale(1.02);box-shadow:0 12px 32px rgba(0,0,0,0.12)}
 .life-cell:hover img{transform:scale(1.06)}
 .life-cell.span-2{grid-row:span 2}
-
-.concept-photo{
-  background:var(--black);aspect-ratio:4/3;border-radius:6px;
-  overflow:hidden;
-}
-.concept-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.45s ease}
-.concept-photo:hover img{transform:scale(1.04)}
 
 /* ===== RECRUIT — PC: 左黒 / 右写真  Mobile: 写真フル背景 ===== */
 .recruit{
@@ -460,7 +483,11 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
   .about-right{height:300px;position:relative}
   .ah-line{font-size:clamp(1.7rem,7vw,2.8rem)}
   .about-watermark{font-size:44vw}
-  .concept-grid{grid-template-columns:1fr}
+  .concept{padding:80px 20px}
+  .concept-grid{grid-template-columns:1fr;gap:60px}
+  .concept-visual::before{top:12px;left:12px;right:-12px;bottom:-12px}
+  .concept-quote{padding-left:32px}
+  .concept-quote::before{font-size:3.5rem;top:-18px}
   .svc-grid{grid-template-columns:1fr}
   .svc-img{aspect-ratio:4/3}
   .life-grid{grid-template-columns:1fr;grid-template-rows:auto}
@@ -634,18 +661,21 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
   </div>
 </section>
 
-<!-- CONCEPT (dark diagonal) -->
+<!-- CONCEPT (editorial pull-quote) -->
 <section class="concept" id="concept">
   <div class="concept-grid">
-    <div>
+    <div class="concept-visual reveal">
+      <img src="photos/photo_15.jpg" alt="推し活を楽しむスタッフ">
+    </div>
+    <div class="concept-text">
       <div class="reveal">
-        <span class="sec-tag" style="color:var(--gold-l)">OUR CONCEPT</span>
-        <h2 class="sec-en" style="color:var(--white)">WHO<br>WE ARE</h2>
-        <p class="sec-ja" style="color:var(--gold-l)">私たちのコンセプト</p>
+        <span class="sec-tag">OUR CONCEPT</span>
+        <h2 class="sec-en">WHO<br>WE ARE</h2>
+        <p class="sec-ja">私たちのコンセプト</p>
         <div class="gold-bar"></div>
       </div>
       <div class="reveal">
-        <p class="concept-quote">"好きなことを諦めない、<br>だから仕事にも本気になれる。"</p>
+        <p class="concept-quote">好きなことを諦めない、だから仕事にも本気になれる。</p>
         <p class="concept-lead">推し活を楽しむことで仕事へのエネルギーが増す——そんな好循環を当たり前にしたい。SageGroupはスタッフ一人ひとりの「好き」を尊重し、仕事もプライベートも両立できる職場をつくっています。</p>
         <ul class="concept-vals">
           <li>推し活応援・シフト融通OK</li>
@@ -653,14 +683,7 @@ body.hover-link #cursor-ring{width:54px;height:54px;border-color:var(--sage);opa
           <li>仲間と楽しみながら働ける現場</li>
           <li>一人ひとりの個性を大切にする文化</li>
         </ul>
-      </div>
-    </div>
-    <div class="concept-right reveal">
-      <div class="concept-photo">
-        <img src="photos/photo_15.jpg" alt="推し活を楽しむスタッフ">
-      </div>
-      <div class="concept-photo" style="aspect-ratio:16/7">
-        <img src="photos/photo_00.jpg" alt="チームイベント">
+        <a href="voice.html" class="concept-cta-link">社員の声を見る →</a>
       </div>
     </div>
   </div>
