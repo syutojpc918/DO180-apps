@@ -154,10 +154,10 @@ a{text-decoration:none;color:inherit}
 .info-cta{background:var(--black);padding:100px var(--pad);text-align:center;position:relative;overflow:hidden}
 .info-cta::before{content:'CONTACT';position:absolute;font-family:'Bebas Neue',sans-serif;font-size:clamp(8rem,18vw,20rem);color:rgba(154,122,62,0.04);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;user-select:none;white-space:nowrap}
 .info-cta-inner{position:relative;z-index:1}
-.info-cta-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,4vw,3.5rem);color:var(--white);letter-spacing:0.08em;margin-bottom:16px}
+.info-cta-title{font-family:'Noto Sans JP',sans-serif;font-weight:900;font-size:clamp(1.5rem,3.5vw,2.6rem);color:var(--white);letter-spacing:0.02em;margin-bottom:16px;word-break:keep-all;overflow-wrap:break-word;line-height:1.4}
 .info-cta-sub{font-size:0.82rem;color:rgba(255,255,255,0.45);letter-spacing:0.1em;margin-bottom:40px;line-height:2}
 .cta-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
-.btn-g{display:inline-block;padding:16px 48px;border:1px solid var(--gold);color:var(--gold);font-size:0.75rem;letter-spacing:0.18em;transition:background 0.3s,color 0.3s}
+.btn-g{display:inline-flex;align-items:center;justify-content:center;min-width:280px;padding:16px 32px;border:1px solid var(--gold);color:var(--gold);font-size:0.78rem;letter-spacing:0.14em;transition:background 0.3s,color 0.3s}
 .btn-g:hover{background:var(--gold);color:var(--white)}
 
 /* UNIFIED FOOTER */
@@ -204,6 +204,8 @@ a{text-decoration:none;color:inherit}
   .access{padding:72px 20px}
   .access-inner{grid-template-columns:1fr;gap:40px}
   .info-cta{padding:72px 20px}
+  .btn-g{min-width:240px;width:100%;max-width:300px;padding:14px 20px;font-size:0.74rem}
+  .cta-btns{flex-direction:column;align-items:center;gap:12px}
   .footer{padding:48px 20px 32px}
   .ft-top{flex-direction:column;gap:28px}
   .ft-nav-list{flex-direction:row;flex-wrap:wrap;gap:14px;text-align:left}
