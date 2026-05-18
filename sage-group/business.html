@@ -937,6 +937,20 @@ body {
   .cta-btn { width: 100%; text-align: center; }
   .site-footer { flex-direction: column; gap: 8px; text-align: center; }
 }
+
+/* HAND-WRITTEN MESSAGE */
+.hand-msg{background:var(--cream);padding:120px var(--pad);text-align:center;position:relative;overflow:hidden}
+.hand-msg-inner{max-width:920px;margin:0 auto}
+.hand-msg-tag{display:block;font-family:'Bebas Neue',sans-serif;font-size:0.7rem;letter-spacing:0.4em;color:var(--gold);margin-bottom:14px}
+.hand-msg-bar{width:60px;height:1px;background:var(--gold);margin:0 auto 48px}
+.hand-msg-figure{width:100%;max-width:820px;margin:0 auto}
+.hand-msg-figure img{width:100%;height:auto;display:block;mix-blend-mode:multiply}
+.hand-msg-credit{font-family:'Bebas Neue',sans-serif;font-size:0.66rem;letter-spacing:0.3em;color:var(--gold);margin-top:32px;opacity:0.7}
+@media(max-width:767px){
+  .hand-msg{padding:72px 20px}
+  .hand-msg-bar{margin:0 auto 36px}
+  .hand-msg-credit{margin-top:24px;font-size:0.6rem;letter-spacing:0.25em}
+}
 </style>
 </head>
 <body>
@@ -1330,6 +1344,18 @@ body {
     <div class="area-pill"><span>静岡</span></div>
     <div class="area-pill"><span>愛知</span></div>
     <div class="area-pill"><span>東京</span></div>
+  </div>
+</section>
+
+<!-- HAND MESSAGE -->
+<section class="hand-msg">
+  <div class="hand-msg-inner reveal">
+    <span class="hand-msg-tag">OUR PROMISE</span>
+    <div class="hand-msg-bar"></div>
+    <figure class="hand-msg-figure">
+      <img src="photos/handwritten-message.jpg" alt="あなたの「歩み」に全員で伴走します。">
+    </figure>
+    <p class="hand-msg-credit">— SAGE GROUP</p>
   </div>
 </section>
 
