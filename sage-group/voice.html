@@ -104,11 +104,11 @@ body.nav-locked{overflow:hidden}
 .voice-hero-right{position:relative;overflow:hidden;background:var(--cream-mid)}
 .voice-hero-photo-stack{position:absolute;inset:0;padding:60px 40px}
 .voice-hero-photo{
-  position:absolute;background:linear-gradient(135deg,var(--cream-deep),var(--gold-pale));
+  position:absolute;background:transparent;
   display:flex;align-items:center;justify-content:center;
-  font-family:'Playfair Display',serif;font-style:italic;color:var(--gold);
-  box-shadow:0 12px 40px rgba(0,0,0,0.08);
+  box-shadow:0 12px 40px rgba(0,0,0,0.08);overflow:hidden;
 }
+.voice-hero-photo img{width:100%;height:100%;object-fit:contain;display:block;mix-blend-mode:multiply}
 .voice-hero-photo.p1{top:8%;left:8%;width:42%;aspect-ratio:3/4;font-size:1.2rem;transform:rotate(-3deg)}
 .voice-hero-photo.p2{top:18%;right:6%;width:36%;aspect-ratio:3/4;font-size:1.1rem;transform:rotate(4deg)}
 .voice-hero-photo.p3{bottom:8%;left:22%;width:48%;aspect-ratio:4/3;font-size:1.2rem;transform:rotate(-2deg)}
@@ -541,9 +541,9 @@ body.nav-locked{overflow:hidden}
   </div>
   <div class="voice-hero-right">
     <div class="voice-hero-photo-stack">
-      <div class="voice-hero-photo p1">松村 修斗</div>
-      <div class="voice-hero-photo p2">瀧田 誠</div>
-      <div class="voice-hero-photo p3">山田 集</div>
+      <div class="voice-hero-photo p1"><img src="photos/1.png" alt="松村 修斗"></div>
+      <div class="voice-hero-photo p2"><img src="photos/2.png" alt="瀧田 誠"></div>
+      <div class="voice-hero-photo p3"><img src="photos/3.png" alt="山田 集"></div>
     </div>
   </div>
 </section>
@@ -610,7 +610,7 @@ body.nav-locked{overflow:hidden}
   <div class="if-inner layout-a">
     <div class="if-photo reveal-l">
       <div class="if-photo-num">01</div>
-      <div class="if-photo-frame"><img src="photos/voice-01.jpg" alt="松村 修斗"></div>
+      <div class="if-photo-frame"><img src="photos/1.png" alt="松村 修斗"></div>
       <div class="if-photo-tag">INTERVIEW 01</div>
     </div>
     <div class="if-content reveal-r">
@@ -659,7 +659,7 @@ body.nav-locked{overflow:hidden}
   <div class="if-inner layout-b">
     <div class="if-photo reveal-r">
       <div class="if-photo-num">02</div>
-      <div class="if-photo-frame"><img src="photos/voice-02.jpg" alt="瀧田 誠"></div>
+      <div class="if-photo-frame"><img src="photos/2.png" alt="瀧田 誠"></div>
       <div class="if-photo-tag">INTERVIEW 02</div>
     </div>
     <div class="if-content reveal-l">
@@ -708,7 +708,7 @@ body.nav-locked{overflow:hidden}
   <div class="if-inner layout-a">
     <div class="if-photo reveal-l">
       <div class="if-photo-num">03</div>
-      <div class="if-photo-frame"><img src="photos/voice-03.jpg" alt="山田 集"></div>
+      <div class="if-photo-frame"><img src="photos/3.png" alt="山田 集"></div>
       <div class="if-photo-tag">INTERVIEW 03</div>
     </div>
     <div class="if-content reveal-r">
