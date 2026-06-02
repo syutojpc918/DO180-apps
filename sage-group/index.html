@@ -498,6 +498,17 @@ body.nav-locked{overflow:hidden}
   z-index:5;
 }
 
+/* ===== WHY SAGEGROUP ===== */
+.why{background:var(--off);padding:100px 64px}
+.why-header{text-align:center;margin-bottom:64px}
+.why-sub{font-size:0.82rem;color:var(--body);opacity:0.7;margin-top:12px;letter-spacing:0.08em}
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1100px;margin:0 auto}
+.why-card{background:var(--white);padding:36px 28px;border-top:2px solid var(--gold-pale);transition:border-color 0.3s,transform 0.3s,box-shadow 0.3s}
+.why-card:hover{border-color:var(--gold);transform:translateY(-4px);box-shadow:0 16px 48px rgba(154,122,62,0.1)}
+.why-icon{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:var(--gold);opacity:0.35;line-height:1;margin-bottom:16px}
+.why-title{font-size:0.9rem;font-weight:700;color:var(--black);margin-bottom:10px;letter-spacing:0.04em}
+.why-desc{font-size:0.78rem;color:var(--body);line-height:1.9}
+
 /* ===== RECRUIT — PC: 左黒 / 右写真  Mobile: 写真フル背景 ===== */
 .recruit{
   position:relative;overflow:hidden;
@@ -634,6 +645,10 @@ body.nav-locked{overflow:hidden}
   /* SERVICES */
   .svc-grid{grid-template-columns:1fr}
   .svc-img{aspect-ratio:4/3}
+
+  /* WHY */
+  .why{padding:72px 20px}
+  .why-grid{grid-template-columns:1fr;gap:16px}
 
   /* PEOPLE & CULTURE */
   .life-stats{grid-template-columns:1fr;gap:18px;padding:24px}
@@ -876,10 +891,10 @@ body.nav-locked{overflow:hidden}
         <p class="concept-quote">好きなことを諦めない、<br class="sp-only">だから仕事にも本気になれる。</p>
         <p class="concept-lead">推し活を楽しむことで仕事へのエネルギーが増す——そんな好循環を当たり前にしたい。SageGroupはスタッフ一人ひとりの「好き」を尊重し、仕事もプライベートも両立できる職場をつくっています。</p>
         <ul class="concept-vals">
-          <li>推し活応援・シフト融通OK</li>
-          <li>丁寧な研修と成長できる環境</li>
-          <li>仲間と楽しみながら働ける現場</li>
-          <li>一人ひとりの個性を大切にする文化</li>
+          <li>推し活応援制度　月10,000円支給</li>
+          <li>シフト融通OK・ライブ日も相談可</li>
+          <li>未経験でも丁寧な研修でサポート</li>
+          <li>バディ制度で1対1フォローあり</li>
         </ul>
         <a href="voice.html" class="concept-cta-link">社員の声を見る →</a>
       </div>
@@ -913,6 +928,48 @@ body.nav-locked{overflow:hidden}
       <img src="photos/photo_13.jpg" alt="休日の過ごし方">
       <figcaption>休日の過ごし方</figcaption>
     </figure>
+  </div>
+</section>
+
+<!-- WHY SAGEGROUP -->
+<section class="why" id="why">
+  <div class="why-header reveal">
+    <span class="sec-tag">WHY SAGEGROUP</span>
+    <h2 class="sec-en">安心して<br>働ける理由</h2>
+    <p class="why-sub">「楽しい」だけじゃない。一人ひとりが成長し、長く働ける仕組みがあります。</p>
+    <div class="gold-bar"></div>
+  </div>
+  <div class="why-grid stagger">
+    <div class="why-card reveal">
+      <div class="why-icon">01</div>
+      <div class="why-title">バディ制度</div>
+      <p class="why-desc">専任HR担当が1対1でサポート。勤怠も業務も気軽に相談できる。</p>
+    </div>
+    <div class="why-card reveal">
+      <div class="why-icon">02</div>
+      <div class="why-title">定期面談（3ヶ月毎）</div>
+      <p class="why-desc">キャリアも悩みも話せる場。一人で抱え込ませません。</p>
+    </div>
+    <div class="why-card reveal">
+      <div class="why-icon">03</div>
+      <div class="why-title">業績の見える化</div>
+      <p class="why-desc">毎日の入力で成長が数字に。頑張りがしっかり評価される。</p>
+    </div>
+    <div class="why-card reveal">
+      <div class="why-icon">04</div>
+      <div class="why-title">充実の研修制度</div>
+      <p class="why-desc">未経験でも丁寧な研修あり。ゼロから安心してスタートできます。</p>
+    </div>
+    <div class="why-card reveal">
+      <div class="why-icon">05</div>
+      <div class="why-title">シフト融通OK</div>
+      <p class="why-desc">推しのライブ日も相談可能。推し活応援制度で月10,000円支給。</p>
+    </div>
+    <div class="why-card reveal">
+      <div class="why-icon">06</div>
+      <div class="why-title">BBQ・忘年会</div>
+      <p class="why-desc">定期的な食事会・イベントあり。「友達と仕事してる感覚」な仲間と。</p>
+    </div>
   </div>
 </section>
 
