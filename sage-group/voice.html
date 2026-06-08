@@ -465,13 +465,16 @@ body.nav-locked{overflow:hidden}
   .if-inner,.if-inner.layout-a,.if-inner.layout-b{grid-template-columns:1fr;gap:56px}
   .if-inner.layout-b .if-photo{order:1}
   .if-inner.layout-b .if-content{order:2}
-  .if-photo{max-width:none;width:100%;margin:0 auto}
-  .if-photo::after{top:14px;left:14px;right:-10px;bottom:-10px}
+  .if-photo{max-width:260px;width:100%;margin:0 auto}
+  .if-photo::after{display:none}
   .if-photo-num{font-size:4rem;top:-24px;left:-8px}
   .if-photo-tag{font-size:0.68rem;padding:7px 16px}
   .if-quote{font-size:1.1rem;padding-left:18px;margin-bottom:32px;word-break:keep-all;overflow-wrap:break-word}
   .if-quote br{display:none}
-  .interview-intro-title,.interview-intro-sub,.qa-q-text,.qa-a-text,.if-name{word-break:keep-all;overflow-wrap:break-word}
+  .interview-intro-title,.interview-intro-sub,.if-name{word-break:keep-all;overflow-wrap:break-word}
+  .qa-q-text,.qa-a-text{min-width:0;word-break:break-all;overflow-wrap:anywhere;}
+  .qa-a,.qa-q{overflow:hidden;}
+  .interview-feature{overflow-x:hidden;}
   .ceo-quote,.ceo-body{word-break:keep-all;overflow-wrap:break-word}
   .activity{padding:72px 20px}
   .activity-grid{grid-template-columns:1fr 1fr;gap:18px}
